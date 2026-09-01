@@ -1,0 +1,1318 @@
+# Machine-readable source of truth for this profile.
+# このProfileの機械可読な正本です。説明は同じフォルダのREADME.mdを参照してください。
+schema_version = "haip-assurance-profile.v1"
+profile_id = "haip-profile.coldchain-handoff.v1"
+slug = "coldchain-handoff"
+version = "1.0.0"
+snapshot_date = "2026-09-01"
+title_ja = "医薬品コールドチェーン引渡し保証マッピング"
+title_en = "Medical Cold-Chain Handoff Assurance Mapping"
+publisher = "GhostDrift Mathematical Institute"
+published = true
+public_claim_ja = "本プロファイルは、広島AIプロセスの11行動を分解し、医薬品コールドチェーン引渡しPoCで技術的に評価可能な一部義務を版固定された証拠へ対応付け、その証拠から言える範囲を機械検証します。"
+public_claim_en = "This profile represents all 11 Hiroshima AI Process actions, maps selected technical obligations to version-pinned evidence for a medical cold-chain handoff PoC, and machine-checks the limits of what that evidence can support."
+non_claims_ja = [
+  "G7、日本政府、OECD又はHAIPの公式プロジェクトではありません。",
+  "HAIP行動規範への全面的な適合を認証するものではありません。",
+  "規制認証、医薬品品質認証又は製品出荷可否の認証ではありません。",
+  "独立した第三者監査ではありません。",
+  "センサー若しくはロガーの真正性、本番運用準備又は組織全体のガバナンスを証明するものではありません。",
+  "決定論的なコールドチェーンPoC単独では、OECD Reporting Frameworkの対象となる高度AIシステムの存在を立証しません。",
+  "Reporting v2ブリッジは証拠利用のガイドであり、質問票の複製、完成済み報告書、提出ワークフロー、参加資格判定又は承認ではありません。",
+  "Evaluation OSはコールドチェーン判定エンジンの技術的安全性を証明するものではなく、公開主張と公開証拠の整合性を扱う別のメタ保証層です。",
+]
+non_claims_en = [
+  "It is not an official G7, Government of Japan, OECD, or HAIP project.",
+  "It does not certify full compliance with the HAIP Code of Conduct.",
+  "It is not a regulatory, pharmaceutical-quality, or product-release certification.",
+  "It is not an independent third-party audit.",
+  "It does not prove sensor or logger authenticity, production readiness, or organisation-wide governance.",
+  "The deterministic cold-chain PoC does not by itself establish that an advanced AI system is within the OECD Reporting Framework scope.",
+  "The Reporting v2 bridge is evidence-use guidance, not a questionnaire replica, completed report, submission workflow, eligibility decision, or approval.",
+  "Evaluation OS does not prove the technical safety of the cold-chain decision engine; it is a separate public claim-to-evidence meta-assurance layer.",
+]
+prohibited_claim_phrases = [
+  "haip compliant",
+  "haip certified",
+  "official haip implementation",
+  "oecd approved",
+  "g7 approved",
+  "full haip compliance",
+  "広島aiプロセス完全準拠",
+  "広島aiプロセス認証済み",
+  "haip公式実装",
+  "oecd公認",
+  "g7公認",
+  "official oecd reporting tool",
+  "submission-ready oecd report",
+  "oecd submission approved",
+  "oecd公式報告ツール",
+  "oecd提出可能",
+  "oecd提出承認済み",
+  "haip brand certified",
+  "haipブランド認証済み",
+]
+
+[subject]
+scenario_ja = "医薬品2〜8℃コールドチェーンの引渡し判定保証"
+scenario_en = "Medical 2–8°C cold-chain handoff decision assurance"
+
+[boundaries]
+forced_outside_profile_actions = ["HAIP-A7"]
+meta_assurance_not_direct_for_actions = [
+  "HAIP-A1",
+  "HAIP-A2",
+  "HAIP-A6",
+  "HAIP-A11",
+]
+meta_assurance_not_evidence_for_reporting_sections = [
+  1,
+  2,
+  4,
+  5,
+  7,
+]
+reporting_sections_forced_no_profile_coverage = [5]
+
+[[components]]
+source_id = "SRC-COLDCHAIN-POC"
+role = "PRIMARY_IMPLEMENTATION"
+description_ja = "引渡し証拠ゲートと安全側処分判定を行う決定論的実装。"
+description_en = "Deterministic handoff evidence gate and fail-safe disposition engine."
+
+[[components]]
+source_id = "SRC-EVALUATION-OS"
+role = "META_ASSURANCE"
+description_ja = "公開主張と公開証拠の頑健性を扱う別建てのメタ保証。実行安全性の証拠ではない。"
+description_en = "Separate public claim-to-evidence robustness assessment; not execution-safety evidence."
+
+[[sources]]
+id = "SRC-HAIP-CODE-2023"
+kind = "official_policy"
+title = "Hiroshima Process International Code of Conduct for Organizations Developing Advanced AI Systems"
+publisher = "Ministry of Foreign Affairs of Japan / G7 Hiroshima Process"
+url = "https://www.mofa.go.jp/files/100573473.pdf"
+version_note = "Official English PDF, 8 pages; mapped as viewed on 2026-09-01."
+as_of = "2026-09-01"
+
+[[sources]]
+id = "SRC-OECD-HAIP-V2"
+kind = "official_reporting_framework"
+title = "Hiroshima AI Process Reporting Framework, Version 2.0"
+publisher = "OECD.AI"
+url = "https://oecd.ai/en/transparency/overview"
+supporting_urls = [
+  "https://oecd.ai/en/transparency/faq",
+  "https://oecd.ai/en/transparency/instructions",
+  "https://oecd.ai/en/transparency/reports",
+  "https://oecd.ai/en/haip-2-launch",
+]
+version_note = "Version 2.0 distinguishes roles across the AI lifecycle and broadens participation; the OECD Secretariat checks completeness and accessibility but does not verify the substance of submissions."
+as_of = "2026-09-01"
+
+[[sources]]
+id = "SRC-COLDCHAIN-POC"
+kind = "implementation_repository"
+title = "Cold-Chain Handoff Assurance PoC"
+repository = "https://github.com/GhostDriftTheory/coldchain-handoff-assurance"
+commit = "1437b21a41b4c2b8623e8ae22ad71db3ef330383"
+commit_url = "https://github.com/GhostDriftTheory/coldchain-handoff-assurance/commit/1437b21a41b4c2b8623e8ae22ad71db3ef330383"
+raw_readme_url = "https://raw.githubusercontent.com/GhostDriftTheory/coldchain-handoff-assurance/1437b21a41b4c2b8623e8ae22ad71db3ef330383/README.md"
+as_of = "2026-09-01"
+
+[[sources]]
+id = "SRC-EVALUATION-OS"
+kind = "meta_assurance_repository"
+title = "ONZALINKS Public Claim-to-Evidence Evaluation OS"
+repository = "https://github.com/GhostDriftTheory/onzalinx-evaluation-os"
+commit = "11eb3f22ea719b286043617a0c0205983aca5c71"
+commit_url = "https://github.com/GhostDriftTheory/onzalinx-evaluation-os/commit/11eb3f22ea719b286043617a0c0205983aca5c71"
+raw_readme_url = "https://raw.githubusercontent.com/GhostDriftTheory/onzalinx-evaluation-os/11eb3f22ea719b286043617a0c0205983aca5c71/README.md"
+as_of = "2026-09-01"
+
+[[sources]]
+id = "SRC-MAPPING-REPOSITORY"
+kind = "mapping_repository"
+title = "Hiroshima AI Process Assurance Mappings"
+repository = "https://github.com/GhostDriftTheory/hiroshima-ai-process-assurance-mappings"
+as_of = "2026-09-01"
+version_note = "This repository's validator is supporting evidence only and cannot establish a DIRECT implementation claim."
+
+[[evidence]]
+id = "E-HAIP-CODE"
+title_ja = "HAIP公式行動規範"
+title_en = "Official HAIP Code of Conduct"
+origin = "official_policy"
+mode = "POLICY_SOURCE"
+strength = 0
+source_pin_id = "SRC-HAIP-CODE-2023"
+url = "https://www.mofa.go.jp/files/100573473.pdf"
+claims = [
+  "Defines the policy actions that this profile operationalises selectively.",
+]
+limitations = ["A policy source is not implementation evidence."]
+
+[[evidence]]
+id = "E-OECD-V2"
+title_ja = "OECD HAIP報告枠組みv2.0"
+title_en = "OECD HAIP Reporting Framework v2.0"
+origin = "official_policy"
+mode = "POLICY_SOURCE"
+strength = 0
+source_pin_id = "SRC-OECD-HAIP-V2"
+url = "https://oecd.ai/en/transparency/overview"
+claims = [
+  "Provides a seven-section reporting structure across the AI value chain.",
+]
+limitations = [
+  "OECD reporting participation is not substantive verification or compliance certification.",
+]
+
+[[evidence]]
+id = "E-CC-README"
+title_ja = "コールドチェーンPoCの公開範囲・動作文書"
+title_en = "Cold-chain PoC public scope and operation documentation"
+origin = "external_repository"
+mode = "PUBLIC_DOCUMENT"
+strength = 2
+source_pin_id = "SRC-COLDCHAIN-POC"
+url = "https://github.com/GhostDriftTheory/coldchain-handoff-assurance/blob/1437b21a41b4c2b8623e8ae22ad71db3ef330383/README.md"
+repository = "https://github.com/GhostDriftTheory/coldchain-handoff-assurance"
+commit = "1437b21a41b4c2b8623e8ae22ad71db3ef330383"
+path = "README.md"
+raw_url = "https://raw.githubusercontent.com/GhostDriftTheory/coldchain-handoff-assurance/1437b21a41b4c2b8623e8ae22ad71db3ef330383/README.md"
+claims = [
+  "Documents RELEASE, HOLD, QA_REVIEW, and REJECT states.",
+  "Documents default chain-stop at the first non-RELEASE result.",
+  "Discloses regulatory, authenticity, and production limitations.",
+]
+limitations = ["Documentation alone does not prove runtime behaviour."]
+
+[[evidence]]
+id = "E-CC-CORE"
+title_ja = "コールドチェーン引渡し判定エンジン"
+title_en = "Cold-chain handoff decision engine"
+origin = "external_repository"
+mode = "REPRODUCIBLE_IMPLEMENTATION"
+strength = 3
+source_pin_id = "SRC-COLDCHAIN-POC"
+url = "https://github.com/GhostDriftTheory/coldchain-handoff-assurance/blob/1437b21a41b4c2b8623e8ae22ad71db3ef330383/poc_handoff_pde.py"
+repository = "https://github.com/GhostDriftTheory/coldchain-handoff-assurance"
+commit = "1437b21a41b4c2b8623e8ae22ad71db3ef330383"
+path = "poc_handoff_pde.py"
+raw_url = "https://raw.githubusercontent.com/GhostDriftTheory/coldchain-handoff-assurance/1437b21a41b4c2b8623e8ae22ad71db3ef330383/poc_handoff_pde.py"
+expected_sha256_lf = "4fc65615fd383d3491f4ad931da90b77e49188709a03e3d46195cebc4569919f"
+expected_size_bytes_lf = 39922
+claims = [
+  "Implements fixed-order evidence, fatal-breach, automatic-release, and review gates.",
+  "Implements strict validation and chain-stop behaviour.",
+]
+limitations = ["File-based PoC, not live production integration."]
+
+[[evidence]]
+id = "E-CC-CERT"
+title_ja = "ADIC Phase 1証明書兼検証器"
+title_en = "ADIC Phase 1 certificate and verifier"
+origin = "external_repository"
+mode = "HASH_BOUND_SEMANTIC_REPLAY"
+strength = 4
+source_pin_id = "SRC-COLDCHAIN-POC"
+url = "https://github.com/GhostDriftTheory/coldchain-handoff-assurance/blob/1437b21a41b4c2b8623e8ae22ad71db3ef330383/ADIC_POC_PHASE1_CERTIFICATE.py"
+repository = "https://github.com/GhostDriftTheory/coldchain-handoff-assurance"
+commit = "1437b21a41b4c2b8623e8ae22ad71db3ef330383"
+path = "ADIC_POC_PHASE1_CERTIFICATE.py"
+raw_url = "https://raw.githubusercontent.com/GhostDriftTheory/coldchain-handoff-assurance/1437b21a41b4c2b8623e8ae22ad71db3ef330383/ADIC_POC_PHASE1_CERTIFICATE.py"
+certificate_id = "ADIC-COLDCHAIN-POC-PHASE1-SINGLEFILE-001"
+profile_digest = "bed4948bf11ae4383874acdbb18da5497bfb5e70f9b37ba18699cd0bf7bfa49c"
+ruleset_digest = "27a50d185514658cedc63b76e0c9d683ce2137083f293a493d419c6fe70fe29e"
+claims = [
+  "Binds target artifacts by SHA-256.",
+  "Recomputes profile and ruleset digests.",
+  "Replays fatal-breach and chain-stop scenarios and checks decision digests.",
+]
+limitations = [
+  "Explicitly excludes regulatory certification, product-specific threshold validation, sensor authenticity, production integration, and liability allocation.",
+]
+
+[[evidence]]
+id = "E-CC-TESTS"
+title_ja = "コールドチェーンPoCテストスイート"
+title_en = "Cold-chain PoC test suite"
+origin = "external_repository"
+mode = "TEST_SUITE"
+strength = 3
+source_pin_id = "SRC-COLDCHAIN-POC"
+url = "https://github.com/GhostDriftTheory/coldchain-handoff-assurance/blob/1437b21a41b4c2b8623e8ae22ad71db3ef330383/test_poc_handoff_pde.py"
+repository = "https://github.com/GhostDriftTheory/coldchain-handoff-assurance"
+commit = "1437b21a41b4c2b8623e8ae22ad71db3ef330383"
+path = "test_poc_handoff_pde.py"
+raw_url = "https://raw.githubusercontent.com/GhostDriftTheory/coldchain-handoff-assurance/1437b21a41b4c2b8623e8ae22ad71db3ef330383/test_poc_handoff_pde.py"
+expected_sha256_lf = "8e945407b92da2f46f815cfc1f3d7f2ce82aa8f53d728854a3c55f5e806c4532"
+expected_size_bytes_lf = 39288
+claims = [
+  "Exercises validation, boundary, decision, and chain-stop behaviour.",
+]
+limitations = [
+  "PoC tests are not independent external testing or production penetration testing.",
+]
+
+[[evidence]]
+id = "E-CC-REDTEAM"
+title_ja = "レッドチーム形式シナリオ試験報告"
+title_en = "Red-team-style scenario testing report"
+origin = "external_repository"
+mode = "PUBLIC_DOCUMENT"
+strength = 2
+source_pin_id = "SRC-COLDCHAIN-POC"
+url = "https://github.com/GhostDriftTheory/coldchain-handoff-assurance/blob/1437b21a41b4c2b8623e8ae22ad71db3ef330383/docs/RED_TEAM_REPORT.md"
+repository = "https://github.com/GhostDriftTheory/coldchain-handoff-assurance"
+commit = "1437b21a41b4c2b8623e8ae22ad71db3ef330383"
+path = "docs/RED_TEAM_REPORT.md"
+raw_url = "https://raw.githubusercontent.com/GhostDriftTheory/coldchain-handoff-assurance/1437b21a41b4c2b8623e8ae22ad71db3ef330383/docs/RED_TEAM_REPORT.md"
+claims = [
+  "Documents 30 tampering and integrity scenarios.",
+  "Reports 25 scenarios with corresponding test coverage, one known gap, and four out-of-scope scenarios.",
+]
+limitations = [
+  "Not a production-grade penetration test, cryptographic audit, or regulatory certification.",
+]
+
+[[evidence]]
+id = "E-CC-SECURITY"
+title_ja = "セキュリティ設計及び入力保護境界"
+title_en = "Security design and input-protection boundaries"
+origin = "external_repository"
+mode = "PUBLIC_DOCUMENT"
+strength = 2
+source_pin_id = "SRC-COLDCHAIN-POC"
+url = "https://github.com/GhostDriftTheory/coldchain-handoff-assurance/blob/1437b21a41b4c2b8623e8ae22ad71db3ef330383/docs/SECURITY_DESIGN.md"
+repository = "https://github.com/GhostDriftTheory/coldchain-handoff-assurance"
+commit = "1437b21a41b4c2b8623e8ae22ad71db3ef330383"
+path = "docs/SECURITY_DESIGN.md"
+raw_url = "https://raw.githubusercontent.com/GhostDriftTheory/coldchain-handoff-assurance/1437b21a41b4c2b8623e8ae22ad71db3ef330383/docs/SECURITY_DESIGN.md"
+expected_sha256_lf = "2293a521c3edef60f98081751c4e4e980c48c89186ea1b54a9c97f09c9154d14"
+expected_size_bytes_lf = 8245
+claims = [
+  "Documents malformed-input, type-coercion, non-finite-number, timestamp, and evidence-consistency controls.",
+]
+limitations = [
+  "Does not cover API security, hardware authenticity, or pre-parse byte-level attacks.",
+]
+
+[[evidence]]
+id = "E-CC-SAMPLE-REJECT"
+title_ja = "致命的温度逸脱リプレイ入力"
+title_en = "Fatal temperature-breach replay input"
+origin = "external_repository"
+mode = "REPLAY_INPUT"
+strength = 3
+source_pin_id = "SRC-COLDCHAIN-POC"
+url = "https://github.com/GhostDriftTheory/coldchain-handoff-assurance/blob/1437b21a41b4c2b8623e8ae22ad71db3ef330383/samples/sample_beta_breach_reject.json"
+repository = "https://github.com/GhostDriftTheory/coldchain-handoff-assurance"
+commit = "1437b21a41b4c2b8623e8ae22ad71db3ef330383"
+path = "samples/sample_beta_breach_reject.json"
+raw_url = "https://raw.githubusercontent.com/GhostDriftTheory/coldchain-handoff-assurance/1437b21a41b4c2b8623e8ae22ad71db3ef330383/samples/sample_beta_breach_reject.json"
+expected_sha256_lf = "553d0336b28fb6cd9c23ee037246ecd5d9454d811b789f3a29a1844bfbc1e1d9"
+expected_size_bytes_lf = 1050
+claims = ["Certificate-recorded replay produces REJECT."]
+limitations = ["Synthetic PoC sample, not a real shipment record."]
+
+[[evidence]]
+id = "E-CC-SAMPLE-CHAINSTOP"
+title_ja = "証拠欠落・チェーン停止リプレイ入力"
+title_en = "Evidence-gap and chain-stop replay input"
+origin = "external_repository"
+mode = "REPLAY_INPUT"
+strength = 3
+source_pin_id = "SRC-COLDCHAIN-POC"
+url = "https://github.com/GhostDriftTheory/coldchain-handoff-assurance/blob/1437b21a41b4c2b8623e8ae22ad71db3ef330383/samples/sample_chain_stop_demo.json"
+repository = "https://github.com/GhostDriftTheory/coldchain-handoff-assurance"
+commit = "1437b21a41b4c2b8623e8ae22ad71db3ef330383"
+path = "samples/sample_chain_stop_demo.json"
+raw_url = "https://raw.githubusercontent.com/GhostDriftTheory/coldchain-handoff-assurance/1437b21a41b4c2b8623e8ae22ad71db3ef330383/samples/sample_chain_stop_demo.json"
+expected_sha256_lf = "4cd7baba5ab5e3e87ce5cf97df322f3ea3f1a071b038aa48988845738df58264"
+expected_size_bytes_lf = 2884
+claims = [
+  "Certificate-recorded replay yields RELEASE then HOLD, stops early, and records last-good and first-fail anchors.",
+]
+limitations = ["Synthetic PoC sample, not a real shipment record."]
+
+[[evidence]]
+id = "E-CC-CI"
+title_ja = "コールドチェーン証明書CI検証"
+title_en = "Cold-chain certificate verification workflow"
+origin = "external_repository"
+mode = "CONTINUOUS_VERIFICATION"
+strength = 3
+source_pin_id = "SRC-COLDCHAIN-POC"
+url = "https://github.com/GhostDriftTheory/coldchain-handoff-assurance/blob/1437b21a41b4c2b8623e8ae22ad71db3ef330383/.github/workflows/adic-verify.yml"
+repository = "https://github.com/GhostDriftTheory/coldchain-handoff-assurance"
+commit = "1437b21a41b4c2b8623e8ae22ad71db3ef330383"
+path = ".github/workflows/adic-verify.yml"
+claims = ["Runs the certificate verifier in repository automation."]
+limitations = [
+  "CI execution does not establish production operational controls.",
+]
+
+[[evidence]]
+id = "E-EVAL-README"
+title_ja = "Evaluation OSの公開範囲・結果文書"
+title_en = "Evaluation OS public scope and result documentation"
+origin = "external_repository"
+mode = "PUBLIC_DOCUMENT"
+strength = 2
+source_pin_id = "SRC-EVALUATION-OS"
+url = "https://github.com/GhostDriftTheory/onzalinx-evaluation-os/blob/11eb3f22ea719b286043617a0c0205983aca5c71/README.md"
+repository = "https://github.com/GhostDriftTheory/onzalinx-evaluation-os"
+commit = "11eb3f22ea719b286043617a0c0205983aca5c71"
+path = "README.md"
+raw_url = "https://raw.githubusercontent.com/GhostDriftTheory/onzalinx-evaluation-os/11eb3f22ea719b286043617a0c0205983aca5c71/README.md"
+claims = [
+  "Discloses ROBUST / PUBLIC_ALIGNMENT_ESTABLISHED with a 70.0–88.6875 score envelope across 60 evaluation families.",
+  "Discloses the strategic-partner relationship and that the work is not an independent third-party audit.",
+]
+limitations = [
+  "The result concerns public claim-to-public evidence alignment, not cold-chain technical safety or HAIP compliance.",
+]
+
+[[evidence]]
+id = "E-EVAL-REPORT"
+title_ja = "Evaluation OS詳細報告書"
+title_en = "Evaluation OS authoritative detailed report"
+origin = "external_repository"
+mode = "PUBLIC_DOCUMENT"
+strength = 2
+source_pin_id = "SRC-EVALUATION-OS"
+url = "https://github.com/GhostDriftTheory/onzalinx-evaluation-os/blob/11eb3f22ea719b286043617a0c0205983aca5c71/②評価OS詳細レポート（オンザリンクス社）.md"
+repository = "https://github.com/GhostDriftTheory/onzalinx-evaluation-os"
+commit = "11eb3f22ea719b286043617a0c0205983aca5c71"
+path = "②評価OS詳細レポート（オンザリンクス社）.md"
+claims = [
+  "Documents methodology, evidence boundaries, evaluator relationship, and robustness result.",
+]
+limitations = [
+  "Public-source evaluation with human-authored evidence intervals.",
+]
+
+[[evidence]]
+id = "E-EVAL-CORE"
+title_ja = "Evaluation OS実装及び意味リプレイ"
+title_en = "Evaluation OS implementation and semantic replay"
+origin = "external_repository"
+mode = "HASH_BOUND_SEMANTIC_REPLAY"
+strength = 4
+source_pin_id = "SRC-EVALUATION-OS"
+url = "https://github.com/GhostDriftTheory/onzalinx-evaluation-os/blob/11eb3f22ea719b286043617a0c0205983aca5c71/③評価OS実施コード（オンザリンクス社）.py"
+repository = "https://github.com/GhostDriftTheory/onzalinx-evaluation-os"
+commit = "11eb3f22ea719b286043617a0c0205983aca5c71"
+path = "③評価OS実施コード（オンザリンクス社）.py"
+claims = [
+  "Provides evaluation, self-test, certificate generation, verification, and freeze commands.",
+  "Evaluates 60 families and supports certificate-based semantic replay.",
+]
+limitations = [
+  "Human-authored evidence intervals are made explicit and checkable but are not uniquely objective measurements.",
+]
+
+[[evidence]]
+id = "E-EVAL-CI"
+title_ja = "Evaluation OS機械検証ワークフロー"
+title_en = "Evaluation OS machine-verification workflow"
+origin = "external_repository"
+mode = "CONTINUOUS_VERIFICATION"
+strength = 3
+source_pin_id = "SRC-EVALUATION-OS"
+url = "https://github.com/GhostDriftTheory/onzalinx-evaluation-os/blob/11eb3f22ea719b286043617a0c0205983aca5c71/.github/workflows/verify-and-pages.yml"
+repository = "https://github.com/GhostDriftTheory/onzalinx-evaluation-os"
+commit = "11eb3f22ea719b286043617a0c0205983aca5c71"
+path = ".github/workflows/verify-and-pages.yml"
+claims = [
+  "Checks self-tests, certificate determinism, semantic replay, core results, disclosures, and report consistency before Pages publication.",
+]
+limitations = [
+  "Verifies the declared evaluation universe, not unobserved public information or cold-chain runtime safety.",
+]
+
+[[evidence]]
+id = "E-PROFILE-VERIFIER"
+title_ja = "本リポジトリの軽量マッピング検証器"
+title_en = "This repository’s lightweight mapping validator"
+origin = "this_repository"
+mode = "GENERATED_PROFILE"
+strength = 2
+source_pin_id = "SRC-MAPPING-REPOSITORY"
+url = "https://github.com/GhostDriftTheory/hiroshima-ai-process-assurance-mappings/blob/main/validate.py"
+path = "validate.py"
+claims = [
+  "Rejects missing references, status inflation, unsupported direct claims, role-boundary violations, and prohibited public claims.",
+]
+limitations = [
+  "Self-produced evidence cannot support a DIRECT assessment under this profile.",
+]
+
+[[obligations]]
+id = "M-A1-01"
+obligation_id = "O-A1-RISK-GATES"
+haip_action_id = "HAIP-A1"
+obligation_ja = "次の状態遷移を許可する前に引渡しリスクを評価し、必要証拠又は安全条件が満たされない場合に安全側の軽減措置を適用する。"
+obligation_en = "Evaluate handoff risks before permitting onward state transition, and apply a fail-safe mitigation when required evidence or safety conditions fail."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "DIRECT"
+minimum_evidence_strength = 3
+evidence_ids = [
+  "E-CC-CORE",
+  "E-CC-CERT",
+  "E-CC-SAMPLE-REJECT",
+  "E-CC-SAMPLE-CHAINSTOP",
+]
+supporting_evidence_ids = ["E-CC-README"]
+gaps = []
+rationale_ja = "固定された判定順序が証拠を先に検査し、致命的閾値超過を拒否し、最初の非RELEASE判定後にチェーンを停止する。証明書リプレイがその挙動を拘束する。"
+rationale_en = "The fixed decision sequence checks evidence first, rejects fatal threshold breaches, and stops the chain after the first non-RELEASE outcome; certificate replay binds the behaviour."
+
+[[obligations]]
+id = "M-A1-02"
+obligation_id = "O-A1-INTERNAL-TESTING"
+haip_action_id = "HAIP-A1"
+obligation_ja = "本番利用前に多様な内部評価及びレッドチーム形式シナリオを用いる。"
+obligation_en = "Use diverse internal evaluation and red-team-style scenarios before production use."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "DIRECT"
+minimum_evidence_strength = 3
+evidence_ids = ["E-CC-TESTS", "E-CC-CERT"]
+supporting_evidence_ids = ["E-CC-REDTEAM", "E-CC-SECURITY"]
+gaps = []
+rationale_ja = "テストスイート及び証明書が再現可能な検証を支え、公開されたレッドチーム形式報告が改ざん、境界及びチェーン隠蔽シナリオを列挙する。"
+rationale_en = "The test suite and certificate support replayable validation, while the published red-team-style report enumerates tampering, boundary, and chain-masking scenarios."
+
+[[obligations]]
+id = "M-A1-03"
+obligation_id = "O-A1-INDEPENDENT-EXTERNAL-TESTING"
+haip_action_id = "HAIP-A1"
+obligation_ja = "リスクに応じた独立外部試験を実施する。"
+obligation_en = "Undertake independent external testing proportionate to risk."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "NOT_COVERED"
+minimum_evidence_strength = 3
+evidence_ids = []
+supporting_evidence_ids = []
+gaps = [
+  "No independent external laboratory, auditor, or red-team result is included in the present evidence set.",
+]
+rationale_ja = "既存試験は実装プロジェクト内で作成されたもので、独立外部試験ではない。"
+rationale_en = "The existing testing was produced within the implementation project and is not independent external testing."
+
+[[obligations]]
+id = "M-A1-04"
+obligation_id = "O-A1-TRACEABILITY"
+haip_action_id = "HAIP-A1"
+obligation_ja = "関連入力、規則、判断及び最初の失敗位置を追跡可能にする。"
+obligation_en = "Enable traceability of relevant inputs, rules, decisions, and first-failure location."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "DIRECT"
+minimum_evidence_strength = 4
+evidence_ids = ["E-CC-CERT"]
+supporting_evidence_ids = ["E-CC-README", "E-CC-SAMPLE-CHAINSTOP"]
+gaps = []
+rationale_ja = "証明書が対象成果物、プロファイル及びルールセットのダイジェスト、判断ダイジェスト並びに最終正常・最初失敗アンカーを拘束する。"
+rationale_en = "The certificate binds target artifacts, profile and ruleset digests, decision digests, and last-good/first-fail anchors."
+
+[[obligations]]
+id = "M-A1-05"
+obligation_id = "O-A1-FULL-LIFECYCLE-CHECKPOINTS"
+haip_action_id = "HAIP-A1"
+obligation_ja = "本番AIライフサイクル全体で反復チェックポイント及び更新試験を運用する。"
+obligation_en = "Operate repeated checkpoints and updated testing across a production AI lifecycle."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "NOT_COVERED"
+minimum_evidence_strength = 3
+evidence_ids = []
+supporting_evidence_ids = ["E-CC-CI"]
+gaps = [
+  "The implementation is a file-based PoC and does not evidence a production lifecycle monitoring programme.",
+]
+rationale_ja = "CIは開発時検査を提供するが、本番ライフサイクルのチェックポイントは実証されていない。"
+rationale_en = "CI provides development-time checking, but production lifecycle checkpoints are not demonstrated."
+
+[[obligations]]
+id = "M-A2-01"
+obligation_id = "O-A2-INCIDENT-LOCALISATION"
+haip_action_id = "HAIP-A2"
+obligation_ja = "観測された失敗を特定し、下流の正常区間による隠蔽を防止する。"
+obligation_en = "Localise an observed failure and prevent a downstream clean leg from masking it."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "SUPPORTING_ONLY"
+minimum_evidence_strength = 3
+evidence_ids = ["E-CC-CERT", "E-CC-SAMPLE-CHAINSTOP"]
+supporting_evidence_ids = ["E-CC-REDTEAM"]
+gaps = [
+  "The demonstrated behaviour is a PoC replay, not post-deployment monitoring of live incidents.",
+]
+rationale_ja = "チェーン停止及び最初失敗アンカーはインシデント対応に技術的に関連するが、導入後監視を成立させるものではない。"
+rationale_en = "Chain-stop and first-fail anchors are technically relevant to incident handling, but do not establish post-deployment monitoring."
+
+[[obligations]]
+id = "M-A2-02"
+obligation_id = "O-A2-POSTDEPLOY-MONITORING"
+haip_action_id = "HAIP-A2"
+obligation_ja = "稼働中の本番システムについて、脆弱性、インシデント、新たなリスク及び誤用を監視する。"
+obligation_en = "Monitor live deployed systems for vulnerabilities, incidents, emerging risks, and misuse."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "NOT_COVERED"
+minimum_evidence_strength = 3
+evidence_ids = []
+supporting_evidence_ids = []
+gaps = [
+  "No live deployment, telemetry, incident register, or post-market monitoring evidence is provided.",
+]
+rationale_ja = "本プロファイルは本番前PoCを対象とする。"
+rationale_en = "This profile is based on a pre-production PoC."
+
+[[obligations]]
+id = "M-A2-03"
+obligation_id = "O-A2-EXTERNAL-REPORTING-CHANNEL"
+haip_action_id = "HAIP-A2"
+obligation_ja = "利用者又は第三者が脆弱性及びインシデントを報告できる利用可能な仕組みを設ける。"
+obligation_en = "Provide an accessible mechanism for users or third parties to report vulnerabilities and incidents."
+applicability = "IN_SCOPE_ORGANISATIONAL"
+assessment = "NOT_COVERED"
+minimum_evidence_strength = 2
+evidence_ids = []
+supporting_evidence_ids = []
+gaps = [
+  "A formal vulnerability disclosure or incident-reporting channel is not evidenced by the mapped artifacts.",
+]
+rationale_ja = "公開リポジトリ自体は、文書化されたインシデント報告制度を意味しない。"
+rationale_en = "A public repository is not, by itself, a documented incident-reporting programme."
+
+[[obligations]]
+id = "M-A3-01"
+obligation_id = "O-A3-CAPABILITIES-USE"
+haip_action_id = "HAIP-A3"
+obligation_ja = "システムの目的、判断種別、動作条件及び適切な利用を公開説明する。"
+obligation_en = "Publicly describe the system’s purpose, decisions, operating conditions, and appropriate use."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "DIRECT"
+minimum_evidence_strength = 2
+evidence_ids = ["E-CC-README"]
+supporting_evidence_ids = []
+gaps = []
+rationale_ja = "READMEが2〜8℃引渡しシナリオ、4判定、固定ゲート順序、サンプル実行及び閾値プロファイルを説明する。"
+rationale_en = "The README explains the 2–8°C handoff scenario, four decision states, fixed gate order, sample operation, and threshold profile."
+
+[[obligations]]
+id = "M-A3-02"
+obligation_id = "O-A3-EVALUATION-RESULTS"
+haip_action_id = "HAIP-A3"
+obligation_ja = "重要な評価方法及びレッドチーム形式の結果を公開する。"
+obligation_en = "Publicly disclose material evaluation methods and red-team-style results."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "DIRECT"
+minimum_evidence_strength = 2
+evidence_ids = [
+  "E-CC-REDTEAM",
+  "E-CC-TESTS",
+  "E-CC-CERT",
+]
+supporting_evidence_ids = []
+gaps = []
+rationale_ja = "公開報告が結果、既知ギャップ及び対象外ケースを列挙し、テスト及び証明書が再現可能な裏付けを与える。"
+rationale_en = "The public report enumerates outcomes, known gaps, and out-of-scope cases; tests and certificate provide reproducible support."
+
+[[obligations]]
+id = "M-A3-03"
+obligation_id = "O-A3-LIMITATIONS"
+haip_action_id = "HAIP-A3"
+obligation_ja = "解釈又は適切な利用に影響する重要な限界及び非主張事項を公開する。"
+obligation_en = "Publicly disclose significant limitations and non-claims that affect interpretation or appropriate use."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "DIRECT"
+minimum_evidence_strength = 2
+evidence_ids = [
+  "E-CC-README",
+  "E-CC-CERT",
+  "E-CC-REDTEAM",
+  "E-CC-SECURITY",
+]
+supporting_evidence_ids = []
+gaps = []
+rationale_ja = "マッピング対象成果物は、規制認証、製品固有閾値検証、センサー真正性、本番準備及び本番級侵入試験を明示的に除外する。"
+rationale_en = "The mapped artifacts expressly exclude regulatory certification, product-specific threshold validation, sensor authenticity, production readiness, and production-grade penetration testing."
+
+[[obligations]]
+id = "M-A3-04"
+obligation_id = "O-A3-DOCUMENT-MAINTENANCE"
+haip_action_id = "HAIP-A3"
+obligation_ja = "重要リリースに対応して透明性文書及び技術文書を維持・更新する。"
+obligation_en = "Maintain and update transparency and technical documentation for significant releases."
+applicability = "IN_SCOPE_ORGANISATIONAL"
+assessment = "PARTIAL"
+minimum_evidence_strength = 2
+evidence_ids = [
+  "E-CC-README",
+  "E-CC-SECURITY",
+  "E-CC-REDTEAM",
+]
+supporting_evidence_ids = ["E-CC-CI"]
+gaps = [
+  "No documented organisation-wide review cadence, document owner, or release-governance policy is included.",
+]
+rationale_ja = "版固定された公開文書は存在するが、組織的な維持手続は証拠化されていない。"
+rationale_en = "Version-pinned public documents exist, but the organisational maintenance process is not evidenced."
+
+[[obligations]]
+id = "M-A3-05"
+obligation_id = "O-A3-PUBLIC-CLAIM-ROBUSTNESS"
+haip_action_id = "HAIP-A3"
+obligation_ja = "公開主張と公開証拠の整合性について、頑健性及び限界を明示し再現可能にする。"
+obligation_en = "Make the robustness and limitations of public claim-to-evidence alignment explicit and reproducible."
+applicability = "IN_SCOPE_META_ASSURANCE"
+assessment = "SUPPORTING_ONLY"
+minimum_evidence_strength = 4
+evidence_ids = ["E-EVAL-CORE"]
+supporting_evidence_ids = [
+  "E-EVAL-README",
+  "E-EVAL-REPORT",
+  "E-EVAL-CI",
+]
+gaps = [
+  "Evaluation OS evaluates ONZALINKS public claim-to-public evidence alignment; it does not independently verify the cold-chain engine or full HAIP implementation.",
+]
+rationale_ja = "Evaluation OSは、公開評価宇宙、不確実性、評価者関係及び結論不変性を機械検証可能にする別のメタ保証層である。"
+rationale_en = "Evaluation OS is a separate meta-assurance layer that makes the public evaluation universe, uncertainty, evaluator relationship, and result invariance machine-checkable."
+
+[[obligations]]
+id = "M-A4-01"
+obligation_id = "O-A4-PUBLIC-SHARING"
+haip_action_id = "HAIP-A4"
+obligation_ja = "評価成果物、安全上の限界及び再利用可能なツールを、責任ある公開形式で関係主体と共有する。"
+obligation_en = "Share evaluation artifacts, safety limitations, and reusable tools with relevant stakeholders in a responsible public form."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "DIRECT"
+minimum_evidence_strength = 2
+evidence_ids = [
+  "E-CC-README",
+  "E-CC-REDTEAM",
+  "E-CC-SECURITY",
+  "E-EVAL-README",
+  "E-EVAL-REPORT",
+]
+supporting_evidence_ids = ["E-CC-CERT", "E-EVAL-CORE"]
+gaps = []
+rationale_ja = "両リポジトリが方法、限界、実装成果物及び再現手順を公開している。"
+rationale_en = "Both repositories publicly disclose methods, limitations, implementation artifacts, and reproducibility instructions."
+
+[[obligations]]
+id = "M-A4-02"
+obligation_id = "O-A4-INCIDENT-SHARING"
+haip_action_id = "HAIP-A4"
+obligation_ja = "責任あるインシデント報告及び協調軽減のための関係主体横断機構を運用する。"
+obligation_en = "Operate a cross-stakeholder mechanism for responsible incident reporting and coordinated mitigation."
+applicability = "IN_SCOPE_ORGANISATIONAL"
+assessment = "NOT_COVERED"
+minimum_evidence_strength = 2
+evidence_ids = []
+supporting_evidence_ids = []
+gaps = [
+  "No operational incident-sharing protocol, escalation matrix, or public-authority reporting process is evidenced.",
+]
+rationale_ja = "公開コード及び報告は情報共有ではあるが、運用上のインシデント共有機構ではない。"
+rationale_en = "Public code and reports are information sharing, but not an operational incident-sharing mechanism."
+
+[[obligations]]
+id = "M-A4-03"
+obligation_id = "O-A4-IP-SAFEGUARDS"
+haip_action_id = "HAIP-A4"
+obligation_ja = "安全情報の共有時に知的財産権を保護する。"
+obligation_en = "Protect intellectual-property rights when sharing safety information."
+applicability = "IN_SCOPE_LEGAL_ORGANISATIONAL"
+assessment = "NOT_ASSESSED"
+minimum_evidence_strength = 2
+evidence_ids = []
+supporting_evidence_ids = []
+gaps = [
+  "Licensing, ownership, confidential-information review, and publication authorisation are legal/organisational matters outside the technical evidence set.",
+]
+rationale_ja = "本プロファイルは、公開されているという事実から知財ガバナンスを推定しない。"
+rationale_en = "This profile does not infer IP governance from the fact of public publication."
+
+[[obligations]]
+id = "M-A5-01"
+obligation_id = "O-A5-RISK-BASED-DECISION-POLICY"
+haip_action_id = "HAIP-A5"
+obligation_ja = "説明可能な状態及び安全側優先順位を備えた明示的なリスクベース判断方針を実装する。"
+obligation_en = "Implement an explicit risk-based decision policy with accountable states and fail-safe precedence."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "DIRECT"
+minimum_evidence_strength = 3
+evidence_ids = ["E-CC-CORE", "E-CC-CERT"]
+supporting_evidence_ids = ["E-CC-README"]
+gaps = []
+rationale_ja = "証拠欠落はRELEASEを阻止し、致命的逸脱はREJECT、中間ケースはQA_REVIEW、境界内のみRELEASEとなる。"
+rationale_en = "Evidence gaps dominate release, fatal breaches produce REJECT, intermediate cases produce QA_REVIEW, and only bounded cases produce RELEASE."
+
+[[obligations]]
+id = "M-A5-02"
+obligation_id = "O-A5-ORGANISATION-GOVERNANCE"
+haip_action_id = "HAIP-A5"
+obligation_ja = "組織全体のAIガバナンス、説明責任上の役割及びリスク管理プロセスを確立する。"
+obligation_en = "Establish organisation-wide AI governance, accountability roles, and risk-management processes."
+applicability = "IN_SCOPE_ORGANISATIONAL"
+assessment = "NOT_COVERED"
+minimum_evidence_strength = 2
+evidence_ids = []
+supporting_evidence_ids = ["E-EVAL-README"]
+gaps = [
+  "No board-level policy, role matrix, approval authority, internal audit process, or enterprise risk-management evidence is included.",
+]
+rationale_ja = "技術的判断状態及び関係開示は、組織全体のガバナンス証拠に代替しない。"
+rationale_en = "Technical decision states and relationship disclosure cannot substitute for organisation-wide governance evidence."
+
+[[obligations]]
+id = "M-A5-03"
+obligation_id = "O-A5-PRIVACY-POLICY"
+haip_action_id = "HAIP-A5"
+obligation_ja = "関連する個人データ、プロンプト及び出力を対象とするプライバシー方針を策定・開示する。"
+obligation_en = "Develop and disclose privacy policies covering relevant personal data, prompts, and outputs."
+applicability = "IN_SCOPE_ORGANISATIONAL"
+assessment = "NOT_COVERED"
+minimum_evidence_strength = 2
+evidence_ids = []
+supporting_evidence_ids = []
+gaps = [
+  "The mapped PoC uses synthetic logistics data and does not evidence an organisation-wide privacy policy.",
+]
+rationale_ja = "サンプルに個人データがないことは、プライバシー・ガバナンス制度の証拠ではない。"
+rationale_en = "Absence of personal data in a sample is not evidence of a privacy governance programme."
+
+[[obligations]]
+id = "M-A5-04"
+obligation_id = "O-A5-TRAINING"
+haip_action_id = "HAIP-A5"
+obligation_ja = "リスク管理方針上の職務が理解・遂行されるよう、職員教育及び手続を維持する。"
+obligation_en = "Train staff and maintain procedures so that duties under the risk-management policy are understood and performed."
+applicability = "IN_SCOPE_ORGANISATIONAL"
+assessment = "NOT_COVERED"
+minimum_evidence_strength = 2
+evidence_ids = []
+supporting_evidence_ids = []
+gaps = [
+  "No training records, competency criteria, or operating-procedure evidence is included.",
+]
+rationale_ja = "コード文書は組織的な教育制度と同一ではない。"
+rationale_en = "Code documentation is not equivalent to an organisational training programme."
+
+[[obligations]]
+id = "M-A6-01"
+obligation_id = "O-A6-ARTIFACT-INTEGRITY"
+haip_action_id = "HAIP-A6"
+obligation_ja = "主張を支える判定ロジック、プロファイル、テスト及びリプレイ入力の差替え又は変更を検知する。"
+obligation_en = "Detect substitution or alteration of decision logic, profiles, tests, and replay inputs used to support a claim."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "DIRECT"
+minimum_evidence_strength = 4
+evidence_ids = ["E-CC-CERT"]
+supporting_evidence_ids = ["E-CC-CI"]
+gaps = []
+rationale_ja = "証明書がSHA-256拘束された対象ファイル、プロファイル／ルールセット・ダイジェスト及びリプレイ出力を検査する。"
+rationale_en = "The certificate checks SHA-256-bound target files, profile/ruleset digests, and replay outputs."
+
+[[obligations]]
+id = "M-A6-02"
+obligation_id = "O-A6-INPUT-BOUNDARY"
+haip_action_id = "HAIP-A6"
+obligation_ja = "品質判定前に、不正形式、非有限値、型強制、矛盾又は誤プロファイル入力を拒否する。"
+obligation_en = "Reject malformed, non-finite, type-coerced, contradictory, or mis-profiled inputs before quality judgment."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "DIRECT"
+minimum_evidence_strength = 3
+evidence_ids = ["E-CC-CORE", "E-CC-TESTS"]
+supporting_evidence_ids = ["E-CC-SECURITY", "E-CC-REDTEAM"]
+gaps = []
+rationale_ja = "実装及びテストが、解析済入力境界で厳密な真偽値、有限数、昇順時刻、プロファイル同一性及び証拠整合性を強制する。"
+rationale_en = "The implementation and tests enforce strict booleans, finite numbers, increasing timestamps, profile identity, and evidence consistency at the parsed-input boundary."
+
+[[obligations]]
+id = "M-A6-03"
+obligation_id = "O-A6-PRODUCTION-SECURITY"
+haip_action_id = "HAIP-A6"
+obligation_ja = "本番級の物理セキュリティ、サイバーアクセス制御、秘密情報保護及び内部脅威対策を運用する。"
+obligation_en = "Operate production-grade physical security, cyber access controls, secrets protection, and insider-threat safeguards."
+applicability = "IN_SCOPE_ORGANISATIONAL"
+assessment = "NOT_COVERED"
+minimum_evidence_strength = 3
+evidence_ids = []
+supporting_evidence_ids = ["E-CC-SECURITY"]
+gaps = [
+  "No production infrastructure, identity and access management, secrets management, physical controls, or insider-threat programme is evidenced.",
+]
+rationale_ja = "入力境界の強化は、HAIP行動6が想定するセキュリティ統制制度より狭い。"
+rationale_en = "Input-boundary hardening is narrower than the security-control programme contemplated by HAIP Action 6."
+
+[[obligations]]
+id = "M-A6-04"
+obligation_id = "O-A6-VULNERABILITY-MANAGEMENT"
+haip_action_id = "HAIP-A6"
+obligation_ja = "反復的な脆弱性管理及びセキュリティレビュー手続を維持する。"
+obligation_en = "Maintain a recurring vulnerability-management and security-review process."
+applicability = "IN_SCOPE_ORGANISATIONAL"
+assessment = "NOT_COVERED"
+minimum_evidence_strength = 2
+evidence_ids = []
+supporting_evidence_ids = ["E-CC-REDTEAM", "E-CC-CI"]
+gaps = [
+  "No vulnerability register, remediation SLA, review cadence, or ownership model is included.",
+]
+rationale_ja = "有限のPoC試験集合及びCIワークフローは、継続的な脆弱性管理制度を成立させない。"
+rationale_en = "A finite PoC test set and CI workflow do not establish an ongoing vulnerability-management programme."
+
+[[obligations]]
+id = "M-A7-01"
+obligation_id = "O-A7-CONTENT-PROVENANCE"
+haip_action_id = "HAIP-A7"
+obligation_ja = "技術的に可能な場合、AI生成コンテンツを認証又は表示し、コンテンツ来歴を保持する。"
+obligation_en = "Authenticate or label AI-generated content and preserve content provenance where technically feasible."
+applicability = "OUTSIDE_DECISION_PROFILE"
+assessment = "NOT_APPLICABLE"
+minimum_evidence_strength = 2
+evidence_ids = []
+supporting_evidence_ids = []
+gaps = [
+  "The mapped system issues logistics disposition records; it is not a generative-content system. Decision hashes must not be presented as content watermarking or content provenance.",
+]
+rationale_ja = "行動7はAI生成コンテンツの認証を扱い、判断記録をルールセット・ダイジェストに結び付けることとは別概念である。"
+rationale_en = "Action 7 addresses AI-generated content authentication, which is categorically different from binding a decision record to a ruleset digest."
+
+[[obligations]]
+id = "M-A8-01"
+obligation_id = "O-A8-SAFETY-RESEARCH"
+haip_action_id = "HAIP-A8"
+obligation_ja = "AIの安全性、信頼性及びリスク軽減を前進させる応用研究及びツールを実施・共有する。"
+obligation_en = "Conduct and share applied research and tools that advance AI safety, trustworthiness, and risk mitigation."
+applicability = "IN_SCOPE_CONTEXTUAL"
+assessment = "SUPPORTING_ONLY"
+minimum_evidence_strength = 2
+evidence_ids = [
+  "E-CC-README",
+  "E-CC-REDTEAM",
+  "E-EVAL-README",
+]
+supporting_evidence_ids = ["E-CC-CERT", "E-EVAL-CORE"]
+gaps = [
+  "The artifacts evidence a public technical research output, not the scale, continuity, or budget of an organisational research programme.",
+]
+rationale_ja = "両リポジトリは実践的保証手法に貢献するが、行動8は単一PoC及び評価事例の公開より広い。"
+rationale_en = "The repositories contribute practical assurance methods, but Action 8 is broader than publishing a single PoC and evaluation case study."
+
+[[obligations]]
+id = "M-A8-02"
+obligation_id = "O-A8-INVESTMENT-PROGRAMME"
+haip_action_id = "HAIP-A8"
+obligation_ja = "安全及び社会的リスク軽減への組織的投資を優先し、継続する。"
+obligation_en = "Prioritise and sustain organisational investment in safety and societal-risk mitigation."
+applicability = "IN_SCOPE_ORGANISATIONAL"
+assessment = "NOT_ASSESSED"
+minimum_evidence_strength = 2
+evidence_ids = []
+supporting_evidence_ids = []
+gaps = [
+  "Budgets, staffing, research portfolio, and investment governance are not part of the public technical evidence set.",
+]
+rationale_ja = "公開成果物の存在だけでは、投資制度の規模又は成立を証明できない。"
+rationale_en = "The existence of public artifacts does not quantify or establish an investment programme."
+
+[[obligations]]
+id = "M-A9-01"
+obligation_id = "O-A9-GLOBAL-HEALTH-CONTEXT"
+haip_action_id = "HAIP-A9"
+obligation_ja = "グローバルヘルス及び医薬品物流の強靱性に実質的に関係するユースケースへ、信頼できるAI保証を適用する。"
+obligation_en = "Apply trustworthy AI assurance to a use case materially connected to global health and resilient medicine logistics."
+applicability = "IN_SCOPE_CONTEXTUAL"
+assessment = "SUPPORTING_ONLY"
+minimum_evidence_strength = 2
+evidence_ids = ["E-CC-README"]
+supporting_evidence_ids = ["E-CC-CORE"]
+gaps = [
+  "The PoC demonstrates technical relevance to medical cold-chain handoffs, not measured health outcomes, deployment impact, or an SDG programme.",
+]
+rationale_ja = "適用領域は医薬品物流に直接関係するが、政策レベルの社会的便益はPoCだけでは証明されない。"
+rationale_en = "The application domain is directly related to medicine logistics, but policy-level societal benefit is not proven by the PoC."
+
+[[obligations]]
+id = "M-A9-02"
+obligation_id = "O-A9-LITERACY-COMMUNITY"
+haip_action_id = "HAIP-A9"
+obligation_ja = "デジタルリテラシー、公共教育及び市民社会又は地域との協働を支援する。"
+obligation_en = "Support digital literacy, public education, and collaboration with civil society or communities."
+applicability = "IN_SCOPE_ORGANISATIONAL"
+assessment = "NOT_COVERED"
+minimum_evidence_strength = 2
+evidence_ids = []
+supporting_evidence_ids = ["E-CC-README"]
+gaps = [
+  "No education programme, community consultation, or measured literacy activity is evidenced.",
+]
+rationale_ja = "読みやすい公開文書はアクセスを助けるが、デジタルリテラシー制度ではない。"
+rationale_en = "Readable public documentation supports access, but is not a digital-literacy programme."
+
+[[obligations]]
+id = "M-A10-01"
+obligation_id = "O-A10-MACHINE-READABLE-PROFILE"
+haip_action_id = "HAIP-A10"
+obligation_ja = "技術的プラクティスとして再利用可能な、相互運用的・機械可読な保証プロファイル及び検証器を公開する。"
+obligation_en = "Publish an interoperable, machine-readable assurance profile and verifier that can be reused as a technical practice."
+applicability = "IN_SCOPE_CONTEXTUAL"
+assessment = "SUPPORTING_ONLY"
+minimum_evidence_strength = 2
+evidence_ids = ["E-PROFILE-VERIFIER"]
+supporting_evidence_ids = ["E-CC-CERT", "E-EVAL-CORE"]
+gaps = [
+  "This repository is a private reference profile and has not been adopted by a recognised standards-development organisation. Self-produced evidence is barred from DIRECT assessment.",
+]
+rationale_ja = "本プロファイルは標準志向の技術形式を示すが、国際標準化又は外部採用を示さない。"
+rationale_en = "The profile demonstrates a standards-oriented technical form, but not international standardisation or external adoption."
+
+[[obligations]]
+id = "M-A10-02"
+obligation_id = "O-A10-SDO-ADOPTION"
+haip_action_id = "HAIP-A10"
+obligation_ja = "適切な標準化機関を通じて国際技術標準へ貢献し、正式採用し、又は適合を実証する。"
+obligation_en = "Contribute to, formally adopt, or demonstrate conformity with an international technical standard through an appropriate standards body."
+applicability = "IN_SCOPE_ORGANISATIONAL"
+assessment = "NOT_COVERED"
+minimum_evidence_strength = 2
+evidence_ids = []
+supporting_evidence_ids = ["E-PROFILE-VERIFIER"]
+gaps = [
+  "No ISO, IEC, IEEE, C2PA, or other SDO submission, liaison, adoption decision, or conformity assessment is evidenced.",
+]
+rationale_ja = "公開スキーマは将来の標準化を支え得るが、それ自体は国際標準ではない。"
+rationale_en = "A public schema may support future standardisation, but is not itself an international standard."
+
+[[obligations]]
+id = "M-A11-01"
+obligation_id = "O-A11-DATA-QUALITY"
+haip_action_id = "HAIP-A11"
+obligation_ja = "判断発行前に、明示的な入力品質、整合性、完全性及びプロファイル拘束統制を適用する。"
+obligation_en = "Apply explicit input-quality, consistency, completeness, and profile-binding controls before a decision is issued."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "DIRECT"
+minimum_evidence_strength = 3
+evidence_ids = [
+  "E-CC-CORE",
+  "E-CC-TESTS",
+  "E-CC-CERT",
+]
+supporting_evidence_ids = ["E-CC-SECURITY", "E-CC-REDTEAM"]
+gaps = []
+rationale_ja = "PoCは不正又は矛盾入力を拒否し、RELEASEに証拠完全性を要求し、判断を正確な測定プロファイル及びルールセットへ拘束する。"
+rationale_en = "The PoC rejects malformed and contradictory inputs, requires evidence completeness for RELEASE, and binds decisions to an exact measure profile and ruleset."
+
+[[obligations]]
+id = "M-A11-02"
+obligation_id = "O-A11-PERSONAL-DATA"
+haip_action_id = "HAIP-A11"
+obligation_ja = "収集、処理、試験及び出力を通じて個人又は機微データの保護措置を実装する。"
+obligation_en = "Implement safeguards for personal or sensitive data throughout collection, processing, testing, and output."
+applicability = "IN_SCOPE_ORGANISATIONAL"
+assessment = "NOT_COVERED"
+minimum_evidence_strength = 3
+evidence_ids = []
+supporting_evidence_ids = []
+gaps = [
+  "The synthetic PoC schema does not evidence privacy-preserving processing, retention, access, deletion, or disclosure controls.",
+]
+rationale_ja = "デモで非個人サンプルを使うことは露出を避けるが、データ保護統制を証明しない。"
+rationale_en = "Using non-personal sample data avoids exposure in the demo but does not prove data-protection controls."
+
+[[obligations]]
+id = "M-A11-03"
+obligation_id = "O-A11-IP-PROTECTION"
+haip_action_id = "HAIP-A11"
+obligation_ja = "データ入力及び出力における知的財産及び著作権保護コンテンツの保護措置を実装する。"
+obligation_en = "Implement safeguards for intellectual property and copyright-protected content in data inputs and outputs."
+applicability = "IN_SCOPE_LEGAL_ORGANISATIONAL"
+assessment = "NOT_ASSESSED"
+minimum_evidence_strength = 2
+evidence_ids = []
+supporting_evidence_ids = []
+gaps = [
+  "Dataset provenance, licences, rights clearance, and output-use controls are not assessed by this technical mapping.",
+]
+rationale_ja = "ソースコード又はサンプルデータが公開されていることから法的評価を推定しない。"
+rationale_en = "No legal inference is made from the public availability of source code or sample data."
+
+[[obligations]]
+id = "M-A11-04"
+obligation_id = "O-A11-LEGAL-COMPLIANCE"
+haip_action_id = "HAIP-A11"
+obligation_ja = "想定導入に適用される法令及び規制枠組みに適合する。"
+obligation_en = "Comply with applicable legal and regulatory frameworks for the intended deployment."
+applicability = "IN_SCOPE_LEGAL_ORGANISATIONAL"
+assessment = "NOT_ASSESSED"
+minimum_evidence_strength = 2
+evidence_ids = []
+supporting_evidence_ids = ["E-CC-README", "E-CC-CERT"]
+gaps = [
+  "The PoC expressly disclaims regulatory certification and product-specific threshold validation; no legal opinion or regulatory assessment is included.",
+]
+rationale_ja = "本プロファイルは技術試験を法令適合と同一視せず、法務・導入上の未解決事項として保持する。"
+rationale_en = "The profile preserves this as an open legal and deployment question rather than treating technical testing as legal compliance."
+
+[reporting]
+bridge_id = "haip-reporting-v2-coldchain-evidence-bridge.v0.3"
+snapshot_date = "2026-09-01"
+official_source_id = "SRC-OECD-HAIP-V2"
+purpose_ja = "組織がHAIP Reporting Framework v2.0への回答を作成する際に、本プロファイルの公開技術成果を裏付け資料として使う範囲を限定して示すガイドです。"
+purpose_en = "A bounded guide for using this profile's public technical outputs as supporting evidence when an organisation prepares its own HAIP Reporting Framework v2.0 response."
+not_a_submission_tool_ja = "本ブリッジは、質問票の複製、参加資格若しくは対象範囲の判定、組織回答全体の作成、承認管理又は提出可能との判定を行うものではありません。"
+not_a_submission_tool_en = "This bridge does not reproduce the questionnaire, determine eligibility or scope, draft a complete organisational response, manage approvals, or certify readiness for submission."
+
+[[reporting.scope_checks]]
+id = "SCOPE-AI-SYSTEM"
+question_ja = "報告対象となる実際の高度AIシステムと、それに対する報告組織の役割を特定しているか。"
+question_en = "Has the reporting organisation identified the actual advanced AI system covered by its report and its role in relation to that system?"
+rule_ja = "決定論的なコールドチェーンPoC単独では、高度AIシステムが報告対象に含まれることを立証できません。"
+rule_en = "The deterministic cold-chain PoC does not by itself establish that an advanced AI system is in scope."
+
+[[reporting.scope_checks]]
+id = "SCOPE-RELATIONSHIP"
+question_ja = "本コールドチェーン保証層が、対象AIシステムの開発、導入、提供又はガバナンスに実質的に接続されているか。"
+question_en = "Is the cold-chain assurance layer substantively connected to the development, deployment, provision, or governance of that in-scope AI system?"
+rule_ja = "単なる周辺資料又は例示にとどまる場合、実装済み組織慣行の証拠ではなく研究上の参考資料としてのみ扱います。"
+rule_en = "If the profile is merely adjacent or illustrative, cite it only as research context, not as evidence of implemented organisational practice."
+
+[[reporting.scope_checks]]
+id = "SCOPE-LIVE-QUESTION"
+question_ja = "OECD公式ポータルに表示される、その時点の正確な役割別設問を確認したか。"
+question_en = "Has the preparer checked the exact, current, role-routed question in the official OECD portal?"
+rule_ja = "正本は公式ポータル及び公式案内であり、本ブリッジは証拠の使い方だけを補助します。"
+rule_en = "The portal and official instructions are authoritative; this bridge supplies evidence-use guidance only."
+
+[[reporting.scope_checks]]
+id = "SCOPE-ORGANISATION-FACTS"
+question_ja = "責任主体、ガバナンス、導入状況、インシデント、セキュリティ、投資及び成果に関する最新の組織事実を追加できるか。"
+question_en = "Can the organisation add current facts about ownership, governance, deployment, incidents, security, investment, and outcomes?"
+rule_ja = "技術プロファイルは組織保有事実の代わりにはならず、公開回答には機密情報又は専有情報を含めてはなりません。"
+rule_en = "Technical profile evidence cannot substitute for organisation-owned facts, and public responses must exclude confidential or proprietary information."
+
+[[reporting.sections]]
+section_id = "RF2-S1"
+section_number = 1
+title_ja = "リスクの特定及び評価"
+title_en = "Risk identification and evaluation"
+bridge_status = "TECHNICAL_EVIDENCE_INPUT"
+haip_action_ids = ["HAIP-A1", "HAIP-A11"]
+supported_obligation_ids = [
+  "O-A1-RISK-GATES",
+  "O-A1-INTERNAL-TESTING",
+  "O-A1-TRACEABILITY",
+  "O-A11-DATA-QUALITY",
+]
+known_gap_obligation_ids = [
+  "O-A1-INDEPENDENT-EXTERNAL-TESTING",
+  "O-A1-FULL-LIFECYCLE-CHECKPOINTS",
+  "O-A11-LEGAL-COMPLIANCE",
+]
+evidence_ids = [
+  "E-CC-README",
+  "E-CC-CORE",
+  "E-CC-TESTS",
+  "E-CC-REDTEAM",
+  "E-CC-CERT",
+  "E-CC-SAMPLE-REJECT",
+  "E-CC-SAMPLE-CHAINSTOP",
+]
+profile_can_support_ja = "限定されたPoCについて、引渡し前の証拠・温度リスクゲート、厳格な入力検査、再実行可能なテスト、レッドチーム形式シナリオ、判断追跡及び次状態への遷移前の安全側判定を示せます。"
+profile_can_support_en = "The bounded PoC defines pre-handoff evidence and temperature-risk gates, strict input checks, replayable test cases, red-team-style scenarios, decision traceability, and fail-safe outcomes before onward transition."
+organisation_must_add_ja = "対象AIシステム、リスク分類、重要リスクの責任者、評価頻度、外部又は独立評価、本番ライフサイクルの範囲、導入実績及び適用法令・業界レビューを追加する必要があります。"
+organisation_must_add_en = "Identify the in-scope AI system, risk taxonomy, material risk owners, assessment cadence, external or independent evaluation, production lifecycle coverage, deployment evidence, and applicable legal or sectoral review."
+illustrative_wording_ja = "公開した2〜8℃引渡しPoCでは、証拠完備性及び温度ルールの検査を明示し、再実行可能なテストとレッドチーム形式シナリオで確認し、最初の非RELEASE区間で停止するよう構成しました。この結果はファイルベースPoCに限定され、全社又は本番のリスク管理を立証するものではありません。"
+illustrative_wording_en = "For the published 2–8°C handoff PoC, we defined explicit evidence-completeness and temperature-rule checks, exercised them through replayable tests and red-team-style scenarios, and configured the workflow to stop at the first non-RELEASE leg. These results are limited to the file-based PoC and do not establish enterprise-wide or production risk management."
+do_not_infer_ja = "独立外部評価、継続的な本番監視、規制準拠、製品別閾値の妥当性又は上流センサーデータの真正性を推論してはいけません。"
+do_not_infer_en = "Do not infer independent external testing, continuous production monitoring, regulatory compliance, validated product thresholds, or authenticity of upstream sensor data."
+
+[[reporting.sections]]
+section_id = "RF2-S2"
+section_number = 2
+title_ja = "リスク管理及び情報セキュリティ"
+title_en = "Risk management and information security"
+bridge_status = "TECHNICAL_EVIDENCE_INPUT"
+haip_action_ids = [
+  "HAIP-A1",
+  "HAIP-A2",
+  "HAIP-A5",
+  "HAIP-A6",
+  "HAIP-A11",
+]
+supported_obligation_ids = [
+  "O-A1-RISK-GATES",
+  "O-A2-INCIDENT-LOCALISATION",
+  "O-A5-RISK-BASED-DECISION-POLICY",
+  "O-A6-ARTIFACT-INTEGRITY",
+  "O-A6-INPUT-BOUNDARY",
+  "O-A11-DATA-QUALITY",
+]
+known_gap_obligation_ids = [
+  "O-A2-POSTDEPLOY-MONITORING",
+  "O-A2-EXTERNAL-REPORTING-CHANNEL",
+  "O-A5-ORGANISATION-GOVERNANCE",
+  "O-A5-PRIVACY-POLICY",
+  "O-A6-PRODUCTION-SECURITY",
+  "O-A6-VULNERABILITY-MANAGEMENT",
+  "O-A11-PERSONAL-DATA",
+]
+evidence_ids = [
+  "E-CC-CORE",
+  "E-CC-CERT",
+  "E-CC-TESTS",
+  "E-CC-SECURITY",
+  "E-CC-CI",
+  "E-CC-SAMPLE-CHAINSTOP",
+]
+profile_can_support_ja = "PoCは、順序付けられた安全側判定、最初の失敗地点でのチェーン停止、不正入力の拒否、プロファイル・ルールセット拘束、ハッシュによる成果物検査及びCI上の再現検証を実装しています。"
+profile_can_support_en = "The PoC implements ordered fail-safe dispositions, first-failure chain stop, malformed-input rejection, profile/ruleset binding, hash-bound artifact checks, and reproducible verification in continuous integration."
+organisation_must_add_ja = "本番IAM、秘密情報・インフラ統制、データ保護、脆弱性管理、インシデント対応、事業継続、アクセスレビュー、供給者統制及びHOLD又はREJECTを受け入れ若しくは解除する権限主体を説明する必要があります。"
+organisation_must_add_en = "Describe production IAM, secrets and infrastructure controls, data protection, vulnerability management, incident response, business continuity, access review, supplier controls, and the governance authority that can accept or override a hold or rejection."
+illustrative_wording_ja = "PoC内では、証拠欠落、矛盾入力又は閾値超過に対して黙って継続せず、限定された安全側状態を出します。また、証明書とCI検査により選択された判断成果物の変更を検出します。本番のセキュリティ、アクセス制御、監視及びインシデント対応は公開PoCの対象外であり、別途説明が必要です。"
+illustrative_wording_en = "Within the PoC, missing evidence, contradictory inputs, or threshold breaches produce bounded fail-safe states rather than silent continuation; the certificate and CI checks detect changes to selected decision artifacts. Production security, access control, monitoring, and incident response are outside this public PoC and must be described separately."
+do_not_infer_ja = "PoCを、本番グレードのサイバーセキュリティ、エンドツーエンドのデータ真正性、プライバシー準拠、脆弱性管理プログラム又は全社リスク管理システムと表現してはいけません。"
+do_not_infer_en = "Do not describe the PoC as production-grade cybersecurity, end-to-end data authenticity, privacy compliance, a vulnerability-management programme, or an organisation-wide risk-management system."
+
+[[reporting.sections]]
+section_id = "RF2-S3"
+section_number = 3
+title_ja = "高度AIシステムに関する透明性報告"
+title_en = "Transparency reporting on advanced AI systems"
+bridge_status = "TECHNICAL_EVIDENCE_INPUT"
+haip_action_ids = ["HAIP-A3", "HAIP-A4"]
+supported_obligation_ids = [
+  "O-A3-CAPABILITIES-USE",
+  "O-A3-EVALUATION-RESULTS",
+  "O-A3-LIMITATIONS",
+  "O-A3-DOCUMENT-MAINTENANCE",
+  "O-A3-PUBLIC-CLAIM-ROBUSTNESS",
+  "O-A4-PUBLIC-SHARING",
+]
+known_gap_obligation_ids = []
+evidence_ids = [
+  "E-CC-README",
+  "E-CC-REDTEAM",
+  "E-CC-SECURITY",
+  "E-CC-CERT",
+  "E-EVAL-README",
+  "E-EVAL-REPORT",
+  "E-PROFILE-VERIFIER",
+]
+profile_can_support_ja = "公開リポジトリは、目的、判断状態、方法、選択された評価、固定されたソース版、既知の限界、非主張事項並びにEvaluation OSの別個の役割と関係上の限界を開示しています。"
+profile_can_support_en = "The public repositories disclose purpose, decision states, methods, selected evaluations, fixed source versions, known limitations, non-claims, and the separate scope and relationship limits of Evaluation OS."
+organisation_must_add_ja = "実際の高度AIシステム、その能力・限界、下流利用者向け情報、リリース別文書化手順、公開承認、更新慣行、重要変更及び安全に要約可能な非公開評価を追加する必要があります。"
+organisation_must_add_en = "Describe the actual advanced AI system, its capabilities and limitations, downstream-user information, release-specific documentation process, disclosure approval, update practice, material changes, and any non-public evaluations that can be summarised safely."
+illustrative_wording_ja = "コールドチェーン保証層について、想定用途、判断ロジック、テストシナリオ、既知の境界及び版固定された証拠を公開しています。また、Evaluation OSが限定された公開主張・公開証拠集合を検査するものであり、独立第三者監査ではなく戦略的パートナーが実施したことも開示しています。この文書はここで特定した保証成果物に関するもので、高度AIシステム全体の透明性報告ではありません。"
+illustrative_wording_en = "We publish the cold-chain assurance layer's intended use, decision logic, test scenarios, known boundaries, and version-pinned evidence. We also disclose that Evaluation OS examines a bounded public claim-to-evidence universe and is conducted by a strategic partner rather than an independent third-party auditor. This documentation concerns the assurance artifacts identified here and must not be read as a complete transparency report for an advanced AI system."
+do_not_infer_ja = "本マッピングをOECD報告書、HAIP公式実装、独立監査又は完全なモデル／システムカードと呼んではいけません。また、Evaluation OSの下限値を企業点、HAIP点又はコールドチェーン点へ読み替えてはいけません。"
+do_not_infer_en = "Do not call the mapping an OECD report, official HAIP implementation, independent audit, or complete model/system card; do not convert the Evaluation OS lower bound into a company, HAIP, or cold-chain score."
+
+[[reporting.sections]]
+section_id = "RF2-S4"
+section_number = 4
+title_ja = "組織ガバナンス、インシデント管理及び透明性"
+title_en = "Organizational governance, incident management, and transparency"
+bridge_status = "LIMITED_CONTEXT_INPUT"
+haip_action_ids = [
+  "HAIP-A2",
+  "HAIP-A4",
+  "HAIP-A5",
+  "HAIP-A11",
+]
+supported_obligation_ids = ["O-A2-INCIDENT-LOCALISATION", "O-A4-PUBLIC-SHARING"]
+known_gap_obligation_ids = [
+  "O-A2-POSTDEPLOY-MONITORING",
+  "O-A2-EXTERNAL-REPORTING-CHANNEL",
+  "O-A4-INCIDENT-SHARING",
+  "O-A4-IP-SAFEGUARDS",
+  "O-A5-ORGANISATION-GOVERNANCE",
+  "O-A5-TRAINING",
+  "O-A11-IP-PROTECTION",
+  "O-A11-LEGAL-COMPLIANCE",
+]
+evidence_ids = [
+  "E-CC-README",
+  "E-CC-REDTEAM",
+  "E-CC-SAMPLE-CHAINSTOP",
+]
+profile_can_support_ja = "成果物は、技術的な失敗地点の特定、安全側のチェーン停止、テスト・限界情報の公開及び評価者関係の開示を示しますが、組織ガバナンス又はインシデント管理運用を立証しません。"
+profile_can_support_en = "The artifacts demonstrate technical failure localisation, a conservative chain-stop rule, public sharing of test and limitation material, and disclosure of the evaluator relationship. They do not establish organisational governance or incident-management operations."
+organisation_must_add_ja = "責任あるガバナンス役割、エスカレーション権限、インシデント定義・窓口、対応・通知手順、教育、監督、法務・知財・プライバシーレビュー、記録保持及び開示可能な実運用例又は指標を追加する必要があります。"
+organisation_must_add_en = "Provide accountable governance roles, escalation authority, incident definitions and channels, response and notification procedures, training, oversight, legal/IP/privacy review, record retention, and examples or metrics from actual operation where disclosure is appropriate."
+illustrative_wording_ja = "PoCは最初の非RELEASE引渡しを記録し、後続の正常区間によってその失敗が隠れることを防ぐため、技術調査を補助できます。組織のインシデント責任、報告窓口、エスカレーション、教育及び規制当局への通知は本プロファイルでは立証されず、別のガバナンス記録に基づいて説明する必要があります。"
+illustrative_wording_en = "The PoC records the first non-RELEASE handoff and prevents a later clean leg from masking that failure, which can support technical investigation. Organisational incident ownership, reporting channels, escalation, training, and regulatory notification are not evidenced by this profile and would need to be described from separate governance records."
+do_not_infer_ja = "チェーン停止記録だけから、インシデント対応プログラム、当局報告、教育済み人員、経営監督又は全社的説明責任を推論してはいけません。"
+do_not_infer_en = "Do not infer an incident-response programme, reporting to authorities, trained personnel, executive oversight, or organisation-wide accountability from the chain-stop trace alone."
+
+[[reporting.sections]]
+section_id = "RF2-S5"
+section_number = 5
+title_ja = "コンテンツ認証及び来歴管理の仕組み"
+title_en = "Content authentication & provenance mechanisms"
+bridge_status = "NO_PROFILE_COVERAGE"
+haip_action_ids = ["HAIP-A7"]
+supported_obligation_ids = []
+known_gap_obligation_ids = ["O-A7-CONTENT-PROVENANCE"]
+evidence_ids = []
+profile_can_support_ja = "直接実装証拠はありません。本プロファイルは、判断記録・成果物のハッシュと、AI生成コンテンツを認証、表示、透かし付与又は来歴保存する機構とを明確に区別しています。"
+profile_can_support_en = "No direct implementation evidence. The profile deliberately distinguishes decision-record and artifact hashes from mechanisms that authenticate, label, watermark, or preserve provenance for AI-generated content."
+organisation_must_add_ja = "実際のAIシステム及びコンテンツ工程に基づき、利用者がAI生成コンテンツと接するか、どの表示・来歴機構を使うか、その技術的限界、適用範囲、相互運用性及び非適用の場合を回答する必要があります。"
+organisation_must_add_en = "Answer from the actual AI system and content workflow: whether users interact with or receive AI-generated content, what labelling or provenance mechanisms are used, their technical limits, coverage, interoperability, and any cases in which the mechanisms do not apply."
+illustrative_wording_ja = "本コールドチェーン判断保証プロファイルは、利用者向けAIコンテンツの生成又は認証を行わず、透かし又はコンテンツ来歴機構を実装していません。証明書のハッシュは選択された判断成果物を拘束するもので、コンテンツ認証統制として示してはいけません。本セクションは組織の実際のAIコンテンツシステムについて独立に回答します。"
+illustrative_wording_en = "This cold-chain decision-assurance profile does not generate or authenticate user-facing AI content and does not implement watermarking or content-provenance mechanisms. Hashes in the certificate bind selected decision artifacts; they must not be presented as content-authentication controls. Any answer for this section is supplied independently for the organisation's actual AI content systems."
+do_not_infer_ja = "SHA-256による成果物拘束、ルールセットダイジェスト又は判断追跡を、コンテンツ透かし、出所認証、C2PA型来歴又はAI生成表示と同一視してはいけません。"
+do_not_infer_en = "Never treat SHA-256 artifact binding, ruleset digests, or decision traceability as content watermarking, origin authentication, C2PA-style provenance, or user disclosure of AI-generated content."
+
+[[reporting.sections]]
+section_id = "RF2-S6"
+section_number = 6
+title_ja = "AI安全性の向上及び社会的リスク軽減のための研究・投資"
+title_en = "Research & investment to advance AI safety & mitigate societal risks"
+bridge_status = "LIMITED_CONTEXT_INPUT"
+haip_action_ids = ["HAIP-A8", "HAIP-A10"]
+supported_obligation_ids = ["O-A8-SAFETY-RESEARCH", "O-A10-MACHINE-READABLE-PROFILE"]
+known_gap_obligation_ids = ["O-A8-INVESTMENT-PROGRAMME", "O-A10-SDO-ADOPTION"]
+evidence_ids = [
+  "E-CC-REDTEAM",
+  "E-CC-CERT",
+  "E-EVAL-CORE",
+  "E-PROFILE-VERIFIER",
+]
+profile_can_support_ja = "各リポジトリは、安全性・信頼性研究に関係するテスト方法、再現検証、限定された形式規則、機械可読マッピング及び明示的限界を公開する応用研究成果です。"
+profile_can_support_en = "The repositories are public applied-research artifacts: they expose test methods, reproducible verification, bounded formal rules, machine-readable mappings, and explicit limitations relevant to safety and trustworthiness research."
+organisation_must_add_ja = "実際の予算、人員、研究戦略、優先順位、連携、公開方針、継続投資、測定可能な成果及び正式な標準化活動への参加を追加する必要があります。"
+organisation_must_add_en = "Describe actual budgets, staffing, research strategy, prioritisation, partnerships, publication policy, investment continuity, measurable outputs, and any formal standards-development participation."
+illustrative_wording_ja = "応用研究成果の一つとして、再現可能なコールドチェーン保証PoC、レッドチーム形式シナリオ、ハッシュ拘束証明書及び機械可読なHAIP証拠マッピングを公開しました。これは特定の研究貢献を示しますが、組織的なAI安全投資プログラムの規模、継続性、人員又は予算を立証するものではありません。"
+illustrative_wording_en = "As one applied research output, we published a reproducible cold-chain assurance PoC, red-team-style scenarios, a hash-bound certificate, and a machine-readable HAIP evidence mapping. This demonstrates a specific research contribution; it does not by itself evidence the scale, continuity, staffing, or budget of an organisational AI-safety investment programme."
+do_not_infer_ja = "公開コードの存在だけから、継続的投資プログラム、正式な標準採用、外部研究検証又は全社的な安全研究成熟度を推論してはいけません。"
+do_not_infer_en = "Do not infer a sustained investment programme, formal standard adoption, external research validation, or organisation-wide safety-research maturity from the existence of public code alone."
+
+[[reporting.sections]]
+section_id = "RF2-S7"
+section_number = 7
+title_ja = "人類及び世界全体の利益の推進"
+title_en = "Advancing human and global interests"
+bridge_status = "LIMITED_CONTEXT_INPUT"
+haip_action_ids = ["HAIP-A9"]
+supported_obligation_ids = ["O-A9-GLOBAL-HEALTH-CONTEXT"]
+known_gap_obligation_ids = ["O-A9-LITERACY-COMMUNITY"]
+evidence_ids = [
+  "E-CC-README",
+  "E-CC-CORE",
+  "E-CC-SAMPLE-REJECT",
+  "E-CC-SAMPLE-CHAINSTOP",
+]
+profile_can_support_ja = "対象ユースケースは、医薬品物流の強靱性と医療コールドチェーンにおける不安全な次工程移行の防止に実質的に関係します。本プロファイルが示すのは意図した機構であり、実現済みの健康・社会的効果ではありません。"
+profile_can_support_en = "The selected use case is materially connected to resilient medicine logistics and preventing unsafe onward handoff in a medical cold chain. The profile shows the intended mechanism, not realised health or social impact."
+organisation_must_add_ja = "公益目的、影響を受ける関係者、アクセシビリティ・人間監督、導入文脈、協議、実現又は期待される成果、測定方法、不利益とのトレードオフ、デジタルリテラシー活動及び便益を単に主張していないことの証拠を追加する必要があります。"
+organisation_must_add_en = "Provide the public-interest objective, affected stakeholders, accessibility and human-oversight considerations, deployment context, consultation, realised or expected outcomes, measurement method, adverse trade-offs, digital-literacy work, and evidence that benefits are not merely asserted."
+illustrative_wording_ja = "PoCは、不安全な継続が医薬品品質及び供給強靱性に影響し得る医療コールドチェーンの引渡し課題を対象とし、合成・ファイル入力上で安全側の技術判断機構を示します。廃棄削減、患者便益、アクセス、強靱性又は社会的価値については、別途の実測及び関係者証拠が必要です。"
+illustrative_wording_en = "The PoC targets a medical cold-chain handoff problem in which unsafe continuation can affect medicine quality and supply resilience. It demonstrates a conservative technical decision mechanism on synthetic/file-based inputs. Claims about reduced spoilage, patient benefit, access, resilience, or social value require separate real-world measurement and stakeholder evidence."
+do_not_infer_ja = "導入データ及び関係者証拠なしに、患者便益、廃棄削減、アクセス改善、グローバルヘルス効果、公平性、包摂性又は地域連携を実証済みと主張してはいけません。"
+do_not_infer_en = "Do not claim demonstrated patient benefit, reduced waste, improved access, global-health impact, fairness, inclusion, or community engagement without deployment data and stakeholder evidence."
