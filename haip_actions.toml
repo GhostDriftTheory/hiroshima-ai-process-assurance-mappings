@@ -1,0 +1,97 @@
+# Shared HAIP action definitions / HAIP共通定義
+# Update this file only when the cited official source changes.
+schema_version = "haip-actions.v1"
+snapshot_date = "2026-09-01"
+official_source_url = "https://www.mofa.go.jp/files/100573473.pdf"
+
+[[actions]]
+id = "HAIP-A1"
+number = 1
+summary_ja = "AIライフサイクル全体でリスクを特定・評価・試験・文書化し、軽減する。"
+summary_en = "Identify, evaluate, test, document, and mitigate risks across the AI lifecycle."
+official_source_pages = [2, 3]
+reporting_v2_sections = [1, 2]
+
+[[actions]]
+id = "HAIP-A2"
+number = 2
+summary_ja = "導入後の脆弱性、インシデント、新たなリスク及び誤用を特定し、軽減する。"
+summary_en = "Identify and mitigate post-deployment vulnerabilities, incidents, emerging risks, and misuse."
+official_source_pages = [3, 4]
+reporting_v2_sections = [2, 4]
+
+[[actions]]
+id = "HAIP-A3"
+number = 3
+summary_ja = "能力、限界、適切な利用、評価及び重要なリスクを公開報告する。"
+summary_en = "Publicly report capabilities, limitations, appropriate use, evaluations, and material risks."
+official_source_pages = [4]
+reporting_v2_sections = [3]
+
+[[actions]]
+id = "HAIP-A4"
+number = 4
+summary_ja = "安全情報を責任ある形で共有し、関係主体とインシデントを報告する。"
+summary_en = "Share safety information responsibly and report incidents with relevant stakeholders."
+official_source_pages = [4, 5]
+reporting_v2_sections = [4]
+
+[[actions]]
+id = "HAIP-A5"
+number = 5
+summary_ja = "リスクベースのAIガバナンス及びリスク管理方針を策定・実施・開示・更新する。"
+summary_en = "Develop, implement, disclose, and update risk-based AI governance and risk-management policies."
+official_source_pages = [5]
+reporting_v2_sections = [2, 4]
+
+[[actions]]
+id = "HAIP-A6"
+number = 6
+summary_ja = "堅牢な物理・サイバー・アクセス制御・内部脅威対策を実施する。"
+summary_en = "Implement robust physical, cyber, access-control, and insider-threat safeguards."
+official_source_pages = [6]
+reporting_v2_sections = [2]
+
+[[actions]]
+id = "HAIP-A7"
+number = 7
+summary_ja = "可能な場合、AI生成コンテンツの認証及び来歴機構を用いる。"
+summary_en = "Use reliable content-authentication and provenance mechanisms for AI-generated content where feasible."
+official_source_pages = [6]
+reporting_v2_sections = [5]
+
+[[actions]]
+id = "HAIP-A8"
+number = 8
+summary_ja = "AIの安全・セキュリティ・信頼性及び社会的リスク軽減の研究・投資を優先する。"
+summary_en = "Prioritise research and investment in AI safety, security, trustworthiness, and societal-risk mitigation."
+official_source_pages = [7]
+reporting_v2_sections = [6]
+
+[[actions]]
+id = "HAIP-A9"
+number = 9
+summary_ja = "グローバルヘルスを含む世界的課題及び人間の利益のため、責任あるAIを推進する。"
+summary_en = "Advance responsible AI for global challenges and human interests, including global health."
+official_source_pages = [7]
+reporting_v2_sections = [7]
+
+[[actions]]
+id = "HAIP-A10"
+number = 10
+summary_ja = "相互運用可能な国際技術標準及びベストプラクティスを推進し、必要に応じて採用する。"
+summary_en = "Advance and, where appropriate, adopt interoperable international technical standards and best practices."
+official_source_pages = [7, 8]
+reporting_v2_sections = [2, 5]
+
+[[actions]]
+id = "HAIP-A11"
+number = 11
+summary_ja = "データ品質措置並びに個人データ及び知的財産の保護を実施する。"
+summary_en = "Apply data-quality measures and protections for personal data and intellectual property."
+official_source_pages = [8]
+reporting_v2_sections = [
+  1,
+  2,
+  4,
+]
