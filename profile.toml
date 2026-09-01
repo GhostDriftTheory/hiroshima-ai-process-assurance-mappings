@@ -1,0 +1,369 @@
+# Copy this directory or run: python validate.py --init <new-slug>
+# This draft is structurally complete and makes no implementation claim.
+schema_version = "haip-assurance-profile.v1"
+profile_id = "REPLACE_PROFILE_ID"
+slug = "REPLACE_SLUG"
+version = "0.1.0"
+snapshot_date = "YYYY-MM-DD"
+title_ja = "REPLACE_PROFILE_TITLE_JA"
+title_en = "REPLACE_PROFILE_TITLE_EN"
+publisher = "GhostDrift Mathematical Institute"
+published = false
+public_claim_ja = "本下書きはHAIPの11行動を表示しますが、実装カバレッジを主張しません。"
+public_claim_en = "This draft represents all 11 HAIP actions without claiming implementation coverage."
+non_claims_ja = ["G7、日本政府、OECD又はHAIPの公式プロジェクトではありません。", "公式認証、全面適合、規制承認、本番準備又は独立監査を主張しません。"]
+non_claims_en = ["Not an official G7, Government of Japan, OECD, or HAIP project.", "No certification, full compliance, regulatory approval, production readiness, or independent audit is claimed."]
+prohibited_claim_phrases = ["haip certified", "oecd approved", "g7 approved", "full haip compliance", "広島aiプロセス完全準拠", "広島aiプロセス認証済み", "haip公式実装", "oecd公認", "g7公認"]
+
+[subject]
+scenario_ja = "REPLACE_BOUNDED_SCOPE_JA"
+scenario_en = "REPLACE_BOUNDED_SCOPE_EN"
+
+[boundaries]
+forced_outside_profile_actions = []
+meta_assurance_not_direct_for_actions = []
+meta_assurance_not_evidence_for_reporting_sections = []
+reporting_sections_forced_no_profile_coverage = []
+
+[[components]]
+source_id = "SRC-PRIMARY"
+role = "PRIMARY_IMPLEMENTATION"
+description_ja = "REPLACE_PRIMARY_COMPONENT_DESCRIPTION_JA"
+description_en = "REPLACE_PRIMARY_COMPONENT_DESCRIPTION_EN"
+
+[[sources]]
+id = "SRC-HAIP-CODE-2023"
+kind = "official_policy"
+title = "Hiroshima Process International Code of Conduct for Organizations Developing Advanced AI Systems"
+publisher = "Ministry of Foreign Affairs of Japan / G7 Hiroshima Process"
+url = "https://www.mofa.go.jp/files/100573473.pdf"
+as_of = "YYYY-MM-DD"
+
+[[sources]]
+id = "SRC-OECD-HAIP-V2"
+kind = "official_reporting_framework"
+title = "Hiroshima AI Process Reporting Framework, Version 2.0"
+publisher = "OECD.AI"
+url = "https://oecd.ai/en/transparency/overview"
+as_of = "YYYY-MM-DD"
+
+[[sources]]
+id = "SRC-PRIMARY"
+kind = "draft_source"
+title = "REPLACE_PRIMARY_SOURCE_TITLE"
+url = "https://example.invalid/replace-before-publication"
+as_of = "YYYY-MM-DD"
+
+[[obligations]]
+id = "M-A1-01"
+obligation_id = "O-A1-TODO"
+haip_action_id = "HAIP-A1"
+obligation_ja = "REPLACE_PROFILE_SPECIFIC_OBLIGATION_JA"
+obligation_en = "REPLACE_PROFILE_SPECIFIC_OBLIGATION_EN"
+applicability = "TO_BE_DETERMINED"
+assessment = "NOT_ASSESSED"
+minimum_evidence_strength = 0
+evidence_ids = []
+supporting_evidence_ids = []
+gaps = ["Evidence and assessment have not yet been established."]
+rationale_ja = "下書き用の仮置き。公開前に置換する。"
+rationale_en = "Draft placeholder; replace before publication."
+
+[[obligations]]
+id = "M-A2-01"
+obligation_id = "O-A2-TODO"
+haip_action_id = "HAIP-A2"
+obligation_ja = "REPLACE_PROFILE_SPECIFIC_OBLIGATION_JA"
+obligation_en = "REPLACE_PROFILE_SPECIFIC_OBLIGATION_EN"
+applicability = "TO_BE_DETERMINED"
+assessment = "NOT_ASSESSED"
+minimum_evidence_strength = 0
+evidence_ids = []
+supporting_evidence_ids = []
+gaps = ["Evidence and assessment have not yet been established."]
+rationale_ja = "下書き用の仮置き。公開前に置換する。"
+rationale_en = "Draft placeholder; replace before publication."
+
+[[obligations]]
+id = "M-A3-01"
+obligation_id = "O-A3-TODO"
+haip_action_id = "HAIP-A3"
+obligation_ja = "REPLACE_PROFILE_SPECIFIC_OBLIGATION_JA"
+obligation_en = "REPLACE_PROFILE_SPECIFIC_OBLIGATION_EN"
+applicability = "TO_BE_DETERMINED"
+assessment = "NOT_ASSESSED"
+minimum_evidence_strength = 0
+evidence_ids = []
+supporting_evidence_ids = []
+gaps = ["Evidence and assessment have not yet been established."]
+rationale_ja = "下書き用の仮置き。公開前に置換する。"
+rationale_en = "Draft placeholder; replace before publication."
+
+[[obligations]]
+id = "M-A4-01"
+obligation_id = "O-A4-TODO"
+haip_action_id = "HAIP-A4"
+obligation_ja = "REPLACE_PROFILE_SPECIFIC_OBLIGATION_JA"
+obligation_en = "REPLACE_PROFILE_SPECIFIC_OBLIGATION_EN"
+applicability = "TO_BE_DETERMINED"
+assessment = "NOT_ASSESSED"
+minimum_evidence_strength = 0
+evidence_ids = []
+supporting_evidence_ids = []
+gaps = ["Evidence and assessment have not yet been established."]
+rationale_ja = "下書き用の仮置き。公開前に置換する。"
+rationale_en = "Draft placeholder; replace before publication."
+
+[[obligations]]
+id = "M-A5-01"
+obligation_id = "O-A5-TODO"
+haip_action_id = "HAIP-A5"
+obligation_ja = "REPLACE_PROFILE_SPECIFIC_OBLIGATION_JA"
+obligation_en = "REPLACE_PROFILE_SPECIFIC_OBLIGATION_EN"
+applicability = "TO_BE_DETERMINED"
+assessment = "NOT_ASSESSED"
+minimum_evidence_strength = 0
+evidence_ids = []
+supporting_evidence_ids = []
+gaps = ["Evidence and assessment have not yet been established."]
+rationale_ja = "下書き用の仮置き。公開前に置換する。"
+rationale_en = "Draft placeholder; replace before publication."
+
+[[obligations]]
+id = "M-A6-01"
+obligation_id = "O-A6-TODO"
+haip_action_id = "HAIP-A6"
+obligation_ja = "REPLACE_PROFILE_SPECIFIC_OBLIGATION_JA"
+obligation_en = "REPLACE_PROFILE_SPECIFIC_OBLIGATION_EN"
+applicability = "TO_BE_DETERMINED"
+assessment = "NOT_ASSESSED"
+minimum_evidence_strength = 0
+evidence_ids = []
+supporting_evidence_ids = []
+gaps = ["Evidence and assessment have not yet been established."]
+rationale_ja = "下書き用の仮置き。公開前に置換する。"
+rationale_en = "Draft placeholder; replace before publication."
+
+[[obligations]]
+id = "M-A7-01"
+obligation_id = "O-A7-TODO"
+haip_action_id = "HAIP-A7"
+obligation_ja = "REPLACE_PROFILE_SPECIFIC_OBLIGATION_JA"
+obligation_en = "REPLACE_PROFILE_SPECIFIC_OBLIGATION_EN"
+applicability = "TO_BE_DETERMINED"
+assessment = "NOT_ASSESSED"
+minimum_evidence_strength = 0
+evidence_ids = []
+supporting_evidence_ids = []
+gaps = ["Evidence and assessment have not yet been established."]
+rationale_ja = "下書き用の仮置き。公開前に置換する。"
+rationale_en = "Draft placeholder; replace before publication."
+
+[[obligations]]
+id = "M-A8-01"
+obligation_id = "O-A8-TODO"
+haip_action_id = "HAIP-A8"
+obligation_ja = "REPLACE_PROFILE_SPECIFIC_OBLIGATION_JA"
+obligation_en = "REPLACE_PROFILE_SPECIFIC_OBLIGATION_EN"
+applicability = "TO_BE_DETERMINED"
+assessment = "NOT_ASSESSED"
+minimum_evidence_strength = 0
+evidence_ids = []
+supporting_evidence_ids = []
+gaps = ["Evidence and assessment have not yet been established."]
+rationale_ja = "下書き用の仮置き。公開前に置換する。"
+rationale_en = "Draft placeholder; replace before publication."
+
+[[obligations]]
+id = "M-A9-01"
+obligation_id = "O-A9-TODO"
+haip_action_id = "HAIP-A9"
+obligation_ja = "REPLACE_PROFILE_SPECIFIC_OBLIGATION_JA"
+obligation_en = "REPLACE_PROFILE_SPECIFIC_OBLIGATION_EN"
+applicability = "TO_BE_DETERMINED"
+assessment = "NOT_ASSESSED"
+minimum_evidence_strength = 0
+evidence_ids = []
+supporting_evidence_ids = []
+gaps = ["Evidence and assessment have not yet been established."]
+rationale_ja = "下書き用の仮置き。公開前に置換する。"
+rationale_en = "Draft placeholder; replace before publication."
+
+[[obligations]]
+id = "M-A10-01"
+obligation_id = "O-A10-TODO"
+haip_action_id = "HAIP-A10"
+obligation_ja = "REPLACE_PROFILE_SPECIFIC_OBLIGATION_JA"
+obligation_en = "REPLACE_PROFILE_SPECIFIC_OBLIGATION_EN"
+applicability = "TO_BE_DETERMINED"
+assessment = "NOT_ASSESSED"
+minimum_evidence_strength = 0
+evidence_ids = []
+supporting_evidence_ids = []
+gaps = ["Evidence and assessment have not yet been established."]
+rationale_ja = "下書き用の仮置き。公開前に置換する。"
+rationale_en = "Draft placeholder; replace before publication."
+
+[[obligations]]
+id = "M-A11-01"
+obligation_id = "O-A11-TODO"
+haip_action_id = "HAIP-A11"
+obligation_ja = "REPLACE_PROFILE_SPECIFIC_OBLIGATION_JA"
+obligation_en = "REPLACE_PROFILE_SPECIFIC_OBLIGATION_EN"
+applicability = "TO_BE_DETERMINED"
+assessment = "NOT_ASSESSED"
+minimum_evidence_strength = 0
+evidence_ids = []
+supporting_evidence_ids = []
+gaps = ["Evidence and assessment have not yet been established."]
+rationale_ja = "下書き用の仮置き。公開前に置換する。"
+rationale_en = "Draft placeholder; replace before publication."
+
+[reporting]
+bridge_id = "REPLACE_SLUG-reporting-v2-bridge.v0.1"
+snapshot_date = "YYYY-MM-DD"
+official_source_id = "SRC-OECD-HAIP-V2"
+purpose_ja = "検証済み証拠をReporting Framework v2.0の7セクションへ限定的に接続するための下書きです。"
+purpose_en = "Draft bounded bridge from verified profile evidence to the seven Reporting Framework v2.0 sections."
+not_a_submission_tool_ja = "質問票の複製、完成済み報告書、提出ワークフロー、参加資格判定、承認又は認証ではありません。"
+not_a_submission_tool_en = "Not a questionnaire replica, completed report, submission workflow, eligibility decision, approval, or certification."
+
+[[reporting.scope_checks]]
+id = "SCOPE-AI-SYSTEM"
+question_ja = "対象となる実際のAIシステムは何か。"
+question_en = "What actual AI system, if any, is in scope?"
+rule_ja = "本Profile単独から対象範囲を推定しない。"
+rule_en = "Do not infer scope from this profile alone."
+
+[[reporting.sections]]
+section_id = "RF2-S1"
+section_number = 1
+title_ja = "リスクの特定及び評価"
+title_en = "Risk identification and evaluation"
+bridge_status = "NO_PROFILE_COVERAGE"
+haip_action_ids = ["HAIP-A1", "HAIP-A11"]
+supported_obligation_ids = []
+known_gap_obligation_ids = ["O-A1-TODO", "O-A11-TODO"]
+evidence_ids = []
+profile_can_support_ja = "この下書きでは利用可能なProfile証拠はまだありません。"
+profile_can_support_en = "No profile evidence has been established in this draft."
+organisation_must_add_ja = "組織固有の事実は別途説明する。"
+organisation_must_add_en = "Describe organisation-owned facts independently."
+illustrative_wording_ja = "下書き段階であり、証拠に裏付けられた記載例はまだありません。"
+illustrative_wording_en = "Draft only; no evidence-backed wording is available yet."
+do_not_infer_ja = "実装、適合、認証又は準備完了を推論しない。"
+do_not_infer_en = "Do not infer implementation, compliance, certification, or readiness."
+
+[[reporting.sections]]
+section_id = "RF2-S2"
+section_number = 2
+title_ja = "リスク管理及び情報セキュリティ"
+title_en = "Risk management and information security"
+bridge_status = "NO_PROFILE_COVERAGE"
+haip_action_ids = ["HAIP-A1", "HAIP-A2", "HAIP-A5", "HAIP-A6", "HAIP-A11"]
+supported_obligation_ids = []
+known_gap_obligation_ids = ["O-A1-TODO", "O-A2-TODO", "O-A5-TODO", "O-A6-TODO", "O-A11-TODO"]
+evidence_ids = []
+profile_can_support_ja = "この下書きでは利用可能なProfile証拠はまだありません。"
+profile_can_support_en = "No profile evidence has been established in this draft."
+organisation_must_add_ja = "組織固有の事実は別途説明する。"
+organisation_must_add_en = "Describe organisation-owned facts independently."
+illustrative_wording_ja = "下書き段階であり、証拠に裏付けられた記載例はまだありません。"
+illustrative_wording_en = "Draft only; no evidence-backed wording is available yet."
+do_not_infer_ja = "実装、適合、認証又は準備完了を推論しない。"
+do_not_infer_en = "Do not infer implementation, compliance, certification, or readiness."
+
+[[reporting.sections]]
+section_id = "RF2-S3"
+section_number = 3
+title_ja = "高度AIシステムに関する透明性報告"
+title_en = "Transparency reporting on advanced AI systems"
+bridge_status = "NO_PROFILE_COVERAGE"
+haip_action_ids = ["HAIP-A3", "HAIP-A4"]
+supported_obligation_ids = []
+known_gap_obligation_ids = ["O-A3-TODO", "O-A4-TODO"]
+evidence_ids = []
+profile_can_support_ja = "この下書きでは利用可能なProfile証拠はまだありません。"
+profile_can_support_en = "No profile evidence has been established in this draft."
+organisation_must_add_ja = "組織固有の事実は別途説明する。"
+organisation_must_add_en = "Describe organisation-owned facts independently."
+illustrative_wording_ja = "下書き段階であり、証拠に裏付けられた記載例はまだありません。"
+illustrative_wording_en = "Draft only; no evidence-backed wording is available yet."
+do_not_infer_ja = "実装、適合、認証又は準備完了を推論しない。"
+do_not_infer_en = "Do not infer implementation, compliance, certification, or readiness."
+
+[[reporting.sections]]
+section_id = "RF2-S4"
+section_number = 4
+title_ja = "組織ガバナンス、インシデント管理及び透明性"
+title_en = "Organizational governance, incident management, and transparency"
+bridge_status = "NO_PROFILE_COVERAGE"
+haip_action_ids = ["HAIP-A2", "HAIP-A4", "HAIP-A5", "HAIP-A11"]
+supported_obligation_ids = []
+known_gap_obligation_ids = ["O-A2-TODO", "O-A4-TODO", "O-A5-TODO", "O-A11-TODO"]
+evidence_ids = []
+profile_can_support_ja = "この下書きでは利用可能なProfile証拠はまだありません。"
+profile_can_support_en = "No profile evidence has been established in this draft."
+organisation_must_add_ja = "組織固有の事実は別途説明する。"
+organisation_must_add_en = "Describe organisation-owned facts independently."
+illustrative_wording_ja = "下書き段階であり、証拠に裏付けられた記載例はまだありません。"
+illustrative_wording_en = "Draft only; no evidence-backed wording is available yet."
+do_not_infer_ja = "実装、適合、認証又は準備完了を推論しない。"
+do_not_infer_en = "Do not infer implementation, compliance, certification, or readiness."
+
+[[reporting.sections]]
+section_id = "RF2-S5"
+section_number = 5
+title_ja = "コンテンツ認証及び来歴管理の仕組み"
+title_en = "Content authentication & provenance mechanisms"
+bridge_status = "NO_PROFILE_COVERAGE"
+haip_action_ids = ["HAIP-A7"]
+supported_obligation_ids = []
+known_gap_obligation_ids = ["O-A7-TODO"]
+evidence_ids = []
+profile_can_support_ja = "この下書きでは利用可能なProfile証拠はまだありません。"
+profile_can_support_en = "No profile evidence has been established in this draft."
+organisation_must_add_ja = "組織固有の事実は別途説明する。"
+organisation_must_add_en = "Describe organisation-owned facts independently."
+illustrative_wording_ja = "下書き段階であり、証拠に裏付けられた記載例はまだありません。"
+illustrative_wording_en = "Draft only; no evidence-backed wording is available yet."
+do_not_infer_ja = "実装、適合、認証又は準備完了を推論しない。"
+do_not_infer_en = "Do not infer implementation, compliance, certification, or readiness."
+
+[[reporting.sections]]
+section_id = "RF2-S6"
+section_number = 6
+title_ja = "AI安全性の向上及び社会的リスク軽減のための研究・投資"
+title_en = "Research & investment to advance AI safety & mitigate societal risks"
+bridge_status = "NO_PROFILE_COVERAGE"
+haip_action_ids = ["HAIP-A8", "HAIP-A10"]
+supported_obligation_ids = []
+known_gap_obligation_ids = ["O-A8-TODO", "O-A10-TODO"]
+evidence_ids = []
+profile_can_support_ja = "この下書きでは利用可能なProfile証拠はまだありません。"
+profile_can_support_en = "No profile evidence has been established in this draft."
+organisation_must_add_ja = "組織固有の事実は別途説明する。"
+organisation_must_add_en = "Describe organisation-owned facts independently."
+illustrative_wording_ja = "下書き段階であり、証拠に裏付けられた記載例はまだありません。"
+illustrative_wording_en = "Draft only; no evidence-backed wording is available yet."
+do_not_infer_ja = "実装、適合、認証又は準備完了を推論しない。"
+do_not_infer_en = "Do not infer implementation, compliance, certification, or readiness."
+
+[[reporting.sections]]
+section_id = "RF2-S7"
+section_number = 7
+title_ja = "人類及び世界全体の利益の推進"
+title_en = "Advancing human and global interests"
+bridge_status = "NO_PROFILE_COVERAGE"
+haip_action_ids = ["HAIP-A9"]
+supported_obligation_ids = []
+known_gap_obligation_ids = ["O-A9-TODO"]
+evidence_ids = []
+profile_can_support_ja = "この下書きでは利用可能なProfile証拠はまだありません。"
+profile_can_support_en = "No profile evidence has been established in this draft."
+organisation_must_add_ja = "組織固有の事実は別途説明する。"
+organisation_must_add_en = "Describe organisation-owned facts independently."
+illustrative_wording_ja = "下書き段階であり、証拠に裏付けられた記載例はまだありません。"
+illustrative_wording_en = "Draft only; no evidence-backed wording is available yet."
+do_not_infer_ja = "実装、適合、認証又は準備完了を推論しない。"
+do_not_infer_en = "Do not infer implementation, compliance, certification, or readiness."
