@@ -1,5 +1,7 @@
 # Hiroshima AI Process Assurance Mappings / 広島AIプロセス保証マッピング集
 
+[![validate](https://github.com/GhostDriftTheory/hiroshima-ai-process-assurance-mappings/actions/workflows/validate.yml/badge.svg)](https://github.com/GhostDriftTheory/hiroshima-ai-process-assurance-mappings/actions/workflows/validate.yml)
+
 > **継続拡張型の公開マッピング集です。** 広島AIプロセス（HAIP）の各行動を、個別の領域・システム・保証技術ごとに、明示的な義務、版固定された証拠、未解決事項及び機械検証可能な主張境界へ対応付けます。
 >
 > This is an extensible collection of independently scoped mappings. The first profile is not the end of the collection and does not limit future profiles.
