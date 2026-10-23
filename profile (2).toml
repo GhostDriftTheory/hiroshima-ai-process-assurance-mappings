@@ -1,0 +1,1069 @@
+# Machine-readable source of truth for this profile.
+# このProfileの機械可読な正本です。説明は同じフォルダのREADME.mdを参照してください。
+schema_version = "haip-assurance-profile.v1"
+profile_id = "haip-profile.civic-ai-lifecycle.v1"
+slug = "civic-ai-lifecycle"
+version = "1.0.0"
+snapshot_date = "2026-10-23"
+title_ja = "自治体AI・派生情報ライフサイクル保証マッピング"
+title_en = "Civic AI Derived-Information Lifecycle Assurance Mapping"
+publisher = "AI Assurance, Inc.（株式会社AIアシュアランス）"
+published = true
+public_claim_ja = "本プロファイルは、広島AIプロセスの11行動を分解し、合成の自治体相談情報に関する派生情報の条件承継・継続利用・管理範囲の業務利用終了について、一部の技術義務を版固定された公開参照実装、Lean4のモデル証明及び再計算可能な記録へ対応付け、その証拠から言える範囲を機械検証します。"
+public_claim_en = "This profile represents all 11 Hiroshima AI Process actions, maps selected technical obligations for condition inheritance, continued use and scoped termination of business use of derived synthetic municipal information to a version-pinned public implementation, Lean 4 model proofs and replayable records, and machine-checks the limits of what that evidence can support."
+non_claims_ja = [
+  "G7、日本政府、OECD又はHAIPの公式プロジェクト、公式認証又は全面適合ではありません。",
+  "独立第三者監査、本番運用準備、実在自治体への導入、実住民情報の処理又は実社会での効果を立証しません。",
+  "Lean4の証明対象は定義した判定モデルです。全Python・JavaScript実装の全入力に対する同値性、AI文章の意味的正確性、認証、JSON、SHA-256又はI/Oの正当性の証明ではありません。",
+  "利用終了は指定した管理ゲート経由の業務利用に限ります。媒体の物理消去、モデルへの影響除去、未知の管理外コピーの不存在、監査記録の消失又はAPI提供者内部の消去を証明しません。",
+  "管理範囲の完全性は捕捉済みの管理実体と固定の読取り能力に基づくものです。管理外の経路を全域で発見する機能ではありません。",
+  "条件、承認者及び操作結果は固定仕様・模擬承認によるものです。実在する権利者・承認者の真正性や個別案件の法令適合を認定しません。",
+  "公開API記録の再計算はローカル記録の整合性検査です。応答ID及びローカルのハッシュは提供者の署名・発行者認証ではなく、OpenAIによる成果認証又は共同研究を意味しません。",
+  "記録した起源・モデル識別子・ハッシュは、透かし、C2PA又は信頼できるAI生成コンテンツの出所認証を実装した証拠ではありません。",
+  "第1・第2弾との自動スキーマ変換又は3件を統合した実行システムを提供するものではありません。",
+  "Reporting v2ブリッジは証拠利用のガイドであり、質問票の複製、完成済み報告書、提出ワークフロー、参加資格判定又は承認ではありません。",
+]
+non_claims_en = [
+  "It is not an official G7, Government of Japan, OECD or HAIP project, an official certification, or evidence of full compliance.",
+  "It does not establish an independent third-party audit, production readiness, deployment in an actual municipality, processing of real resident data, or realised societal outcomes.",
+  "Lean 4 proves the defined decision model, not all-input equivalence of the complete Python/JavaScript implementations, semantic accuracy of AI text, authentication, JSON, SHA-256 or I/O correctness.",
+  "Termination concerns business use through specified management gates only. It does not prove physical erasure, removal of model influence, absence of unknown unmanaged copies, disappearance of audit records, or erasure inside the API provider.",
+  "Inventory completeness is relative to captured managed entities and fixed read capabilities; this is not global discovery of unmanaged paths.",
+  "Conditions, approvers and operation outcomes use a fixed specification and mock authorization. They do not authenticate actual rights holders or approvers or determine case-specific legal compliance.",
+  "Replaying the published API record checks local consistency. Response identifiers and local hashes are not provider signatures or issuer authentication, and do not imply certification by or joint research with OpenAI.",
+  "Recorded origins, model identifiers and hashes do not establish watermarking, C2PA or reliable authentication of AI-generated content origins.",
+  "No automatic schema conversion with the first two PoCs or integrated runtime spanning all three is provided.",
+  "The Reporting v2 bridge is evidence-use guidance, not a questionnaire replica, completed report, submission workflow, eligibility decision or approval.",
+]
+prohibited_claim_phrases = [
+  "haip compliant",
+  "haip certified",
+  "official haip implementation",
+  "oecd approved",
+  "g7 approved",
+  "full haip compliance",
+  "広島aiプロセス完全準拠",
+  "広島aiプロセス認証済み",
+  "haip公式実装",
+  "oecd公認",
+  "g7公認",
+  "official oecd reporting tool",
+  "submission-ready oecd report",
+  "oecd submission approved",
+  "oecd公式報告ツール",
+  "oecd提出可能",
+  "oecd提出承認済み",
+  "haip brand certified",
+  "haipブランド認証済み",
+]
+
+[subject]
+scenario_ja = "合成の自治体相談情報から生成された派生情報の起源別条件承継、限定変更、継続利用及び指定管理範囲の業務利用終了"
+scenario_en = "Origin-specific condition inheritance, bounded amendment, continued use and termination of business use within a specified managed scope for information derived from synthetic municipal consultations"
+
+[boundaries]
+forced_outside_profile_actions = []
+meta_assurance_not_direct_for_actions = []
+meta_assurance_not_evidence_for_reporting_sections = []
+reporting_sections_forced_no_profile_coverage = [
+  5,
+]
+
+[[components]]
+source_id = "SRC-CIVIC-LIFECYCLE"
+role = "PRIMARY_IMPLEMENTATION"
+description_ja = "合成データ、固定仕様、逐次実行の管理ストア及び模擬承認を使い、条件承継・利用制御・範囲付き終了・履歴再計算を実装する独立した参照PoC。"
+description_en = "An independent reference PoC implementing condition inheritance, use gates, scoped termination and historical replay with synthetic data, a fixed specification, a sequential managed store and mock authorization."
+
+[[sources]]
+id = "SRC-HAIP-CODE-2023"
+kind = "official_policy"
+title = "Hiroshima Process International Code of Conduct for Organizations Developing Advanced AI Systems"
+publisher = "Ministry of Foreign Affairs of Japan / G7 Hiroshima Process"
+url = "https://www.mofa.go.jp/files/100573473.pdf"
+version_note = "Official 2023 English Code of Conduct, 8 pages; action identifiers retain the shared repository baseline."
+as_of = "2026-10-23"
+
+[[sources]]
+id = "SRC-OECD-HAIP-V2"
+kind = "official_reporting_framework"
+title = "Hiroshima AI Process Reporting Framework, Version 2.0"
+publisher = "OECD.AI"
+url = "https://oecd.ai/en/transparency/overview"
+supporting_urls = [
+  "https://oecd.ai/en/transparency/faq",
+  "https://oecd.ai/en/transparency/instructions",
+]
+version_note = "Seven-section evidence-use bridge; reporting participation and completeness checks do not verify the substance of the reported technical claims."
+as_of = "2026-10-23"
+
+[[sources]]
+id = "SRC-CIVIC-LIFECYCLE"
+kind = "implementation_repository"
+title = "Civic AI Derived-Information Lifecycle Assurance PoC"
+repository = "https://github.com/GhostDriftTheory/civic-ai-lifecycle-assurance"
+commit = "a410d4171734a56a789d3d0742a9db17d17b7e3d"
+commit_url = "https://github.com/GhostDriftTheory/civic-ai-lifecycle-assurance/commit/a410d4171734a56a789d3d0742a9db17d17b7e3d"
+raw_readme_url = "https://raw.githubusercontent.com/GhostDriftTheory/civic-ai-lifecycle-assurance/a410d4171734a56a789d3d0742a9db17d17b7e3d/README.md"
+as_of = "2026-10-23"
+version_note = "Pinned repository revision dated 2026-10-22, containing records of a distinct 2026-10-11 API experiment. The experiment date is not the source revision date."
+
+[[evidence]]
+id = "E-LC-README"
+title_ja = "公開範囲・再検証手順・保証境界"
+title_en = "Published scope, replay instructions and assurance boundaries"
+origin = "external_repository"
+mode = "PUBLIC_DOCUMENT"
+strength = 2
+source_pin_id = "SRC-CIVIC-LIFECYCLE"
+url = "https://github.com/GhostDriftTheory/civic-ai-lifecycle-assurance/blob/a410d4171734a56a789d3d0742a9db17d17b7e3d/README.md"
+repository = "https://github.com/GhostDriftTheory/civic-ai-lifecycle-assurance"
+commit = "a410d4171734a56a789d3d0742a9db17d17b7e3d"
+path = "README.md"
+raw_url = "https://raw.githubusercontent.com/GhostDriftTheory/civic-ai-lifecycle-assurance/a410d4171734a56a789d3d0742a9db17d17b7e3d/README.md"
+expected_sha256_lf = "b2466c72f9678454c090ea8edf794641c1641ae970fdd81901d05a7bc755835f"
+expected_size_bytes_lf = 31078
+claims = [
+  "Documents the fixed synthetic scope, collaboration roles, reported evaluations, use conditions and distinctions between model proofs, finite implementation checks and live-record replay.",
+]
+limitations = [
+  "Documentation alone does not prove executable behavior or independently authenticate an API response.",
+]
+
+[[evidence]]
+id = "E-LC-CORE"
+title_ja = "条件承継・利用・終了・再計算のPython実装"
+title_en = "Python inheritance, use, termination and replay implementation"
+origin = "external_repository"
+mode = "REPRODUCIBLE_IMPLEMENTATION"
+strength = 3
+source_pin_id = "SRC-CIVIC-LIFECYCLE"
+url = "https://github.com/GhostDriftTheory/civic-ai-lifecycle-assurance/blob/a410d4171734a56a789d3d0742a9db17d17b7e3d/poc.py"
+repository = "https://github.com/GhostDriftTheory/civic-ai-lifecycle-assurance"
+commit = "a410d4171734a56a789d3d0742a9db17d17b7e3d"
+path = "poc.py"
+raw_url = "https://raw.githubusercontent.com/GhostDriftTheory/civic-ai-lifecycle-assurance/a410d4171734a56a789d3d0742a9db17d17b7e3d/poc.py"
+expected_sha256_lf = "4c6730a3e274a839a173df0e130723ff88bdb5c98e6d25cd16c8e60b1e7a1300"
+expected_size_bytes_lf = 93469
+claims = [
+  "Enforces fixed use and amendment gates, preserves origin-specific conditions, accounts for managed paths and unresolved operations, and replays recorded command histories.",
+  "Compares current state, scope, version, origin epoch and validity time before applying a saved scoped end certificate.",
+]
+limitations = [
+  "Sequential local managed-store PoC with mock authority and fixed conditions; no operating-system enforcement, provider-side deletion or whole-program proof.",
+]
+anchors = [
+  "Engine.register",
+  "Engine.use_observation",
+  "Engine.grant_observation",
+  "Engine.end_observation",
+  "Engine.apply",
+  "Engine.verify",
+  "verify_live_record",
+  "ci",
+]
+
+[[evidence]]
+id = "E-LC-CASES"
+title_ja = "固定仕様と13シナリオ・85操作"
+title_en = "Fixed specification and 13 scenarios / 85 operations"
+origin = "external_repository"
+mode = "TEST_FIXTURES"
+strength = 3
+source_pin_id = "SRC-CIVIC-LIFECYCLE"
+url = "https://github.com/GhostDriftTheory/civic-ai-lifecycle-assurance/blob/a410d4171734a56a789d3d0742a9db17d17b7e3d/cases.json"
+repository = "https://github.com/GhostDriftTheory/civic-ai-lifecycle-assurance"
+commit = "a410d4171734a56a789d3d0742a9db17d17b7e3d"
+path = "cases.json"
+raw_url = "https://raw.githubusercontent.com/GhostDriftTheory/civic-ai-lifecycle-assurance/a410d4171734a56a789d3d0742a9db17d17b7e3d/cases.json"
+expected_sha256_lf = "fe59c2e0ab0206f8272e4983d2a7c4cb8fc5957da5bf429af8d3b3b857e6fce1"
+expected_size_bytes_lf = 20504
+claims = [
+  "Provides synthetic sources, origin-specific conditions, permitted operations and expected decisions for inheritance, partial changes, residual paths, unresolved operations and stale certificates.",
+]
+limitations = [
+  "Fixed synthetic test inputs do not represent every real-world municipal policy or risk.",
+]
+
+[[evidence]]
+id = "E-LC-BROWSER"
+title_ja = "独立したJavaScript実装と操作デモ"
+title_en = "Independent JavaScript implementation and interactive demo"
+origin = "external_repository"
+mode = "REPRODUCIBLE_IMPLEMENTATION"
+strength = 3
+source_pin_id = "SRC-CIVIC-LIFECYCLE"
+url = "https://github.com/GhostDriftTheory/civic-ai-lifecycle-assurance/blob/a410d4171734a56a789d3d0742a9db17d17b7e3d/civic_lifecycle_poc_demo.html"
+repository = "https://github.com/GhostDriftTheory/civic-ai-lifecycle-assurance"
+commit = "a410d4171734a56a789d3d0742a9db17d17b7e3d"
+path = "civic_lifecycle_poc_demo.html"
+raw_url = "https://raw.githubusercontent.com/GhostDriftTheory/civic-ai-lifecycle-assurance/a410d4171734a56a789d3d0742a9db17d17b7e3d/civic_lifecycle_poc_demo.html"
+expected_sha256_lf = "5772c218bd5ffaa3d217e7f757b2c9c70a92237e600d85258666ae172cc7a964"
+expected_size_bytes_lf = 82477
+claims = [
+  "Runs a separate JavaScript state engine and supports local history replay; the workflow compares complete results, states and hashes with Python.",
+]
+limitations = [
+  "Offline browser behavior and finite agreement do not establish production access isolation or all-input equivalence.",
+]
+
+[[evidence]]
+id = "E-LC-LEAN"
+title_ja = "条件承継・変更・利用・終了の70定理"
+title_en = "Seventy model theorems for inheritance, amendment, use and termination"
+origin = "external_repository"
+mode = "FORMAL_MODEL_PROOF"
+strength = 4
+source_pin_id = "SRC-CIVIC-LIFECYCLE"
+url = "https://github.com/GhostDriftTheory/civic-ai-lifecycle-assurance/blob/a410d4171734a56a789d3d0742a9db17d17b7e3d/CivicLifecycleAssurance.lean"
+repository = "https://github.com/GhostDriftTheory/civic-ai-lifecycle-assurance"
+commit = "a410d4171734a56a789d3d0742a9db17d17b7e3d"
+path = "CivicLifecycleAssurance.lean"
+raw_url = "https://raw.githubusercontent.com/GhostDriftTheory/civic-ai-lifecycle-assurance/a410d4171734a56a789d3d0742a9db17d17b7e3d/CivicLifecycleAssurance.lean"
+expected_sha256_lf = "4264bb41055a731e0082ae3032ada05ffcb6c5df893f84350766fa4fdd986159"
+expected_size_bytes_lf = 19092
+claims = [
+  "Defines and proves properties of use and amendment gates, origin-preserving changes, conservative path handling, scoped end decisions and current certificate applicability.",
+  "The model distinguishes a scoped end record from physical erasure.",
+]
+limitations = [
+  "Model inputs abstract inventory capture, authenticity, condition matching and state identity; the proofs do not verify full Python/JavaScript code, text semantics, hashing, I/O or provider operations.",
+]
+anchors = [
+  "CivicLifecycleAssurance.unknown_support_does_not_drop_conditions",
+  "CivicLifecycleAssurance.missing_evidence_cannot_relax",
+  "CivicLifecycleAssurance.other_condition_unchanged",
+  "CivicLifecycleAssurance.amendment_preserves_origin",
+  "CivicLifecycleAssurance.residual_route_blocks_certificate",
+  "CivicLifecycleAssurance.unknown_operation_blocks_certificate",
+  "CivicLifecycleAssurance.pending_operation_blocks_certificate",
+  "CivicLifecycleAssurance.retained_audit_requires_exception",
+  "CivicLifecycleAssurance.stale_version_cannot_apply",
+  "CivicLifecycleAssurance.changed_generation_cannot_apply",
+  "CivicLifecycleAssurance.expired_certificate_cannot_apply",
+  "CivicLifecycleAssurance.end_record_is_not_erasure",
+]
+
+[[evidence]]
+id = "E-LC-WORKFLOW"
+title_ja = "モデル・実装照合・公開記録の自動検査定義"
+title_en = "Workflow for model proofs, conformance and published records"
+origin = "external_repository"
+mode = "CONTINUOUS_INTEGRATION_DEFINITION"
+strength = 3
+source_pin_id = "SRC-CIVIC-LIFECYCLE"
+url = "https://github.com/GhostDriftTheory/civic-ai-lifecycle-assurance/blob/a410d4171734a56a789d3d0742a9db17d17b7e3d/.github/workflows/lean.yml"
+repository = "https://github.com/GhostDriftTheory/civic-ai-lifecycle-assurance"
+commit = "a410d4171734a56a789d3d0742a9db17d17b7e3d"
+path = ".github/workflows/lean.yml"
+raw_url = "https://raw.githubusercontent.com/GhostDriftTheory/civic-ai-lifecycle-assurance/a410d4171734a56a789d3d0742a9db17d17b7e3d/.github/workflows/lean.yml"
+expected_sha256_lf = "3d1bf1c374b3ee178270bcbb1d5878641703202a507d9d8fe742ff5b96f6e1c6"
+expected_size_bytes_lf = 5050
+claims = [
+  "Runs Lean model checking, Python/JavaScript conformance, proof-dependency audits and offline replay of the published API record.",
+  "Checks published evidence hashes, request/response identifier and usage consistency, and regeneration of the HTML report.",
+]
+limitations = [
+  "Workflow code defines checks; the separately referenced successful run is the execution evidence. No live API call is made by these checks.",
+]
+
+[[evidence]]
+id = "E-LC-CI-RUN"
+title_ja = "固定コミットに対する成功したGitHub Actions実行"
+title_en = "Successful GitHub Actions run for the pinned commit"
+origin = "external_repository"
+mode = "CONTINUOUS_INTEGRATION_RUN"
+strength = 3
+source_pin_id = "SRC-CIVIC-LIFECYCLE"
+url = "https://github.com/GhostDriftTheory/civic-ai-lifecycle-assurance/actions/runs/39787514011"
+repository = "https://github.com/GhostDriftTheory/civic-ai-lifecycle-assurance"
+commit = "a410d4171734a56a789d3d0742a9db17d17b7e3d"
+run_id = 39787514011
+workflow_path = ".github/workflows/lean.yml"
+conclusion = "success"
+run_date = "2026-10-22"
+as_of = "2026-10-23"
+claims = [
+  "The pinned-commit run completed model checking, runtime/cross-language conformance and proof-dependency checks, and published API-record offline verification successfully.",
+]
+limitations = [
+  "Repository CI is not an independent third-party audit, production deployment evaluation or provider-issued attestation.",
+]
+
+[[evidence]]
+id = "E-LC-LIVE"
+title_ja = "公開API実験の生成結果と16操作の再計算記録"
+title_en = "Published API output and replay record of 16 operations"
+origin = "external_repository"
+mode = "REPLAYABLE_EXPERIMENT_RECORD"
+strength = 3
+source_pin_id = "SRC-CIVIC-LIFECYCLE"
+url = "https://github.com/GhostDriftTheory/civic-ai-lifecycle-assurance/blob/a410d4171734a56a789d3d0742a9db17d17b7e3d/evidence/openai-api-2026-10-11/live_evidence.json"
+repository = "https://github.com/GhostDriftTheory/civic-ai-lifecycle-assurance"
+commit = "a410d4171734a56a789d3d0742a9db17d17b7e3d"
+path = "evidence/openai-api-2026-10-11/live_evidence.json"
+raw_url = "https://raw.githubusercontent.com/GhostDriftTheory/civic-ai-lifecycle-assurance/a410d4171734a56a789d3d0742a9db17d17b7e3d/evidence/openai-api-2026-10-11/live_evidence.json"
+expected_sha256_lf = "9d74e1423401f764bed338c3314635b2cece8a3712248b44bd2cf32582dc429c"
+expected_size_bytes_lf = 48161
+claims = [
+  "Records one Responses API call using synthetic source A and a 16-operation local trace; the fixed verifier replays inherited conditions, bounded amendment, copy handling and scoped end decisions without another API call.",
+  "The record expressly sets provider_deletion_proven to false and does not treat unsent internal source B as an input to the generated text.",
+]
+limitations = [
+  "A locally recorded response, response identifier and hash do not authenticate the provider as issuer. This record does not prove the semantic accuracy of the text or deletion inside OpenAI.",
+]
+experiment_date = "2026-10-11"
+requested_model = "gpt-5.4-mini"
+network_calls_recorded = 1
+local_operations = 16
+
+[[evidence]]
+id = "E-LC-INTENT"
+title_ja = "公開API実験の呼出し意図・完了記録"
+title_en = "Published API call intent and completion record"
+origin = "external_repository"
+mode = "EXPERIMENT_INTENT_RECORD"
+strength = 2
+source_pin_id = "SRC-CIVIC-LIFECYCLE"
+url = "https://github.com/GhostDriftTheory/civic-ai-lifecycle-assurance/blob/a410d4171734a56a789d3d0742a9db17d17b7e3d/evidence/openai-api-2026-10-11/api_intent.json"
+repository = "https://github.com/GhostDriftTheory/civic-ai-lifecycle-assurance"
+commit = "a410d4171734a56a789d3d0742a9db17d17b7e3d"
+path = "evidence/openai-api-2026-10-11/api_intent.json"
+raw_url = "https://raw.githubusercontent.com/GhostDriftTheory/civic-ai-lifecycle-assurance/a410d4171734a56a789d3d0742a9db17d17b7e3d/evidence/openai-api-2026-10-11/api_intent.json"
+expected_sha256_lf = "c1fcc8dbb2461448560760a303af6b0eb20911e55dfb363528d1ae533421fac9"
+expected_size_bytes_lf = 1561
+claims = [
+  "Records the prior single-call intent, synthetic outbound scope, requested store:false setting, and locally recorded completion identifiers and usage.",
+]
+limitations = [
+  "Local intent and completion fields are not independent issuer authentication, a billing guarantee or proof of provider-side erasure.",
+]
+experiment_date = "2026-10-11"
+
+[[obligations]]
+id = "M-A1-01"
+obligation_id = "O-A1-LIFECYCLE-GATES"
+haip_action_id = "HAIP-A1"
+obligation_ja = "固定PoC内で、派生・変更・利用・終了の各段階に明示的な条件検査を置き、不明又は不成立を利用許可に読み替えない。"
+obligation_en = "Within the fixed PoC, apply explicit gates to derivation, amendment, use and termination without treating unknown or failed conditions as permission."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "DIRECT"
+minimum_evidence_strength = 3
+evidence_ids = [
+  "E-LC-CORE",
+  "E-LC-CASES",
+  "E-LC-LEAN",
+]
+supporting_evidence_ids = [
+  "E-LC-CI-RUN",
+]
+gaps = []
+rationale_ja = "8条件の利用判定、6条件の変更検査及び6条件の終了判定を定義し、HOLD又はREJECTでは情報供給・終了証明発行を行わない。対象は公開された管理モデルの操作である。"
+rationale_en = "The model defines eight use checks, six amendment checks and six termination checks; HOLD or REJECT does not supply content or issue an end record. This obligation concerns the published managed-model operations."
+
+[[obligations]]
+id = "M-A1-02"
+obligation_id = "O-A1-MODEL-AND-CONFORMANCE"
+haip_action_id = "HAIP-A1"
+obligation_ja = "定義した判定モデルの性質を証明し、固定仕様の具体的処理列についてPython・JavaScript及びLeanの判定を照合する。"
+obligation_en = "Prove properties of the defined decision model and compare Python, JavaScript and Lean decisions for concrete sequences under the fixed specification."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "DIRECT"
+minimum_evidence_strength = 3
+evidence_ids = [
+  "E-LC-LEAN",
+  "E-LC-CORE",
+  "E-LC-BROWSER",
+  "E-LC-WORKFLOW",
+  "E-LC-CI-RUN",
+]
+supporting_evidence_ids = [
+  "E-LC-CASES",
+]
+gaps = []
+rationale_ja = "70モデル定理と証明依存検査、181処理列・817操作の実装照合及び8,095具体命題を公開検査に含む。全プログラムの全入力に対する証明という義務には拡張しない。"
+rationale_en = "Public checks include 70 model theorems and dependency audits, conformance over 181 sequences / 817 operations and 8,095 concrete propositions. The obligation does not extend to whole-program correctness for all inputs."
+
+[[obligations]]
+id = "M-A1-03"
+obligation_id = "O-A1-SYSTEM-WIDE-EVALUATION"
+haip_action_id = "HAIP-A1"
+obligation_ja = "実際の高度AIシステム全体のリスクを、実利用文脈及び独立外部評価を含めて評価する。"
+obligation_en = "Evaluate risks of an actual advanced AI system as a whole, including its deployment context and independent external evaluation."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "NOT_COVERED"
+minimum_evidence_strength = 0
+evidence_ids = []
+supporting_evidence_ids = [
+  "E-LC-README",
+]
+gaps = [
+  "No actual municipal deployment, system-wide evaluation or independent external testing is established by this fixed synthetic PoC.",
+]
+rationale_ja = "モデルと管理ゲートの技術検証は示されるが、採用先システム全体の安全評価は示されない。"
+rationale_en = "Technical evaluation of the model and management gates is shown, but evaluation of the complete adopting system is not."
+
+[[obligations]]
+id = "M-A2-01"
+obligation_id = "O-A2-CHANGED-STATE-RECHECK"
+haip_action_id = "HAIP-A2"
+obligation_ja = "固定PoCの状態変化後に終了証明を再評価し、残存経路、未終結操作、世代・版・期限の不一致がある証明を現在へ流用しない。"
+obligation_en = "Re-evaluate end certificates after state changes in the fixed PoC and prevent current application when residual paths, unresolved operations or generation, version or time mismatches remain."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "SUPPORTING_ONLY"
+minimum_evidence_strength = 3
+evidence_ids = [
+  "E-LC-CORE",
+  "E-LC-LEAN",
+  "E-LC-CASES",
+]
+supporting_evidence_ids = [
+  "E-LC-CI-RUN",
+]
+gaps = ["The fixed-PoC recheck mechanism is not evidence of post-deployment monitoring or mitigation in an actual municipal or other deployed AI system."]
+rationale_ja = "残存・不明・予約中の操作を終了阻害要因とし、現在の状態・版・起源世代・期限及び終了条件を再照合する。導入後の実運用監視とは区別する。"
+rationale_en = "Residual paths and unknown or pending operations block termination; current state, version, origin epoch, time and termination conditions are rechecked. This is distinct from deployed operational monitoring."
+
+[[obligations]]
+id = "M-A2-02"
+obligation_id = "O-A2-POSTDEPLOYMENT-INCIDENTS"
+haip_action_id = "HAIP-A2"
+obligation_ja = "導入後の脆弱性・誤用・インシデントを検出し、対応・報告する組織運用を示す。"
+obligation_en = "Demonstrate organisational operation for discovering, handling and reporting post-deployment vulnerabilities, misuse and incidents."
+applicability = "IN_SCOPE_ORGANISATIONAL"
+assessment = "NOT_COVERED"
+minimum_evidence_strength = 0
+evidence_ids = []
+supporting_evidence_ids = [
+  "E-LC-README",
+]
+gaps = [
+  "No live monitoring, incident-response operation, vulnerability intake or reporting channel is evidenced.",
+]
+rationale_ja = "模擬状態遷移と履歴再計算は、実運用の監視・対応体制を立証しない。"
+rationale_en = "Simulated transitions and history replay do not establish operational monitoring or response arrangements."
+
+[[obligations]]
+id = "M-A3-01"
+obligation_id = "O-A3-PUBLIC-SCOPE-AND-RESULTS"
+haip_action_id = "HAIP-A3"
+obligation_ja = "この参照PoCの用途、動作、評価方法、再検証手順及び保証境界を公開する。"
+obligation_en = "Publish this reference PoC's intended use, behavior, evaluation methods, replay instructions and assurance boundaries."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "DIRECT"
+minimum_evidence_strength = 2
+evidence_ids = [
+  "E-LC-README",
+]
+supporting_evidence_ids = [
+  "E-LC-LEAN",
+  "E-LC-WORKFLOW",
+  "E-LC-LIVE",
+  "E-LC-INTENT",
+  "E-LC-CI-RUN",
+]
+gaps = []
+rationale_ja = "公開文書は形式モデル・有限照合・実API記録を区別し、合成データ、利用終了の管理範囲及び発行者認証の不在を説明する。"
+rationale_en = "Public documentation distinguishes model proofs, finite conformance and API records, and states the synthetic-data scope, managed termination boundary and absence of issuer authentication."
+
+[[obligations]]
+id = "M-A3-02"
+obligation_id = "O-A3-COMPLETE-SYSTEM-REPORT"
+haip_action_id = "HAIP-A3"
+obligation_ja = "組織が利用する高度AIシステム全体の能力・限界・重要なリスク及びリリース別文書を示す。"
+obligation_en = "Provide capabilities, limitations, material risks and release-specific documentation for the organisation's complete advanced AI system."
+applicability = "IN_SCOPE_ORGANISATIONAL"
+assessment = "NOT_COVERED"
+minimum_evidence_strength = 0
+evidence_ids = []
+supporting_evidence_ids = [
+  "E-LC-README",
+]
+gaps = [
+  "The public PoC documents a bounded assurance layer, not a complete model or deployed-system transparency report.",
+]
+rationale_ja = "生成モデル全体や採用先システムの評価・文書化を、このProfileから推定できない。"
+rationale_en = "Evaluation and documentation of the full generative model or adopting system cannot be inferred from this profile."
+
+[[obligations]]
+id = "M-A4-01"
+obligation_id = "O-A4-PUBLIC-EVIDENCE-SHARING"
+haip_action_id = "HAIP-A4"
+obligation_ja = "公開対象を合成データに限定し、このPoCの証明コード、評価方法及び再計算可能な記録を公開する。"
+obligation_en = "Publish this PoC's proof code, evaluation methods and replayable records using synthetic public inputs."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "DIRECT"
+minimum_evidence_strength = 2
+evidence_ids = [
+  "E-LC-README",
+  "E-LC-LEAN",
+  "E-LC-LIVE",
+  "E-LC-INTENT",
+]
+supporting_evidence_ids = [
+  "E-LC-WORKFLOW",
+]
+gaps = []
+rationale_ja = "公開記録と再検証手順があり、READMEは再検証に限定した利用許諾を明示する。公開を包括的なオープンソース許諾には読み替えない。"
+rationale_en = "Published records and replay instructions are accompanied by a limited revalidation permission in the README; publication is not a blanket open-source licence."
+
+[[obligations]]
+id = "M-A4-02"
+obligation_id = "O-A4-INCIDENT-COOPERATION"
+haip_action_id = "HAIP-A4"
+obligation_ja = "関連組織・当局との責任あるインシデント共有及び非公開情報の取扱い体制を示す。"
+obligation_en = "Demonstrate responsible incident sharing with relevant organisations or authorities and arrangements for handling non-public information."
+applicability = "IN_SCOPE_ORGANISATIONAL"
+assessment = "NOT_COVERED"
+minimum_evidence_strength = 0
+evidence_ids = []
+supporting_evidence_ids = [
+  "E-LC-README",
+]
+gaps = [
+  "Publication of synthetic technical artifacts does not establish an operating incident-sharing mechanism or organisation-wide confidential/IP disclosure controls.",
+]
+rationale_ja = "技術成果の公開と、実際のインシデント情報共有体制は別の義務である。"
+rationale_en = "Publishing technical results and operating an incident-information-sharing arrangement are separate obligations."
+
+[[obligations]]
+id = "M-A5-01"
+obligation_id = "O-A5-EXECUTABLE-CONDITIONS"
+haip_action_id = "HAIP-A5"
+obligation_ja = "固定の目的・提供先・期限・模擬権限及び変更証拠を、派生情報の利用・限定変更の判定に適用する。"
+obligation_en = "Apply fixed purpose, recipient, deadline, mock-authority and amendment-evidence conditions to use and bounded amendment of derived information."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "DIRECT"
+minimum_evidence_strength = 3
+evidence_ids = [
+  "E-LC-CORE",
+  "E-LC-CASES",
+  "E-LC-LEAN",
+]
+supporting_evidence_ids = [
+  "E-LC-CI-RUN",
+]
+gaps = []
+rationale_ja = "変更証拠は対象・内容・変更前条件・版・文脈・期限・未使用状態へ結合され、対象外条件を保持する。模擬権限を実在主体の認証には読み替えない。"
+rationale_en = "Amendment evidence is bound to target, content, prior conditions, revision, context, time and unused status while unrelated conditions are preserved. Mock authority is not authentication of actual people."
+
+[[obligations]]
+id = "M-A5-02"
+obligation_id = "O-A5-ORGANISATIONAL-GOVERNANCE"
+haip_action_id = "HAIP-A5"
+obligation_ja = "組織全体のAIガバナンス、プライバシー方針、責任権限及び職員教育を示す。"
+obligation_en = "Demonstrate organisation-wide AI governance, privacy policy, accountable authority and staff training."
+applicability = "IN_SCOPE_ORGANISATIONAL"
+assessment = "NOT_COVERED"
+minimum_evidence_strength = 0
+evidence_ids = []
+supporting_evidence_ids = [
+  "E-LC-README",
+]
+gaps = [
+  "No organisation-wide policy, accountable operational roles, deployment approvals or staff-training records are established.",
+]
+rationale_ja = "固定条件を動作させる技術実装から、組織の方針・教育・権限運用を推定しない。"
+rationale_en = "Executable fixed conditions do not establish organisational policies, training or authority arrangements."
+
+[[obligations]]
+id = "M-A6-01"
+obligation_id = "O-A6-LOCAL-REPLAY-INTEGRITY"
+haip_action_id = "HAIP-A6"
+obligation_ja = "保存された操作履歴を固定初期状態から再計算し、判定・状態・記録の不整合を検出する。"
+obligation_en = "Recompute saved operation histories from the fixed initial state and detect inconsistencies in decisions, states and records."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "DIRECT"
+minimum_evidence_strength = 3
+evidence_ids = [
+  "E-LC-CORE",
+  "E-LC-BROWSER",
+  "E-LC-WORKFLOW",
+  "E-LC-CI-RUN",
+]
+supporting_evidence_ids = [
+  "E-LC-LIVE",
+  "E-LC-INTENT",
+]
+gaps = []
+rationale_ja = "Engine.verify及びverify_live_recordは結論フラグを信頼せず履歴を再実行する。公開記録のハッシュ・要求応答対応も検査する。署名又は真正な実履歴の認証という義務ではない。"
+rationale_en = "Engine.verify and verify_live_record replay histories rather than trusting result flags. Published hashes and request/response consistency are also checked. This obligation is not signature verification or authentication of actual historical events."
+
+[[obligations]]
+id = "M-A6-02"
+obligation_id = "O-A6-PRODUCTION-SECURITY"
+haip_action_id = "HAIP-A6"
+obligation_ja = "本番の認証、アクセス分離、物理・サイバー・内部脅威及び脆弱性管理を示す。"
+obligation_en = "Demonstrate production authentication, access separation, physical/cyber/insider-threat controls and vulnerability management."
+applicability = "IN_SCOPE_ORGANISATIONAL"
+assessment = "NOT_COVERED"
+minimum_evidence_strength = 0
+evidence_ids = []
+supporting_evidence_ids = [
+  "E-LC-README",
+]
+gaps = [
+  "No OS-level mediation, production IAM, external current-state anchor, infrastructure protection or vulnerability-management programme is established.",
+]
+rationale_ja = "利用者による監査JSONの直接読取りや管理外コピーをOSレベルで阻止する実装ではない。"
+rationale_en = "The PoC does not block direct reading of audit JSON or creation of unmanaged copies at operating-system level."
+
+[[obligations]]
+id = "M-A7-01"
+obligation_id = "O-A7-CONTENT-AUTHENTICATION"
+haip_action_id = "HAIP-A7"
+obligation_ja = "AI生成コンテンツを利用者が識別できる信頼できる認証・来歴機構を実装する。"
+obligation_en = "Implement reliable authentication and provenance mechanisms enabling users to identify AI-generated content."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "NOT_COVERED"
+minimum_evidence_strength = 0
+evidence_ids = []
+supporting_evidence_ids = [
+  "E-LC-README",
+  "E-LC-LIVE",
+]
+gaps = [
+  "Declared lineage, model identifiers and local hashes do not authenticate content origins; no watermarking, C2PA or independent provider attestation is implemented.",
+]
+rationale_ja = "管理対象の起源関係と応答IDは記録するが、信頼できるコンテンツ認証を立証しない。Reporting第5節にも実装証拠として流用しない。"
+rationale_en = "Managed origin relationships and response identifiers are recorded, but reliable content authentication is not established and these records are not reused as implementation coverage for Reporting section 5."
+
+[[obligations]]
+id = "M-A8-01"
+obligation_id = "O-A8-SAFETY-RESEARCH"
+haip_action_id = "HAIP-A8"
+obligation_ja = "派生情報の条件逸脱及び過大な終了主張を抑える安全・信頼性研究の成果を示す。"
+obligation_en = "Show a safety and trustworthiness research contribution addressing condition violations and overbroad termination claims for derived information."
+applicability = "IN_SCOPE_CONTEXTUAL"
+assessment = "SUPPORTING_ONLY"
+minimum_evidence_strength = 0
+evidence_ids = []
+supporting_evidence_ids = [
+  "E-LC-LEAN",
+  "E-LC-CORE",
+  "E-LC-CASES",
+  "E-LC-LIVE",
+]
+gaps = [
+  "A bounded public research artifact does not establish a prioritised or sustained organisation-wide research programme.",
+]
+rationale_ja = "モデル証明、試験及び実API生成文のローカル再計算は具体的な応用研究成果の補助証拠になる。"
+rationale_en = "Model proofs, tests and local replay using recorded API-generated text support a specific applied-research contribution."
+
+[[obligations]]
+id = "M-A8-02"
+obligation_id = "O-A8-INVESTMENT-PROGRAMME"
+haip_action_id = "HAIP-A8"
+obligation_ja = "AI安全研究への予算・人員・継続投資の優先度を示す。"
+obligation_en = "Demonstrate prioritisation of budgets, staffing and sustained investment in AI safety research."
+applicability = "IN_SCOPE_ORGANISATIONAL"
+assessment = "NOT_ASSESSED"
+minimum_evidence_strength = 0
+evidence_ids = []
+supporting_evidence_ids = []
+gaps = [
+  "Budgets, staffing and sustained-investment records were not assessed in this technical profile.",
+]
+rationale_ja = "公開コードの有無から投資規模や継続性を推定しない。"
+rationale_en = "The existence of public code does not establish investment scale or continuity."
+
+[[obligations]]
+id = "M-A9-01"
+obligation_id = "O-A9-PUBLIC-SERVICE-CONTEXT"
+haip_action_id = "HAIP-A9"
+obligation_ja = "自治体相談情報の適切な継続利用と利用終了を支援する、人間の利益に結び付く適用文脈を示す。"
+obligation_en = "Show a human-interest application context supporting appropriate continued use and termination of municipal consultation information."
+applicability = "IN_SCOPE_CONTEXTUAL"
+assessment = "SUPPORTING_ONLY"
+minimum_evidence_strength = 0
+evidence_ids = []
+supporting_evidence_ids = [
+  "E-LC-README",
+  "E-LC-CASES",
+]
+gaps = [
+  "The municipal scenario is synthetic and does not establish deployed resident benefit, accessibility, fairness or public literacy outcomes.",
+]
+rationale_ja = "相談案内と内部利用の合成事例は公益上の目的を示すが、実際の住民便益を測定した結果ではない。"
+rationale_en = "Synthetic consultation and internal-use scenarios show an intended public-interest purpose, not measured resident benefit."
+
+[[obligations]]
+id = "M-A9-02"
+obligation_id = "O-A9-REAL-WORLD-OUTCOMES"
+haip_action_id = "HAIP-A9"
+obligation_ja = "実導入での住民便益、アクセシビリティ、公平性又は関係者との協議・教育の成果を示す。"
+obligation_en = "Demonstrate resident benefit, accessibility, fairness or stakeholder-consultation and education outcomes from actual deployment."
+applicability = "IN_SCOPE_ORGANISATIONAL"
+assessment = "NOT_COVERED"
+minimum_evidence_strength = 0
+evidence_ids = []
+supporting_evidence_ids = []
+gaps = [
+  "No actual deployment, measured resident outcomes or stakeholder/education evidence is included.",
+]
+rationale_ja = "技術PoCの成功を社会的効果の実証に置き換えない。"
+rationale_en = "Successful technical PoC checks do not establish realised societal effects."
+
+[[obligations]]
+id = "M-A10-01"
+obligation_id = "O-A10-REFERENCE-CONFORMANCE"
+haip_action_id = "HAIP-A10"
+obligation_ja = "再利用可能な検証方法として、固定の機械可読仕様と実装間の照合方法を公開する。"
+obligation_en = "Publish a fixed machine-readable specification and cross-implementation checking method as a reusable verification approach."
+applicability = "IN_SCOPE_CONTEXTUAL"
+assessment = "SUPPORTING_ONLY"
+minimum_evidence_strength = 0
+evidence_ids = []
+supporting_evidence_ids = [
+  "E-LC-CASES",
+  "E-LC-CORE",
+  "E-LC-BROWSER",
+  "E-LC-LEAN",
+]
+gaps = [
+  "Cross-language agreement under one fixed specification does not establish interoperable international standards or external standards-body adoption.",
+]
+rationale_ja = "公開仕様と複数実装の照合は技術的な参考になるが、国際標準の制定・採用又は他システムとの自動接続を示さない。"
+rationale_en = "The public specification and implementation comparison provide technical reference material, but not international standardisation, standards adoption or automatic integration with other systems."
+
+[[obligations]]
+id = "M-A10-02"
+obligation_id = "O-A10-STANDARD-ADOPTION"
+haip_action_id = "HAIP-A10"
+obligation_ja = "国際的な標準化活動又は既存の相互運用標準への採用・適合を示す。"
+obligation_en = "Demonstrate international standardisation activity or adoption of and conformance with established interoperability standards."
+applicability = "IN_SCOPE_ORGANISATIONAL"
+assessment = "NOT_COVERED"
+minimum_evidence_strength = 0
+evidence_ids = []
+supporting_evidence_ids = []
+gaps = [
+  "No standards-body adoption, standards conformance assessment or external interoperability evidence is established.",
+]
+rationale_ja = "JSON・Leanの利用自体を標準化成果とは扱わない。"
+rationale_en = "Use of JSON or Lean does not by itself establish a standardisation outcome."
+
+[[obligations]]
+id = "M-A11-01"
+obligation_id = "O-A11-ORIGIN-CONDITION-INHERITANCE"
+haip_action_id = "HAIP-A11"
+obligation_ja = "宣言された入力起源の目的・提供先・期限・監査条件を派生情報へ保持し、寄与不明やAIの自己申告だけで条件を落とさない。"
+obligation_en = "Preserve purpose, recipient, deadline and audit conditions from declared input origins in derived information without dropping conditions because contribution is unknown or the AI claims no restrictions."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "DIRECT"
+minimum_evidence_strength = 3
+evidence_ids = [
+  "E-LC-CORE",
+  "E-LC-CASES",
+  "E-LC-LEAN",
+]
+supporting_evidence_ids = [
+  "E-LC-CI-RUN",
+  "E-LC-LIVE",
+]
+gaps = []
+rationale_ja = "派生・コピー時に入力の起源別条件を登録し、限定変更時も他条件・別起源・元情報を保持する。実API記録では未送信のBを寄与元として扱わない。"
+rationale_en = "Derivation and copying register origin-specific input conditions; bounded amendment preserves unrelated conditions, other origins and source information. The live record does not treat unsent source B as contributing."
+
+[[obligations]]
+id = "M-A11-02"
+obligation_id = "O-A11-SCOPED-USE-TERMINATION"
+haip_action_id = "HAIP-A11"
+obligation_ja = "捕捉済み管理範囲の経路・未終結操作・閉鎖記録を確認し、監査保持の例外を明示した業務利用終了記録だけを発行する。"
+obligation_en = "Check captured managed paths, unresolved operations and closure records, and issue only a scoped business-use termination record with an explicit audit-retention exception."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "DIRECT"
+minimum_evidence_strength = 3
+evidence_ids = [
+  "E-LC-CORE",
+  "E-LC-LEAN",
+  "E-LC-CASES",
+  "E-LC-LIVE",
+]
+supporting_evidence_ids = [
+  "E-LC-CI-RUN",
+]
+gaps = []
+rationale_ja = "残存可能経路、結果不明又は予約中操作、登録不足、閉鎖証拠不足のままPASSにしない。end_record_is_not_erasureが終了記録と物理消去の違いをモデルでも明示する。"
+rationale_en = "Possible residual paths, unknown or pending operations, incomplete inventory and missing closure evidence prevent PASS. end_record_is_not_erasure also distinguishes an end record from physical erasure in the model."
+
+[[obligations]]
+id = "M-A11-03"
+obligation_id = "O-A11-REAL-DATA-RIGHTS-AND-LAW"
+haip_action_id = "HAIP-A11"
+obligation_ja = "実住民データの品質、権利者・承認者の真正性及び個人データ・知財保護の適法性を確認する。"
+obligation_en = "Assess real resident-data quality, authenticity of rights holders and approvers, and lawful protection of personal data and intellectual property."
+applicability = "IN_SCOPE_LEGAL_ORGANISATIONAL"
+assessment = "NOT_COVERED"
+minimum_evidence_strength = 0
+evidence_ids = []
+supporting_evidence_ids = [
+  "E-LC-README",
+]
+gaps = [
+  "Only synthetic data and mock authority are used; real-data quality, actual rights and legal bases, provider retention and deletion, and protection outside captured management paths are not established.",
+]
+rationale_ja = "固定条件の承継・利用制御は、現実の権利関係や法令適合の認定ではない。"
+rationale_en = "Inheritance and enforcement of fixed conditions do not determine actual rights or legal compliance."
+
+[reporting]
+bridge_id = "civic-ai-lifecycle-reporting-v2-bridge.v1.0"
+snapshot_date = "2026-10-23"
+official_source_id = "SRC-OECD-HAIP-V2"
+purpose_ja = "派生情報ライフサイクルPoCの証拠を、Reporting Framework v2.0の7セクションへ限定的に接続します。"
+purpose_en = "Provide a bounded bridge from derived-information lifecycle PoC evidence to the seven Reporting Framework v2.0 sections."
+not_a_submission_tool_ja = "質問票の複製、完成済み報告書、提出ワークフロー、参加資格判定、承認又は認証ではありません。"
+not_a_submission_tool_en = "Not a questionnaire replica, completed report, submission workflow, eligibility decision, approval or certification."
+
+[[reporting.scope_checks]]
+id = "SCOPE-AI-SYSTEM"
+question_ja = "報告を行う場合、どの実際のAIシステムと組織の役割を対象とするか。"
+question_en = "If reporting, which actual AI system and organisational role are in scope?"
+rule_ja = "合成データの1回のAPI実験だけから、組織の参加資格、全システムの対象範囲又は提供者の統制を推定しない。"
+rule_en = "Do not infer organisational eligibility, complete system scope or provider controls from the single synthetic API experiment."
+
+[[reporting.scope_checks]]
+id = "SCOPE-TERMINATION"
+question_ja = "報告で利用終了を述べる場合、管理対象、保持例外、未確認経路をどこまで特定するか。"
+question_en = "If reporting termination, what managed objects, retention exceptions and unverified paths are specified?"
+rule_ja = "このPoCの終了記録は指定したローカル管理ゲート経由の業務利用に限る。未知のコピー、物理消去及び提供者内部へ拡張しない。"
+rule_en = "End records in this PoC cover business use through specified local management gates only; do not extend them to unknown copies, physical erasure or provider internals."
+
+[[reporting.sections]]
+section_id = "RF2-S1"
+section_number = 1
+title_ja = "リスクの特定及び評価"
+title_en = "Risk identification and evaluation"
+bridge_status = "TECHNICAL_EVIDENCE_INPUT"
+haip_action_ids = [
+  "HAIP-A1",
+  "HAIP-A11",
+]
+supported_obligation_ids = [
+  "O-A1-LIFECYCLE-GATES",
+  "O-A1-MODEL-AND-CONFORMANCE",
+  "O-A11-ORIGIN-CONDITION-INHERITANCE",
+  "O-A11-SCOPED-USE-TERMINATION",
+]
+known_gap_obligation_ids = [
+  "O-A1-SYSTEM-WIDE-EVALUATION",
+  "O-A11-REAL-DATA-RIGHTS-AND-LAW",
+]
+evidence_ids = [
+  "E-LC-CORE",
+  "E-LC-CASES",
+  "E-LC-LEAN",
+  "E-LC-BROWSER",
+  "E-LC-CI-RUN",
+  "E-LC-LIVE",
+]
+profile_can_support_ja = "条件喪失、未承認変更、残存経路・未終結操作及び過大な終了主張に対する固定PoCの判定と試験を示せます。"
+profile_can_support_en = "The fixed PoC provides decisions and tests addressing lost conditions, unapproved amendments, residual paths, unresolved operations and overbroad termination claims."
+organisation_must_add_ja = "実システムについて報告する場合は、利用文脈、モデル・データのリスク、影響を受ける主体、評価範囲及び独立評価の有無を別途示します。"
+organisation_must_add_en = "If reporting on an actual system, describe its use context, model/data risks, affected parties, evaluation scope and whether independent evaluation exists."
+illustrative_wording_ja = "合成の相談情報を使い、条件承継から管理範囲の業務利用終了までの判定モデルと具体的処理列を検証しました。形式証明、有限照合及び保存済みAPI生成文の再計算は対象が異なります。"
+illustrative_wording_en = "Using synthetic consultation information, we checked a decision model and concrete sequences from condition inheritance to scoped termination of business use. Formal proofs, finite conformance and replay of saved API-generated text have distinct scopes."
+do_not_infer_ja = "独立外部評価、全AIシステムの安全性、生成文の意味的正確性又は全実装の全入力に対する証明を推論してはいけません。"
+do_not_infer_en = "Do not infer independent external evaluation, safety of the entire AI system, semantic accuracy of generated text or whole-program proofs for all inputs."
+
+[[reporting.sections]]
+section_id = "RF2-S2"
+section_number = 2
+title_ja = "リスク管理及び情報セキュリティ"
+title_en = "Risk management and information security"
+bridge_status = "TECHNICAL_EVIDENCE_INPUT"
+haip_action_ids = [
+  "HAIP-A1",
+  "HAIP-A2",
+  "HAIP-A5",
+  "HAIP-A6",
+  "HAIP-A11",
+]
+supported_obligation_ids = [
+  "O-A1-LIFECYCLE-GATES",
+  "O-A2-CHANGED-STATE-RECHECK",
+  "O-A5-EXECUTABLE-CONDITIONS",
+  "O-A6-LOCAL-REPLAY-INTEGRITY",
+  "O-A11-ORIGIN-CONDITION-INHERITANCE",
+  "O-A11-SCOPED-USE-TERMINATION",
+]
+known_gap_obligation_ids = [
+  "O-A2-POSTDEPLOYMENT-INCIDENTS",
+  "O-A5-ORGANISATIONAL-GOVERNANCE",
+  "O-A6-PRODUCTION-SECURITY",
+  "O-A11-REAL-DATA-RIGHTS-AND-LAW",
+]
+evidence_ids = [
+  "E-LC-CORE",
+  "E-LC-CASES",
+  "E-LC-LEAN",
+  "E-LC-WORKFLOW",
+  "E-LC-CI-RUN",
+  "E-LC-LIVE",
+  "E-LC-INTENT",
+]
+profile_can_support_ja = "用途・提供先・期限・模擬権限による利用制御、証拠付き限定変更、現在状態での証明再確認及び記録再計算を示せます。"
+profile_can_support_en = "The PoC shows purpose/recipient/deadline/mock-authority use gates, evidence-bound amendments, current-state certificate rechecks and record replay."
+organisation_must_add_ja = "本番統制を報告する場合は、認証・アクセス分離、管理経路の強制仲介、保持と削除、外部コピー・提供者の取扱い、インシデント対応を別途示します。"
+organisation_must_add_en = "If reporting production controls, describe authentication, access separation, enforced mediation, retention and deletion, external copies/provider handling, and incident response separately."
+illustrative_wording_ja = "管理対象に限り、利用条件が成立しない情報を供給せず、残存経路や結果不明操作がある間は利用終了を認めません。監査保持と管理範囲外は終了記録に明示します。"
+illustrative_wording_en = "Within the managed scope, information is not supplied unless use conditions pass, and termination is not accepted while residual paths or unknown operations remain. Audit retention and exclusions are explicit in the end record."
+do_not_infer_ja = "OS全体のアクセス制御、媒体の物理消去、未知の管理外コピーの不存在又はAPI提供者内部の削除を推論してはいけません。"
+do_not_infer_en = "Do not infer OS-wide access control, physical erasure, absence of unknown unmanaged copies or deletion inside the API provider."
+
+[[reporting.sections]]
+section_id = "RF2-S3"
+section_number = 3
+title_ja = "高度AIシステムに関する透明性報告"
+title_en = "Transparency reporting on advanced AI systems"
+bridge_status = "TECHNICAL_EVIDENCE_INPUT"
+haip_action_ids = [
+  "HAIP-A3",
+  "HAIP-A4",
+]
+supported_obligation_ids = [
+  "O-A3-PUBLIC-SCOPE-AND-RESULTS",
+  "O-A4-PUBLIC-EVIDENCE-SHARING",
+]
+known_gap_obligation_ids = [
+  "O-A3-COMPLETE-SYSTEM-REPORT",
+]
+evidence_ids = [
+  "E-LC-README",
+  "E-LC-LEAN",
+  "E-LC-WORKFLOW",
+  "E-LC-CI-RUN",
+  "E-LC-LIVE",
+  "E-LC-INTENT",
+]
+profile_can_support_ja = "公開範囲、再検証方法、モデル・実装・実API記録の区別、合成データ及び保証の限界を公開しています。"
+profile_can_support_en = "The artifacts publish scope, replay methods, distinctions between model/implementation/API records, synthetic inputs and assurance limits."
+organisation_must_add_ja = "高度AIシステム全体について報告する場合は、その能力、限界、リスク、リリース情報及び下流利用者向け説明を追加します。"
+organisation_must_add_en = "If reporting on the complete advanced AI system, add its capabilities, limitations, risks, release information and downstream-user guidance."
+illustrative_wording_ja = "公開PoCについて70モデル定理と有限照合の方法を示し、1回のAPI呼出しで記録した生成文に対する16操作をオフラインで再計算できるようにしました。API記録は発行者認証ではありません。"
+illustrative_wording_en = "For the public PoC, we disclose 70 model theorems and finite checking methods and provide offline replay of 16 operations on text recorded from one API call. The API record is not issuer authentication."
+do_not_infer_ja = "本Profileを完成済みOECD報告書、全システムの透明性報告、独立監査又は提供者による成果認証と呼んではいけません。"
+do_not_infer_en = "Do not call this profile a completed OECD report, complete-system transparency report, independent audit or provider certification of results."
+
+[[reporting.sections]]
+section_id = "RF2-S4"
+section_number = 4
+title_ja = "組織ガバナンス、インシデント管理及び透明性"
+title_en = "Organizational governance, incident management, and transparency"
+bridge_status = "LIMITED_CONTEXT_INPUT"
+haip_action_ids = [
+  "HAIP-A2",
+  "HAIP-A4",
+  "HAIP-A5",
+  "HAIP-A11",
+]
+supported_obligation_ids = [
+  "O-A2-CHANGED-STATE-RECHECK",
+  "O-A4-PUBLIC-EVIDENCE-SHARING",
+  "O-A5-EXECUTABLE-CONDITIONS",
+]
+known_gap_obligation_ids = [
+  "O-A2-POSTDEPLOYMENT-INCIDENTS",
+  "O-A4-INCIDENT-COOPERATION",
+  "O-A5-ORGANISATIONAL-GOVERNANCE",
+  "O-A11-REAL-DATA-RIGHTS-AND-LAW",
+]
+evidence_ids = [
+  "E-LC-README",
+  "E-LC-CORE",
+  "E-LC-CASES",
+  "E-LC-LIVE",
+]
+profile_can_support_ja = "技術的な保留・拒否理由、模擬承認との対応及び履歴の再現を説明する補助材料になります。"
+profile_can_support_en = "Technical hold/rejection reasons, linkage to mock authorization and reproducible histories provide supporting context."
+organisation_must_add_ja = "組織運用について報告する場合は、実際の責任者・権限、エスカレーション、教育、インシデント共有及び法務・プライバシー判断を別途示します。"
+organisation_must_add_en = "If reporting organisational operations, separately describe accountable roles and authority, escalation, training, incident sharing, and legal/privacy decisions."
+illustrative_wording_ja = "PoCは条件変更や利用終了の判断根拠を記録し再計算できます。ただし、承認主体と操作結果は合成データであり、実運用の責任体制を立証しません。"
+illustrative_wording_en = "The PoC records and replays grounds for condition amendments and termination. Approvers and operation outcomes are synthetic fixtures and do not establish operational accountability."
+do_not_infer_ja = "模擬承認を実在主体の認証、履歴を実際のインシデント対応又は組織全体の統制と同一視してはいけません。"
+do_not_infer_en = "Do not equate mock approval with authenticated real actors, or recorded histories with actual incident response or organisation-wide controls."
+
+[[reporting.sections]]
+section_id = "RF2-S5"
+section_number = 5
+title_ja = "コンテンツ認証及び来歴管理の仕組み"
+title_en = "Content authentication & provenance mechanisms"
+bridge_status = "NO_PROFILE_COVERAGE"
+haip_action_ids = [
+  "HAIP-A7",
+]
+supported_obligation_ids = []
+known_gap_obligation_ids = [
+  "O-A7-CONTENT-AUTHENTICATION",
+]
+evidence_ids = []
+profile_can_support_ja = "信頼できるAI生成コンテンツ認証の直接証拠はありません。宣言された起源・モデル識別子とローカル記録の整合性を、出所認証と区別します。"
+profile_can_support_en = "No direct evidence of reliable AI-generated-content authentication is provided. Declared origins/model identifiers and local record consistency are distinguished from origin authentication."
+organisation_must_add_ja = "このセクションを報告する場合は、実際のAI生成表示、透かし又は認証・来歴機構と、その対象範囲・限界を別途示します。"
+organisation_must_add_en = "If reporting this section, separately describe actual AI-content disclosures, watermarking or authentication/provenance mechanisms and their scope and limits."
+illustrative_wording_ja = "派生情報の起源・条件とAPIモデル識別子を記録しますが、このPoCはそれらの発行者真正性を認証せず、透かし又はC2PAを実装していません。"
+illustrative_wording_en = "The PoC records derived-information origins/conditions and an API model identifier, but does not authenticate their issuer or implement watermarking or C2PA."
+do_not_infer_ja = "起源別の条件承継、応答ID、SHA-256又は整合的な履歴を、信頼できるコンテンツの出所認証と同一視してはいけません。"
+do_not_infer_en = "Do not equate origin-specific condition inheritance, response identifiers, SHA-256 or a consistent history with reliable content-origin authentication."
+
+[[reporting.sections]]
+section_id = "RF2-S6"
+section_number = 6
+title_ja = "AI安全性の向上及び社会的リスク軽減のための研究・投資"
+title_en = "Research & investment to advance AI safety & mitigate societal risks"
+bridge_status = "LIMITED_CONTEXT_INPUT"
+haip_action_ids = [
+  "HAIP-A8",
+  "HAIP-A10",
+]
+supported_obligation_ids = [
+  "O-A8-SAFETY-RESEARCH",
+  "O-A10-REFERENCE-CONFORMANCE",
+]
+known_gap_obligation_ids = [
+  "O-A8-INVESTMENT-PROGRAMME",
+  "O-A10-STANDARD-ADOPTION",
+]
+evidence_ids = [
+  "E-LC-CORE",
+  "E-LC-CASES",
+  "E-LC-BROWSER",
+  "E-LC-LEAN",
+  "E-LC-LIVE",
+]
+profile_can_support_ja = "条件承継・利用終了のモデル証明、複数実装の照合及び公開実験記録という限定された応用研究成果を示せます。"
+profile_can_support_en = "The profile shows a bounded applied-research output comprising proofs of inheritance/termination models, cross-implementation checks and published experiment records."
+organisation_must_add_ja = "投資又は標準化の成果を報告する場合に限り、実際の研究体制、資源配分、連携又は標準化活動の証拠を別途示します。"
+organisation_must_add_en = "If claiming investment or standardisation outcomes, separately provide evidence of actual research arrangements, resource allocation, collaboration or standards activity."
+illustrative_wording_ja = "派生情報の利用条件を保持し、管理範囲を超える終了主張を抑える検証方法を公開しました。この成果のみで継続投資や国際標準への採用を主張しません。"
+illustrative_wording_en = "We published methods to preserve usage conditions in derived information and constrain termination claims to managed scope. This output alone does not establish sustained investment or adoption into international standards."
+do_not_infer_ja = "公開実装から継続的な投資義務、投資規模、正式な標準採用又は外部システムとの相互運用実証を推論してはいけません。"
+do_not_infer_en = "Do not infer a continuing investment commitment, investment scale, formal standard adoption or demonstrated external-system interoperability from the published implementation."
+
+[[reporting.sections]]
+section_id = "RF2-S7"
+section_number = 7
+title_ja = "人類及び世界全体の利益の推進"
+title_en = "Advancing human and global interests"
+bridge_status = "LIMITED_CONTEXT_INPUT"
+haip_action_ids = [
+  "HAIP-A9",
+]
+supported_obligation_ids = [
+  "O-A9-PUBLIC-SERVICE-CONTEXT",
+]
+known_gap_obligation_ids = [
+  "O-A9-REAL-WORLD-OUTCOMES",
+]
+evidence_ids = [
+  "E-LC-README",
+  "E-LC-CASES",
+]
+profile_can_support_ja = "自治体相談情報の適切な継続利用と利用終了を支援する技術的な目的を示せます。"
+profile_can_support_en = "The profile shows a technical objective of supporting appropriate continued use and termination of municipal consultation information."
+organisation_must_add_ja = "実社会での便益を報告する場合に限り、導入状況、影響を受ける主体、確認できた効果及び公平性・アクセシビリティ上の条件を別途示します。"
+organisation_must_add_en = "If claiming real-world benefit, separately describe deployment, affected parties, observed effects and fairness/accessibility conditions."
+illustrative_wording_ja = "自治体相談を合成事例として、派生情報にも利用条件を残す仕組みを検証しました。住民便益、効率向上又は実導入の成果を測定したものではありません。"
+illustrative_wording_en = "Using a synthetic municipal consultation scenario, we checked a mechanism that retains usage conditions on derived information. We did not measure resident benefit, efficiency gains or actual deployment outcomes."
+do_not_infer_ja = "住民便益、業務効率、公共サービスの公平性、導入済みの自治体実績又は教育活動の効果を実証済みと主張してはいけません。"
+do_not_infer_en = "Do not claim demonstrated resident benefit, efficiency, public-service fairness, municipal deployment or education outcomes."
