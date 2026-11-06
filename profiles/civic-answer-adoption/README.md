@@ -89,7 +89,7 @@
 マッピング集のルートで実行します。検証対象はこのマッピングの参照・主張境界の整合性です。元PoCの実行検査又はLeanビルドをこのコマンドで再実行するものではありません。
 
 ```bash
-python validate.py --profile civic-ai-answer-adoption
+python validate.py --profile civic-answer-adoption
 ```
 
 ---
