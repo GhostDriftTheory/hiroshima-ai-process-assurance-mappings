@@ -3,19 +3,39 @@ name: validate
 on:
   push:
   pull_request:
+  workflow_dispatch:
 
 permissions:
   contents: read
+  actions: read
+
+concurrency:
+  group: validate-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   validate:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      PYTHONUTF8: "1"
+      PYTHONDONTWRITEBYTECODE: "1"
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Validate all mappings
+      - name: Record the exact revision under test
         run: |
-          python -m py_compile validate.py
-          python validate.py
+          echo "Checked-out revision: $(git rev-parse HEAD)"
+          echo "Workflow event: $GITHUB_EVENT_NAME"
+      - name: Validate all mappings and documentation
+        run: python validate.py
+      - name: Run validator regression tests (no network)
+        run: python validate.py --self-test
+      - name: Verify pinned external evidence and referenced CI metadata
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python validate.py --check-remote
