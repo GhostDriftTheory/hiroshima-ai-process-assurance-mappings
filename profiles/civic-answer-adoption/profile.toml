@@ -2,7 +2,7 @@
 # このProfileの機械可読な正本です。説明は同じフォルダのREADME.mdを参照してください。
 schema_version = "haip-assurance-profile.v1"
 profile_id = "haip-profile.civic-ai-answer-adoption.v1"
-slug = "civic-ai-answer-adoption"
+slug = "civic-answer-adoption"
 version = "1.0.0"
 snapshot_date = "2026-10-23"
 title_ja = "自治体AI・回答採用アシュアランス・マッピング"
