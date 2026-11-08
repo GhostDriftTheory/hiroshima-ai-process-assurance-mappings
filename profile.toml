@@ -1,0 +1,1049 @@
+# Machine-readable source of truth for this profile.
+# このProfileの機械可読な正本です。説明は同じフォルダのREADME.mdを参照してください。
+schema_version = "haip-assurance-profile.v1"
+profile_id = "haip-profile.joint-delivery-participation.v1"
+slug = "joint-delivery-participation"
+version = "1.0.0"
+snapshot_date = "2026-11-08"
+title_ja = "共同配送・参加拡張アシュアランス・マッピング"
+title_en = "Joint Delivery Participation Assurance Mapping"
+publisher = "AI Assurance, Inc. (株式会社AIアシュアランス)"
+published = true
+public_claim_ja = "本プロファイルは、株式会社オンザリンクスと株式会社AIアシュアランスの共同PoCについて、広島AIプロセスの11行動を分解し、共同配送への追加参加条件、共同承認、引渡し、採算との分離及び記録再検証に関する一部技術義務を、版固定された実装・形式モデル・検査記録へ対応付け、証拠参照と主張境界の整合性を機械検証します。"
+public_claim_en = "This profile represents all eleven HAIP actions and maps selected technical obligations from the joint PoC of 株式会社オンザリンクス and AI Assurance, Inc. to version-pinned implementation, formal-model, and test evidence for participation conditions, joint approvals, handoff, separation of economics from permission, and record replay. It machine-checks evidence-reference and claim-boundary consistency."
+non_claims_ja = [
+  "G7、日本政府、OECD又はHAIPの公式プロジェクト、全面適合認証又は規制承認ではありません。",
+  "公開証拠は固定1ルートの合成データによる技術検証です。実企業の参加承認、配車・運行システムへの接続、実配送又は本番運用準備を示しません。",
+  "形式証明は定義済みLeanモデルを対象とします。観測値抽出、JSON、SHA-256、OS・入出力及びPython・JavaScript全体の全入力に対する正しさを証明していません。",
+  "SHA-256及び記録再検証は、電子署名、発行者・本人認証又は時刻認証ではありません。HOLD・REJECTの記録が再検証できてもPASS又は現在の利用許可にはなりません。",
+  "模擬ゲートの再使用停止は使用状態を保持した範囲に限ります。状態永続化、複数端末間の排他又は実物流での迂回防止を示しません。",
+  "採算・初期費用回収・工数は合成の仮定です。実測利益、実測工数削減、配送最適化性能、法的責任の確定又は事故防止率を示しません。",
+  "共有用要約は固定項目の選別です。匿名性、秘密保持又は複数結果からの推測防止の証明ではありません。",
+  "API実験の公開記録は選定された24合成ケースの補助証拠です。各API出力の個別Lean証明、API応答の外部認証又は今回のAPI再実行を意味しません。",
+  "他Profileの証拠を合算した適合性や統合運転は主張しません。Reporting v2ブリッジは証拠利用のガイドであり、完成報告、提出手続、参加資格判定又は承認ではありません。",
+]
+non_claims_en = [
+  "Not an official G7, Japanese-government, OECD, or HAIP project, full-compliance certification, or regulatory approval.",
+  "Public evidence concerns technical checks on one fixed synthetic route, not real-company participation approval, dispatch-system integration, physical delivery, or production readiness.",
+  "Formal proofs cover the defined Lean model, not observation extraction, JSON, SHA-256, OS/I/O, or all-input correctness of the complete Python and JavaScript implementations.",
+  "Hashes and replay are not signatures, issuer or identity authentication, or trusted timestamps. Successful replay of HOLD/REJECT does not turn it into PASS or current permission.",
+  "Duplicate-use blocking is limited to retained simulation state; persistence, multi-device exclusion, and prevention of bypass in actual logistics are not demonstrated.",
+  "Economics, initial-cost recovery, and workload are synthetic assumptions, not measured profits or effort reductions, route-optimisation performance, legal-liability allocation, or accident-prevention rates.",
+  "The participant summary selects fixed fields; it does not prove anonymity, confidentiality, or resistance to inference across multiple results.",
+  "The published API experiment is supporting evidence for 24 selected synthetic cases, not individual Lean proofs of API outputs, externally authenticated API responses, or a new API run for this profile.",
+  "No integrated operation or aggregated compliance with other profiles is claimed. The Reporting v2 bridge is evidence-use guidance, not a completed report, submission workflow, eligibility decision, or approval.",
+]
+prohibited_claim_phrases = [
+  "haip compliant",
+  "haip certified",
+  "official haip implementation",
+  "oecd approved",
+  "g7 approved",
+  "full haip compliance",
+  "広島aiプロセス完全準拠",
+  "広島aiプロセス認証済み",
+  "haip公式実装",
+  "oecd公認",
+  "g7公認",
+  "official oecd reporting tool",
+  "submission-ready oecd report",
+  "oecd submission approved",
+  "oecd公式報告ツール",
+  "oecd提出可能",
+  "oecd提出承認済み",
+  "haip brand certified",
+  "haipブランド認証済み",
+]
+
+[subject]
+scenario_ja = "株式会社オンザリンクスと株式会社AIアシュアランスの共同PoC。固定1ルート、運送会社1社、既存荷主A・B社及び追加候補C社又はD社の合成条件に基づく、追加参加、共同承認、引渡し、採算の別判定及び記録再検証。"
+scenario_en = "Joint PoC of 株式会社オンザリンクス and AI Assurance, Inc.: participation, joint approvals, handoff, separate economics, and record replay for one fixed synthetic route with one carrier, existing shippers A/B, and candidate C or D."
+
+[boundaries]
+forced_outside_profile_actions = []
+meta_assurance_not_direct_for_actions = []
+meta_assurance_not_evidence_for_reporting_sections = []
+reporting_sections_forced_no_profile_coverage = [5]
+
+[[components]]
+source_id = "SRC-JOINT-DELIVERY-POC"
+role = "PRIMARY_IMPLEMENTATION"
+description_ja = "共同配送・参加拡張アシュアランスの公開参照実装。R01〜R08、PASS／HOLD／REJECT、引渡しの追加検査、使用時再確認、採算との分離及び記録再検証を合成データで扱う。株式会社オンザリンクスと株式会社AIアシュアランスの共同PoC。"
+description_en = "Public reference implementation of R01–R08, PASS/HOLD/REJECT, additional handoff checks, use-time rechecking, separate economics, and record replay over synthetic data, from the joint PoC of 株式会社オンザリンクス and AI Assurance, Inc."
+
+[[sources]]
+id = "SRC-HAIP-CODE-2023"
+kind = "official_policy"
+title = "Hiroshima Process International Code of Conduct for Organizations Developing Advanced AI Systems"
+publisher = "Ministry of Foreign Affairs of Japan / G7 Hiroshima Process"
+url = "https://www.mofa.go.jp/files/100573473.pdf"
+version_note = "Official policy consulted on 2026-11-08. Existing shared HAIP action definitions retain their 2026-09-01 snapshot."
+as_of = "2026-11-08"
+
+[[sources]]
+id = "SRC-OECD-HAIP-V2"
+kind = "official_reporting_framework"
+title = "Hiroshima AI Process Reporting Framework, Version 2.0"
+publisher = "OECD.AI"
+url = "https://oecd.ai/en/transparency/overview"
+supporting_urls = ["https://oecd.ai/en/transparency/faq"]
+version_note = "Version 2.0 overview and FAQ consulted on 2026-11-08. This addition preserves the repository's seven-section evidence-use bridge and does not provide submission or eligibility assessment."
+as_of = "2026-11-08"
+
+[[sources]]
+id = "SRC-JOINT-DELIVERY-POC"
+kind = "implementation_repository"
+title = "Joint Delivery Participation Assurance PoC"
+repository = "https://github.com/GhostDriftTheory/joint-delivery-participation-assurance"
+commit = "dea7084dfd4b4ac9486c577ba2d2a625cf12de38"
+commit_url = "https://github.com/GhostDriftTheory/joint-delivery-participation-assurance/commit/dea7084dfd4b4ac9486c577ba2d2a625cf12de38"
+raw_readme_url = "https://raw.githubusercontent.com/GhostDriftTheory/joint-delivery-participation-assurance/dea7084dfd4b4ac9486c577ba2d2a625cf12de38/README.md"
+version_note = "Public source snapshot read on 2026-11-08. Successful verification run 42342121660 checks this exact commit; the API record is a separately dated 2026-10-24 UTC experiment."
+as_of = "2026-11-08"
+
+[[evidence]]
+id = "E-HAIP-CODE"
+title_ja = "HAIP公式行動規範"
+title_en = "Official HAIP Code of Conduct"
+origin = "official_policy"
+mode = "POLICY_SOURCE"
+strength = 0
+source_pin_id = "SRC-HAIP-CODE-2023"
+url = "https://www.mofa.go.jp/files/100573473.pdf"
+claims = ["Defines the eleven policy actions selectively operationalised by this profile."]
+limitations = ["A policy source is not implementation evidence."]
+
+[[evidence]]
+id = "E-OECD-V2"
+title_ja = "OECD HAIP報告枠組みv2.0"
+title_en = "OECD HAIP Reporting Framework v2.0"
+origin = "official_policy"
+mode = "POLICY_SOURCE"
+strength = 0
+source_pin_id = "SRC-OECD-HAIP-V2"
+url = "https://oecd.ai/en/transparency/overview"
+claims = ["Provides context for bounded evidence use in the existing seven-section Reporting v2 bridge."]
+limitations = ["Reporting participation is not substantive verification or compliance certification."]
+
+[[evidence]]
+id = "E-JD-README"
+title_ja = "公開範囲・操作・検証境界"
+title_en = "Public scope, operation, and verification boundaries"
+origin = "external_repository"
+mode = "PUBLIC_DOCUMENT"
+strength = 2
+source_pin_id = "SRC-JOINT-DELIVERY-POC"
+url = "https://github.com/GhostDriftTheory/joint-delivery-participation-assurance/blob/dea7084dfd4b4ac9486c577ba2d2a625cf12de38/README.md"
+repository = "https://github.com/GhostDriftTheory/joint-delivery-participation-assurance"
+commit = "dea7084dfd4b4ac9486c577ba2d2a625cf12de38"
+path = "README.md"
+raw_url = "https://raw.githubusercontent.com/GhostDriftTheory/joint-delivery-participation-assurance/dea7084dfd4b4ac9486c577ba2d2a625cf12de38/README.md"
+expected_sha256_lf = "f2f816ec44425a05136919b16338ee6ab00e893818097a5e86cfc83fe526f886"
+expected_size_bytes_lf = 22442
+claims = [
+  "Documents the fixed synthetic route, eight participation checks, handoff, separate economics, replay, simulation state, disclosure limits, and use terms.",
+]
+limitations = [
+  "Documentation is not runtime proof. Its October 24 statements that Lean compilation and CI were unconfirmed describe that earlier environment; current execution evidence is registered separately as E-JD-CI.",
+  "The source README describes publication by AI Assurance, Inc.; this mapping separately identifies the joint PoC with 株式会社オンザリンクス. Publication and collaboration are distinct facts.",
+]
+
+[[evidence]]
+id = "E-JD-CORE"
+title_ja = "参加・引渡し・採算・再検証の参照実装"
+title_en = "Participation, handoff, economics, and replay reference implementation"
+origin = "external_repository"
+mode = "REPRODUCIBLE_IMPLEMENTATION"
+strength = 3
+source_pin_id = "SRC-JOINT-DELIVERY-POC"
+url = "https://github.com/GhostDriftTheory/joint-delivery-participation-assurance/blob/dea7084dfd4b4ac9486c577ba2d2a625cf12de38/poc.py"
+repository = "https://github.com/GhostDriftTheory/joint-delivery-participation-assurance"
+commit = "dea7084dfd4b4ac9486c577ba2d2a625cf12de38"
+path = "poc.py"
+raw_url = "https://raw.githubusercontent.com/GhostDriftTheory/joint-delivery-participation-assurance/dea7084dfd4b4ac9486c577ba2d2a625cf12de38/poc.py"
+expected_sha256_lf = "289ce5a87c8678376a0018a0cfa0e473fe7df7109029c34364349881cc1cc7f8"
+expected_size_bytes_lf = 63552
+claims = [
+  "Engine.evaluate applies R01–R08 with REJECT > HOLD > PASS and additional handoff checks.",
+  "Engine.permit and Engine.gate bind simulation permission to a verified record and recheck the current plan, conditions, monotone time, and retained used-state.",
+  "Engine.verify_record and Engine.verify recompute record contents and check standard-suite input order, completeness, and summary.",
+  "Engine.business preserves unknown costs and separates contribution and simple payback arithmetic from permission. Engine.partner_summary selects only allowed fields.",
+]
+limitations = ["Fixed synthetic scope; not actual dispatch, persistent distributed control, authenticated observations, or a proof of all implementation behaviour."]
+
+[[evidence]]
+id = "E-JD-CASES"
+title_ja = "固定の合成条件と38ケース"
+title_en = "Fixed synthetic conditions and 38 cases"
+origin = "external_repository"
+mode = "REPLAY_INPUT"
+strength = 3
+source_pin_id = "SRC-JOINT-DELIVERY-POC"
+url = "https://github.com/GhostDriftTheory/joint-delivery-participation-assurance/blob/dea7084dfd4b4ac9486c577ba2d2a625cf12de38/cases.json"
+repository = "https://github.com/GhostDriftTheory/joint-delivery-participation-assurance"
+commit = "dea7084dfd4b4ac9486c577ba2d2a625cf12de38"
+path = "cases.json"
+raw_url = "https://raw.githubusercontent.com/GhostDriftTheory/joint-delivery-participation-assurance/dea7084dfd4b4ac9486c577ba2d2a625cf12de38/cases.json"
+expected_sha256_lf = "b0c64855313fbe32e4e8a3d971c9562d8aa6cef4206ed751581160a1d15a9ab4"
+expected_size_bytes_lf = 21209
+claims = [
+  "Defines one fixed route, one carrier, existing shippers A/B, candidate C or D, and 38 scenarios.",
+  "Includes approval gaps, overload, delivery-condition violations, changed plans, missing handoff, nonpositive economics, disclosure violations, and out-of-scope requests.",
+]
+limitations = [
+  "Synthetic scenarios and expected labels are test inputs, not real company data, observed operational outcomes, or a population-level performance estimate.",
+]
+
+[[evidence]]
+id = "E-JD-UI"
+title_ja = "操作画面・JavaScript検証器・記録入出力"
+title_en = "Interactive view, JavaScript verifier, and record exchange"
+origin = "external_repository"
+mode = "REPRODUCIBLE_IMPLEMENTATION"
+strength = 3
+source_pin_id = "SRC-JOINT-DELIVERY-POC"
+url = "https://github.com/GhostDriftTheory/joint-delivery-participation-assurance/blob/dea7084dfd4b4ac9486c577ba2d2a625cf12de38/index.html"
+repository = "https://github.com/GhostDriftTheory/joint-delivery-participation-assurance"
+commit = "dea7084dfd4b4ac9486c577ba2d2a625cf12de38"
+path = "index.html"
+raw_url = "https://raw.githubusercontent.com/GhostDriftTheory/joint-delivery-participation-assurance/dea7084dfd4b4ac9486c577ba2d2a625cf12de38/index.html"
+expected_sha256_lf = "e446febe597ae00e880d1b09b6202d52745d6b19ae1668c4b6a969ceb8157f70"
+expected_size_bytes_lf = 101900
+claims = [
+  "Contains a self-contained interactive view and JavaScript verifier with embedded synthetic cases, record import/export, summary export, and simulated permissions.",
+  "The pinned CI checks Python/JavaScript records and browser operation using file and HTTP entrypoints.",
+]
+limitations = ["Browser state is in memory and resets on reload or case change. Finite UI checks do not prove all browser behaviour or real-system integration."]
+
+[[evidence]]
+id = "E-JD-LEAN"
+title_ja = "判定・模擬ゲートの形式モデルと44定理"
+title_en = "Formal decision and simulated-gate model with 44 theorems"
+origin = "external_repository"
+mode = "FORMAL_MODEL_PROOF"
+strength = 4
+source_pin_id = "SRC-JOINT-DELIVERY-POC"
+url = "https://github.com/GhostDriftTheory/joint-delivery-participation-assurance/blob/dea7084dfd4b4ac9486c577ba2d2a625cf12de38/JointDeliveryAssurance.lean"
+repository = "https://github.com/GhostDriftTheory/joint-delivery-participation-assurance"
+commit = "dea7084dfd4b4ac9486c577ba2d2a625cf12de38"
+path = "JointDeliveryAssurance.lean"
+raw_url = "https://raw.githubusercontent.com/GhostDriftTheory/joint-delivery-participation-assurance/dea7084dfd4b4ac9486c577ba2d2a625cf12de38/JointDeliveryAssurance.lean"
+expected_sha256_lf = "5f83380b2f8947cdc5eacf861237d31ad0a2c712103e9af79f3d8db607c2f91d"
+expected_size_bytes_lf = 14504
+claims = [
+  "participation_pass_requires_every_check and failed_check_blocks_participation constrain participation; missing_quantity_not_pass and known_overload_rejected retain missing and adverse facts.",
+  "handoff_pass_requires_participation, handoff_pass_requires_receipt, and missing_receipt_blocks_handoff distinguish participation from handoff.",
+  "economics_cannot_change_participation separates business calculations from participation permission.",
+  "changed_plan_blocks_gate, clock_rollback_blocks_gate, not_ready_blocks_gate, and repeated_gate_is_blocked constrain the modelled use-time gate.",
+  "verified_hold_is_not_pass and changed_record_does_not_verify distinguish matching recorded decisions from permission.",
+  "E-JD-CI records successful build, 134 projected-input checks with 536 concrete equalities, and dependency inspection for all 44 theorems.",
+]
+limitations = [
+  "Proofs cover typed Lean-model inputs. Observation extraction, identifiers, hashes, parsers, OS/I/O, full Python/JavaScript equivalence, true observations, and physical delivery outcomes are outside the proof.",
+]
+
+[[evidence]]
+id = "E-JD-WORKFLOW"
+title_ja = "実装・ブラウザ・形式証明の自動検査手順"
+title_en = "Implementation, browser, and formal-proof checking workflow"
+origin = "external_repository"
+mode = "TEST_WORKFLOW"
+strength = 3
+source_pin_id = "SRC-JOINT-DELIVERY-POC"
+url = "https://github.com/GhostDriftTheory/joint-delivery-participation-assurance/blob/dea7084dfd4b4ac9486c577ba2d2a625cf12de38/.github/workflows/verify.yml"
+repository = "https://github.com/GhostDriftTheory/joint-delivery-participation-assurance"
+commit = "dea7084dfd4b4ac9486c577ba2d2a625cf12de38"
+path = ".github/workflows/verify.yml"
+raw_url = "https://raw.githubusercontent.com/GhostDriftTheory/joint-delivery-participation-assurance/dea7084dfd4b4ac9486c577ba2d2a625cf12de38/.github/workflows/verify.yml"
+expected_sha256_lf = "e724deeb0f83dd53f6946c3460a33b384f1519d6696a911ea1fc0261211b607e"
+expected_size_bytes_lf = 2160
+claims = [
+  "Defines Python 3.10/3.12 and Node checks, standard-suite replay, browser testing, and python poc.py lean-test with build, concrete-input comparisons, and proof-dependency inspection.",
+]
+limitations = [
+  "A workflow definition is distinct from a successful execution. This workflow does not call the external AI API or replay the separate published API experiment file.",
+]
+
+[[evidence]]
+id = "E-JD-TOOLCHAIN"
+title_ja = "固定されたLean版"
+title_en = "Pinned Lean version"
+origin = "external_repository"
+mode = "BUILD_CONFIGURATION"
+strength = 2
+source_pin_id = "SRC-JOINT-DELIVERY-POC"
+url = "https://github.com/GhostDriftTheory/joint-delivery-participation-assurance/blob/dea7084dfd4b4ac9486c577ba2d2a625cf12de38/lean-toolchain"
+repository = "https://github.com/GhostDriftTheory/joint-delivery-participation-assurance"
+commit = "dea7084dfd4b4ac9486c577ba2d2a625cf12de38"
+path = "lean-toolchain"
+raw_url = "https://raw.githubusercontent.com/GhostDriftTheory/joint-delivery-participation-assurance/dea7084dfd4b4ac9486c577ba2d2a625cf12de38/lean-toolchain"
+expected_sha256_lf = "55e97be96000b5e9e290c9e74482e5e317861499a5540353ce845471bded8cea"
+expected_size_bytes_lf = 25
+claims = ["Pins the Lean toolchain to leanprover/lean4:v4.19.0."]
+limitations = ["A version declaration alone does not prove that a build succeeded."]
+
+[[evidence]]
+id = "E-JD-LAKE"
+title_ja = "Leanライブラリのビルド設定"
+title_en = "Lean library build configuration"
+origin = "external_repository"
+mode = "BUILD_CONFIGURATION"
+strength = 2
+source_pin_id = "SRC-JOINT-DELIVERY-POC"
+url = "https://github.com/GhostDriftTheory/joint-delivery-participation-assurance/blob/dea7084dfd4b4ac9486c577ba2d2a625cf12de38/lakefile.toml"
+repository = "https://github.com/GhostDriftTheory/joint-delivery-participation-assurance"
+commit = "dea7084dfd4b4ac9486c577ba2d2a625cf12de38"
+path = "lakefile.toml"
+raw_url = "https://raw.githubusercontent.com/GhostDriftTheory/joint-delivery-participation-assurance/dea7084dfd4b4ac9486c577ba2d2a625cf12de38/lakefile.toml"
+expected_sha256_lf = "20808239564543a849e9c59ff2605e2c9f7fdbcb38e04ff24b0614b667dbdf11"
+expected_size_bytes_lf = 197
+claims = ["Declares the JointDeliveryAssurance Lean library build target."]
+limitations = ["Build configuration is supporting reproducibility information, not independent proof or runtime assurance."]
+
+[[evidence]]
+id = "E-JD-API-ADAPTER"
+title_ja = "AI提案の独立検査用アダプタ"
+title_en = "Adapter for independent checking of AI proposals"
+origin = "external_repository"
+mode = "REPRODUCIBLE_IMPLEMENTATION"
+strength = 3
+source_pin_id = "SRC-JOINT-DELIVERY-POC"
+url = "https://github.com/GhostDriftTheory/joint-delivery-participation-assurance/blob/dea7084dfd4b4ac9486c577ba2d2a625cf12de38/joint_delivery_openai_experiment.py"
+repository = "https://github.com/GhostDriftTheory/joint-delivery-participation-assurance"
+commit = "dea7084dfd4b4ac9486c577ba2d2a625cf12de38"
+path = "joint_delivery_openai_experiment.py"
+raw_url = "https://raw.githubusercontent.com/GhostDriftTheory/joint-delivery-participation-assurance/dea7084dfd4b4ac9486c577ba2d2a625cf12de38/joint_delivery_openai_experiment.py"
+expected_sha256_lf = "6350c8a6bed59362249aaf6c81d8fb19c675b8e5a108527ea1d99787d8c7750c"
+expected_size_bytes_lf = 16178
+claims = [
+  "independently_check retains unknown source facts when the model suggests unsupported values, does not reissue approvals/evidence/handoff, and invokes the existing deterministic verifier.",
+  "AI recommendations are recorded separately from the verifier's participation, handoff, and economic results.",
+]
+limitations = [
+  "A separate API/text-parsing boundary, not a Lean-verified API client or a route optimiser. Running the experiment entrypoint invokes the external API; no such new call is part of this mapping.",
+]
+
+[[evidence]]
+id = "E-JD-API-RECORD"
+title_ja = "AI接続実験24件の公開記録"
+title_en = "Published records of the 24-case AI-connection experiment"
+origin = "external_repository"
+mode = "EXPERIMENT_RECORD"
+strength = 3
+source_pin_id = "SRC-JOINT-DELIVERY-POC"
+url = "https://github.com/GhostDriftTheory/joint-delivery-participation-assurance/blob/dea7084dfd4b4ac9486c577ba2d2a625cf12de38/openai_live_20261024T161205Z_00d42f.json"
+repository = "https://github.com/GhostDriftTheory/joint-delivery-participation-assurance"
+commit = "dea7084dfd4b4ac9486c577ba2d2a625cf12de38"
+path = "openai_live_20261024T161205Z_00d42f.json"
+raw_url = "https://raw.githubusercontent.com/GhostDriftTheory/joint-delivery-participation-assurance/dea7084dfd4b4ac9486c577ba2d2a625cf12de38/openai_live_20261024T161205Z_00d42f.json"
+expected_sha256_lf = "afdcc3322410db5d8ff5c43ea968fa4fe0c8fa3e0297c2590ecdbe33290532c4"
+expected_size_bytes_lf = 196764
+claims = [
+  "Publisher-provided record for 24 selected synthetic cases: participation PASS 5, HOLD 9, REJECT 10; no recorded invalid/failed cases.",
+  "JD21 records an ACCEPT recommendation overridden for disclosure violation; JD04 records an unsupported arrival value blocked; JD32 keeps negative economics separate from participation/handoff PASS.",
+  "All 24 embedded engine records and adapter checks were recomputed offline on 2026-11-08 against the pinned implementation; the stored summary matched.",
+  "The record reports zero numerical proposal changes accepted into plans.",
+]
+limitations = [
+  "Offline replay verifies internal consistency, not provider authenticity or the occurrence of an API call. The stored experiment timestamp is 2026-10-24 UTC; replay is not a fresh API run.",
+  "Not individual Lean proofs of API outputs, measured optimisation performance, or operational logistics results. The source CI workflow does not itself replay this separate record.",
+]
+
+[[evidence]]
+id = "E-JD-CI"
+title_ja = "固定コミットで成功した自動検査実行"
+title_en = "Successful automated verification for the pinned commit"
+origin = "external_repository"
+mode = "CI_RUN"
+strength = 3
+source_pin_id = "SRC-JOINT-DELIVERY-POC"
+url = "https://github.com/GhostDriftTheory/joint-delivery-participation-assurance/actions/runs/42342121660"
+repository = "https://github.com/GhostDriftTheory/joint-delivery-participation-assurance"
+commit = "dea7084dfd4b4ac9486c577ba2d2a625cf12de38"
+run_id = 42342121660
+conclusion = "success"
+workflow_path = ".github/workflows/verify.yml"
+observed_on = "2026-11-08"
+claims = [
+  "The 2026-11-07 run completed successfully at the pinned commit, including Python 3.10/3.12 checks and Python 3.12 browser and Lean steps.",
+  "Logs report 38 standard cases, 134 Python/JavaScript records, 44 Lean theorem declarations, 134 projected inputs, 536 concrete equalities, and 44 audited theorem dependencies.",
+  "Browser checks include file and HTTP entrypoints and report zero external requests during the tested UI interactions.",
+]
+limitations = [
+  "Repository CI is not independent third-party audit, exhaustive proof of the entire software stack, a new API experiment, or measured field performance.",
+]
+
+[[obligations]]
+id = "M-JD-A1-01"
+obligation_id = "O-JD-A1-PARTICIPATION"
+haip_action_id = "HAIP-A1"
+obligation_ja = "固定合成モデルのR01〜R08を検査し、既存荷主の貨物・納品条件を含む既知の違反はREJECT、不足のみはHOLD、全条件成立時だけ参加PASSとする。"
+obligation_en = "Check R01–R08 in the fixed synthetic model, including existing cargo and delivery conditions; return REJECT for known violations, HOLD for missing conditions alone, and participation PASS only when every check passes."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "DIRECT"
+minimum_evidence_strength = 3
+evidence_ids = [
+  "E-JD-CORE",
+  "E-JD-CASES",
+  "E-JD-LEAN",
+  "E-JD-CI",
+]
+supporting_evidence_ids = []
+gaps = []
+rationale_ja = "Engine.evaluateとparticipation_pass_requires_every_checkが8条件の集約を定義する。納品時間帯と既存荷主の遅延上限は必須条件であり、採算や追加参加の希望で緩和しない。"
+rationale_en = "Engine.evaluate and participation_pass_requires_every_check define aggregation of all eight checks. Delivery windows and existing-shipper delay limits remain mandatory regardless of economics or the desire to admit a new shipper."
+
+[[obligations]]
+id = "M-JD-A1-02"
+obligation_id = "O-JD-A1-HANDOFF"
+haip_action_id = "HAIP-A1"
+obligation_ja = "参加判定と引渡し判定を分け、引渡しPASSには参加PASSに加えて送り手・受け手、数量・荷姿、双方の確認、現計画との対応及び有効期間の成立を要求する。"
+obligation_en = "Separate participation from handoff; require participation PASS plus sender/receiver, quantity/condition, both acknowledgements, current-plan binding, and valid timing for handoff PASS."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "DIRECT"
+minimum_evidence_strength = 3
+evidence_ids = [
+  "E-JD-CORE",
+  "E-JD-CASES",
+  "E-JD-LEAN",
+  "E-JD-CI",
+]
+supporting_evidence_ids = []
+gaps = []
+rationale_ja = "Engine.evaluateのhandoff検査、handoff_pass_requires_participation及びmissing_receipt_blocks_handoffが、参加できることと今回引き渡せることを区別する。対象は模擬引渡しである。"
+rationale_en = "Engine.evaluate handoff checks, handoff_pass_requires_participation, and missing_receipt_blocks_handoff distinguish eligibility to participate from the current simulated handoff."
+
+[[obligations]]
+id = "M-JD-A1-03"
+obligation_id = "O-JD-A1-ECONOMIC-SEPARATION"
+haip_action_id = "HAIP-A1"
+obligation_ja = "合成の追加売上から6費目を引いた採算を参加・引渡し条件と別判定し、未知の費用を0にせず、黒字を参加許可へ読み替えない。"
+obligation_en = "Evaluate synthetic contribution after six cost categories separately from participation/handoff conditions, retain unknown costs, and do not turn positive economics into participation permission."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "DIRECT"
+minimum_evidence_strength = 3
+evidence_ids = [
+  "E-JD-CORE",
+  "E-JD-CASES",
+  "E-JD-LEAN",
+  "E-JD-CI",
+]
+supporting_evidence_ids = ["E-JD-README"]
+gaps = []
+rationale_ja = "Engine.businessはPOSITIVE／NEGATIVE／BREAKEVEN／UNKNOWNを計算し、economics_cannot_change_participationはモデル上の分離を示す。JD32では参加・引渡しPASSでも採算はNEGATIVEである。"
+rationale_en = "Engine.business computes POSITIVE/NEGATIVE/BREAKEVEN/UNKNOWN; economics_cannot_change_participation establishes the modelled separation. JD32 has participation/handoff PASS with NEGATIVE economics."
+
+[[obligations]]
+id = "M-JD-A1-04"
+obligation_id = "O-JD-A1-MODEL"
+haip_action_id = "HAIP-A1"
+obligation_ja = "定義済みの判定・模擬ゲートの性質をLeanで証明し、選定した具体入力について実装との一致及び証明依存を検査する。"
+obligation_en = "Prove the defined decision and simulated-gate properties in Lean and check selected concrete inputs for implementation conformance and proof dependencies."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "DIRECT"
+minimum_evidence_strength = 3
+evidence_ids = [
+  "E-JD-LEAN",
+  "E-JD-CORE",
+  "E-JD-WORKFLOW",
+  "E-JD-CI",
+]
+supporting_evidence_ids = ["E-JD-TOOLCHAIN", "E-JD-LAKE"]
+gaps = []
+rationale_ja = "固定コミットのCIは44定理のビルド・依存確認と、入力から射影した134入力・536一致命題の検査に成功している。一般のモデル定理と有限の実装照合は区別する。"
+rationale_en = "The pinned CI successfully builds and inspects dependencies for 44 theorems and checks 134 input-derived projections with 536 concrete equalities. General model theorems remain distinct from finite implementation comparisons."
+
+[[obligations]]
+id = "M-JD-A1-05"
+obligation_id = "O-JD-A1-AI-EXPERIMENT"
+haip_action_id = "HAIP-A1"
+obligation_ja = "AIの提案・採用推奨を既存の条件検証から分離する方法について、公開済み合成API実験を補助的な評価資料として提供する。"
+obligation_en = "Provide a published synthetic API experiment as supporting evaluation material for separating AI proposals and recommendations from existing condition checks."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "SUPPORTING_ONLY"
+minimum_evidence_strength = 0
+evidence_ids = []
+supporting_evidence_ids = ["E-JD-API-ADAPTER", "E-JD-API-RECORD", "E-JD-CORE"]
+gaps = [
+  "Selected 24-case experiment only; no optimisation performance, individual Lean proof of API outputs, provider-authenticated history, or general AI reliability is established.",
+]
+rationale_ja = "JD21の採用推奨拒否、JD04の未確認到着時刻の補完阻止及び24記録のオフライン再計算を参照する。採用された数値提案変更は0件であり、配送最適化の性能へ拡張しない。"
+rationale_en = "Evidence includes the overridden JD21 recommendation, blocked unsupported JD04 arrival, and offline recomputation of 24 records. Accepted numerical proposal changes are zero, so no route-optimisation performance is inferred."
+
+[[obligations]]
+id = "M-JD-A1-06"
+obligation_id = "O-JD-A1-SYSTEM-RISK"
+haip_action_id = "HAIP-A1"
+obligation_ja = "実際のAI・物流システム全体について、導入環境、運行上の影響及びライフサイクル全体のリスクを評価する。"
+obligation_en = "Evaluate lifecycle-wide risks of the actual AI and logistics system, including deployment context and operational impacts."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "NOT_COVERED"
+minimum_evidence_strength = 0
+evidence_ids = []
+supporting_evidence_ids = ["E-JD-README"]
+gaps = ["No deployed-system lifecycle risk assessment, physical delivery trial, or independent external evaluation is supplied."]
+rationale_ja = "固定1ルートの合成検査から実運行・利用組織・社会的影響全体の評価は導けない。"
+rationale_en = "One fixed synthetic route does not establish evaluation of actual operations, organisations, or societal impacts."
+
+[[obligations]]
+id = "M-JD-A2-01"
+obligation_id = "O-JD-A2-REPLAY"
+haip_action_id = "HAIP-A2"
+obligation_ja = "入力、条件、判定及び未確認事項を再計算できる記録を、異常調査の技術資料として提供する。"
+obligation_en = "Provide recomputable inputs, conditions, decisions, and unresolved-state records as technical material for anomaly investigation."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "SUPPORTING_ONLY"
+minimum_evidence_strength = 0
+evidence_ids = []
+supporting_evidence_ids = [
+  "E-JD-CORE",
+  "E-JD-LEAN",
+  "E-JD-UI",
+  "E-JD-CI",
+]
+gaps = ["Local replay supports investigation only; deployed monitoring, alerting, and operational response are not demonstrated."]
+rationale_ja = "Engine.verify_recordとEngine.verifyは入力から記録を照合し、HOLD・REJECTを格上げしない。標準一式では欠落・順序・入力差替え・集計変更も検査する。"
+rationale_en = "Engine.verify_record and Engine.verify compare records against inputs without upgrading HOLD/REJECT; standard-suite replay also checks completeness, ordering, substituted inputs, and summaries."
+
+[[obligations]]
+id = "M-JD-A2-02"
+obligation_id = "O-JD-A2-OPERATIONS"
+haip_action_id = "HAIP-A2"
+obligation_ja = "導入後の脆弱性・誤用・インシデントを監視し、報告・修復・再評価する運用を設ける。"
+obligation_en = "Operate post-deployment vulnerability, misuse, and incident monitoring, reporting, remediation, and reassessment."
+applicability = "IN_SCOPE_ORGANISATIONAL"
+assessment = "NOT_COVERED"
+minimum_evidence_strength = 0
+evidence_ids = []
+supporting_evidence_ids = []
+gaps = ["No production monitoring, incident-response programme, vulnerability handling, or operational remediation evidence is supplied."]
+rationale_ja = "公開PoCの記録及び再検証手順は、本番での監視・事故対応の実施証拠ではない。"
+rationale_en = "Public PoC records and replay procedures are not evidence of deployed monitoring or incident response."
+
+[[obligations]]
+id = "M-JD-A3-01"
+obligation_id = "O-JD-A3-PUBLIC"
+haip_action_id = "HAIP-A3"
+obligation_ja = "本PoCの目的、固定条件、操作・再検証方法、評価範囲、利用条件及び保証境界を公開する。"
+obligation_en = "Publish the PoC purpose, fixed conditions, operation/replay procedures, evaluation scope, use terms, and assurance boundaries."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "DIRECT"
+minimum_evidence_strength = 2
+evidence_ids = ["E-JD-README"]
+supporting_evidence_ids = ["E-JD-CI"]
+gaps = []
+rationale_ja = "版固定READMEは合成範囲、参加・引渡し・採算の区別、再検証、模擬状態、開示及び利用条件を説明する。過去のLean未実行記載と現在の成功CIは時点を分けて参照する。"
+rationale_en = "The pinned README documents synthetic scope, participation/handoff/economics, replay, simulation state, disclosure, and use terms. Its earlier unexecuted-Lean note is distinguished from the later successful CI record."
+
+[[obligations]]
+id = "M-JD-A3-02"
+obligation_id = "O-JD-A3-SYSTEM-REPORT"
+haip_action_id = "HAIP-A3"
+obligation_ja = "実際の高度AIシステムについて能力、限界、評価及び重大リスクを網羅した透明性報告を行う。"
+obligation_en = "Provide comprehensive transparency reporting on the actual advanced AI system, its capabilities, limitations, evaluations, and material risks."
+applicability = "IN_SCOPE_ORGANISATIONAL"
+assessment = "NOT_COVERED"
+minimum_evidence_strength = 0
+evidence_ids = []
+supporting_evidence_ids = ["E-JD-README"]
+gaps = ["No complete system/model transparency report or reporting-organisation-specific evidence is supplied."]
+rationale_ja = "限定PoCの説明及び24ケースのAI接続記録だけでは、実利用システムの全報告項目を満たさない。"
+rationale_en = "A bounded PoC description and 24-case AI-connection record do not supply a complete report for the system in actual use."
+
+[[obligations]]
+id = "M-JD-A4-01"
+obligation_id = "O-JD-A4-PUBLIC-SHARING"
+haip_action_id = "HAIP-A4"
+obligation_ja = "公開可能な安全性評価資料として、合成条件・ケース、形式モデル、検査手順及び再検証方法を共有する。"
+obligation_en = "Share synthetic conditions/cases, formal models, checking procedures, and replay methods as publicly releasable safety-evaluation materials."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "DIRECT"
+minimum_evidence_strength = 2
+evidence_ids = [
+  "E-JD-README",
+  "E-JD-CASES",
+  "E-JD-LEAN",
+  "E-JD-WORKFLOW",
+]
+supporting_evidence_ids = []
+gaps = []
+rationale_ja = "版固定された公開資料が第三者の内容確認と再実行を可能にする。資料の公開という義務に限定し、実インシデントの通知体制とは分ける。"
+rationale_en = "Pinned public materials allow inspection and rerunning. This obligation concerns publication of technical material, separately from operational incident-notification arrangements."
+
+[[obligations]]
+id = "M-JD-A4-02"
+obligation_id = "O-JD-A4-INCIDENT-SHARING"
+haip_action_id = "HAIP-A4"
+obligation_ja = "関係企業、利用者及び当局と安全情報やインシデントを責任ある手順で共有する。"
+obligation_en = "Share safety information and incidents responsibly with relevant companies, users, and authorities."
+applicability = "IN_SCOPE_ORGANISATIONAL"
+assessment = "NOT_COVERED"
+minimum_evidence_strength = 0
+evidence_ids = []
+supporting_evidence_ids = ["E-JD-README"]
+gaps = ["No operational safety-information exchange, coordinated disclosure, or actual incident-notification evidence is supplied."]
+rationale_ja = "リポジトリ公開や共同PoCという関係から、事故通知の窓口・連絡実績・保護手順の実施を推論しない。"
+rationale_en = "Repository publication and the joint-PoC relationship do not establish implemented incident channels, actual notifications, or protective procedures."
+
+[[obligations]]
+id = "M-JD-A5-01"
+obligation_id = "O-JD-A5-APPROVAL-GATE"
+haip_action_id = "HAIP-A5"
+obligation_ja = "固定モデル内で必須4主体の合意・承認と役割を照合し、模擬許可使用時に現計画・現在の条件・時刻・使用状態を再確認する。"
+obligation_en = "Check the four required parties' agreements, approvals, and roles within the fixed model, and recheck the current plan, conditions, time, and retained usage state when simulation permission is used."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "DIRECT"
+minimum_evidence_strength = 3
+evidence_ids = [
+  "E-JD-CORE",
+  "E-JD-CASES",
+  "E-JD-LEAN",
+  "E-JD-CI",
+]
+supporting_evidence_ids = []
+gaps = []
+rationale_ja = "R04・R06は役割、対象・版・内容・期限・撤回を検査する。Engine.permit・Engine.gate及びrepeated_gate_is_blockedは現在の条件が成立する未使用の模擬引渡しだけを許可する。実本人認証や法的責任の決定はこの義務に含めない。"
+rationale_en = "R04/R06 check roles, target, revision, content, expiry, and revocation. Engine.permit, Engine.gate, and repeated_gate_is_blocked permit only an unused simulated handoff with current conditions satisfied. Real identity authentication and legal-liability decisions are outside this obligation."
+
+[[obligations]]
+id = "M-JD-A5-02"
+obligation_id = "O-JD-A5-GOVERNANCE"
+haip_action_id = "HAIP-A5"
+obligation_ja = "組織のリスク管理方針、責任分担、経営監督、教育及び変更管理を策定・実施・更新する。"
+obligation_en = "Establish, operate, and update organisational risk policies, accountability, management oversight, training, and change management."
+applicability = "IN_SCOPE_ORGANISATIONAL"
+assessment = "NOT_COVERED"
+minimum_evidence_strength = 0
+evidence_ids = []
+supporting_evidence_ids = []
+gaps = ["No organisation-wide governance implementation, oversight, training, or policy-maintenance evidence is registered in this profile."]
+rationale_ja = "合成の共同承認と担当役割の照合は、組織全体のガバナンス実施記録とは異なる。"
+rationale_en = "Synthetic joint approval and role checks are distinct from evidence of organisation-wide governance implementation."
+
+[[obligations]]
+id = "M-JD-A6-01"
+obligation_id = "O-JD-A6-INPUT"
+haip_action_id = "HAIP-A6"
+obligation_ja = "PoCの入力境界で壊れたJSON、重複キー、未知の項目、不正な型・値及び重複した開示項目を拒否する。"
+obligation_en = "Reject malformed JSON, duplicate keys, unknown fields, invalid types/values, and duplicate disclosure fields at the PoC input boundary."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "DIRECT"
+minimum_evidence_strength = 3
+evidence_ids = [
+  "E-JD-CORE",
+  "E-JD-UI",
+  "E-JD-WORKFLOW",
+  "E-JD-CI",
+]
+supporting_evidence_ids = []
+gaps = []
+rationale_ja = "parse_jsonとEngine.validateは不正入力をエラーにし、PASS又はHOLDへ読み替えない。対象コミットのCIが異常入力とJavaScriptの厳格JSON検査を実行している。"
+rationale_en = "parse_json and Engine.validate treat malformed input as an error rather than PASS/HOLD; the pinned CI executes invalid-input and JavaScript strict-JSON checks."
+
+[[obligations]]
+id = "M-JD-A6-02"
+obligation_id = "O-JD-A6-DEPLOYED-SECURITY"
+haip_action_id = "HAIP-A6"
+obligation_ja = "本番の本人認証・認可、通信・保管保護、物理防御、内部脅威対策及び永続的な再使用防止を実装し検証する。"
+obligation_en = "Implement and verify production identity/access controls, communication/storage protection, physical and insider-threat safeguards, and persistent replay protection."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "NOT_COVERED"
+minimum_evidence_strength = 0
+evidence_ids = []
+supporting_evidence_ids = ["E-JD-README"]
+gaps = [
+  "No production identity authentication, security infrastructure, persistent tamper-resistant state, multi-device exclusion, or actual-dispatch enforcement is supplied.",
+]
+rationale_ja = "DEMO名義、内容ハッシュ及びメモリ内の使用状態は、本番の真正性・分散排他・迂回防止の証拠ではない。"
+rationale_en = "DEMO identities, content hashes, and in-memory usage state do not establish production authenticity, distributed exclusion, or bypass prevention."
+
+[[obligations]]
+id = "M-JD-A7-01"
+obligation_id = "O-JD-A7-CONTENT-AUTH"
+haip_action_id = "HAIP-A7"
+obligation_ja = "AI生成コンテンツの発行元を確認できる認証・表示・来歴機構を実装する。"
+obligation_en = "Implement authentication, labelling, and provenance mechanisms for identifying the origin of AI-generated content."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "NOT_COVERED"
+minimum_evidence_strength = 0
+evidence_ids = []
+supporting_evidence_ids = ["E-JD-README"]
+gaps = ["No authenticated AI-content provenance, digital signature, watermark, trusted timestamp, or issuer authentication is implemented in this profile."]
+rationale_ja = "SHA-256、API応答識別子及び再計算可能な記録を、署名・透かし・認証された来歴に読み替えない。"
+rationale_en = "SHA-256, API response identifiers, and replayable records are not signatures, watermarks, or authenticated provenance."
+
+[[obligations]]
+id = "M-JD-A8-01"
+obligation_id = "O-JD-A8-RESEARCH"
+haip_action_id = "HAIP-A8"
+obligation_ja = "AI提案を採用条件・模擬許可と分離する参照実装、形式モデル及び検査方法を研究資料として公開する。"
+obligation_en = "Publish reference code, formal models, and checking methods for separating AI proposals from adoption conditions and simulated permission as research material."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "SUPPORTING_ONLY"
+minimum_evidence_strength = 0
+evidence_ids = []
+supporting_evidence_ids = [
+  "E-JD-CORE",
+  "E-JD-LEAN",
+  "E-JD-API-ADAPTER",
+  "E-JD-WORKFLOW",
+]
+gaps = [
+  "Published research artifacts do not establish sustained investment, prioritisation across societal risks, or independently evaluated research maturity.",
+]
+rationale_ja = "実装・証明・再検証方法を共有する技術成果であり、継続的な投資額又は研究成熟度の評価とは区別する。"
+rationale_en = "Shared implementation, proofs, and replay methods are technical research outputs, distinct from evidence of sustained spending or research maturity."
+
+[[obligations]]
+id = "M-JD-A8-02"
+obligation_id = "O-JD-A8-INVESTMENT"
+haip_action_id = "HAIP-A8"
+obligation_ja = "社会的・安全上・セキュリティ上のリスク軽減を優先し、継続的な研究投資を実施する。"
+obligation_en = "Prioritise societal, safety, and security risk mitigation and sustain research investment."
+applicability = "IN_SCOPE_ORGANISATIONAL"
+assessment = "NOT_COVERED"
+minimum_evidence_strength = 0
+evidence_ids = []
+supporting_evidence_ids = []
+gaps = ["No research-priority governance, investment amounts, staffing allocation, or sustained mitigation programme is supplied."]
+rationale_ja = "公開コードや定理件数だけでは組織の研究投資・優先順位の実施を確認できない。"
+rationale_en = "Public code and theorem counts do not establish organisational research investment or prioritisation."
+
+[[obligations]]
+id = "M-JD-A9-01"
+obligation_id = "O-JD-A9-PUBLIC-INTEREST"
+haip_action_id = "HAIP-A9"
+obligation_ja = "既存荷主の条件を尊重した共同配送への追加参加という、人間・産業上の便益を意図する利用例を提示する。"
+obligation_en = "Present an application aimed at human and industrial benefit through admitting new shippers while respecting existing-shipper conditions."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "SUPPORTING_ONLY"
+minimum_evidence_strength = 0
+evidence_ids = []
+supporting_evidence_ids = ["E-JD-README", "E-JD-CASES", "E-JD-UI"]
+gaps = ["Synthetic logistics use case only; real stakeholder benefit, reduced workload, emissions, or commercial outcomes are not measured."]
+rationale_ja = "合成例は参加条件と採算を比較する利用想定を示す。8,000円等の架空値を実収益や便益の実績にしない。"
+rationale_en = "Synthetic examples demonstrate the intended comparison of participation conditions and economics; fictional figures such as JPY 8,000 are not realised revenue or demonstrated benefit."
+
+[[obligations]]
+id = "M-JD-A9-02"
+obligation_id = "O-JD-A9-IMPACT"
+haip_action_id = "HAIP-A9"
+obligation_ja = "実際の利用者・地域・産業に対する便益、負の影響、公平性及び環境影響を評価する。"
+obligation_en = "Assess actual user, regional, and industrial benefits, adverse impacts, fairness, and environmental effects."
+applicability = "IN_SCOPE_ORGANISATIONAL"
+assessment = "NOT_COVERED"
+minimum_evidence_strength = 0
+evidence_ids = []
+supporting_evidence_ids = []
+gaps = ["No field comparison, measured profit or workload reduction, emissions measurement, or stakeholder-impact evaluation is supplied."]
+rationale_ja = "実データを使う共同実証と商用化判断は次段階であり、公開合成PoCの実証済み成果ではない。"
+rationale_en = "Joint field evaluation using real data and commercial decisions are subsequent stages, not demonstrated results of the public synthetic PoC."
+
+[[obligations]]
+id = "M-JD-A10-01"
+obligation_id = "O-JD-A10-METHOD"
+haip_action_id = "HAIP-A10"
+obligation_ja = "固定した条件と判定記録をPython・ブラウザで照合する再現可能な方法を、相互検証の技術資料として提供する。"
+obligation_en = "Provide reproducible Python/browser checks of fixed conditions and decision records as technical material for cross-checking."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "SUPPORTING_ONLY"
+minimum_evidence_strength = 0
+evidence_ids = []
+supporting_evidence_ids = [
+  "E-JD-CORE",
+  "E-JD-UI",
+  "E-JD-CASES",
+  "E-JD-CI",
+]
+gaps = [
+  "Two implementations of one fixed public format are not adoption of an international standard or interoperability across arbitrary companies and systems.",
+]
+rationale_ja = "134入力の記録照合と保存・読込を参照する。C社・D社の固定候補切替から、任意企業への汎用接続や追加費用の線形性は導かない。"
+rationale_en = "Evidence covers 134 record comparisons and save/load checks. Switching between fixed candidates C/D does not establish universal integration or linear onboarding costs."
+
+[[obligations]]
+id = "M-JD-A10-02"
+obligation_id = "O-JD-A10-STANDARDS"
+haip_action_id = "HAIP-A10"
+obligation_ja = "国際技術標準の策定への参加又は実運用での採用・相互運用性を確認する。"
+obligation_en = "Demonstrate participation in international technical-standard development or operational adoption/interoperability."
+applicability = "IN_SCOPE_ORGANISATIONAL"
+assessment = "NOT_COVERED"
+minimum_evidence_strength = 0
+evidence_ids = []
+supporting_evidence_ids = []
+gaps = ["No standards-body participation, standards-conformance evaluation, or multi-organisation production interoperability evidence is supplied."]
+rationale_ja = "公開JSON形式とHAIPとの対応付けを、国際標準への適合又は実装間相互運用性の認定に読み替えない。"
+rationale_en = "A public JSON format and HAIP mapping do not constitute international-standard conformance or certified interoperability."
+
+[[obligations]]
+id = "M-JD-A11-01"
+obligation_id = "O-JD-A11-DATA-QUALITY"
+haip_action_id = "HAIP-A11"
+obligation_ja = "固定合成モデルで未確認の数量・時刻・確認値をnullとして保持し、0・falseと混同せず、合成データ・模擬操作の利用範囲を検査する。"
+obligation_en = "Preserve unknown quantities, times, and confirmation values as null, distinguish them from zero/false, and check synthetic-data and simulation scope within the fixed model."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "DIRECT"
+minimum_evidence_strength = 3
+evidence_ids = [
+  "E-JD-CORE",
+  "E-JD-CASES",
+  "E-JD-LEAN",
+  "E-JD-CI",
+]
+supporting_evidence_ids = []
+gaps = []
+rationale_ja = "required_unknown・missing_quantity_not_pass及びR08が未確認・利用範囲を明示する。既知量だけで上限超過なら、別の未確認値があってもREJECTを保持する。"
+rationale_en = "required_unknown, missing_quantity_not_pass, and R08 make unknown states and scope explicit. A known overload remains REJECT even when other values are unknown."
+
+[[obligations]]
+id = "M-JD-A11-02"
+obligation_id = "O-JD-A11-DISCLOSURE"
+haip_action_id = "HAIP-A11"
+obligation_ja = "共有用要約を、固定条件で許可された参加者向けの識別情報と判定項目に限定し、開示条件違反時は要約出力を停止する。"
+obligation_en = "Limit participant summaries to identifiers and decision fields permitted by the fixed disclosure policy, and block summary output on disclosure-policy violations."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "DIRECT"
+minimum_evidence_strength = 3
+evidence_ids = [
+  "E-JD-CORE",
+  "E-JD-CASES",
+  "E-JD-UI",
+  "E-JD-CI",
+]
+supporting_evidence_ids = ["E-JD-README"]
+gaps = []
+rationale_ja = "R05とEngine.partner_summaryは許可項目だけを選別する。重量・採算・承認詳細を含む完全記録とは別形式であり、秘匿性・匿名性・推測防止をこの義務に含めない。"
+rationale_en = "R05 and Engine.partner_summary select permitted fields only. This is distinct from full records containing weights, economics, and approvals; confidentiality, anonymity, and inference resistance are outside this obligation."
+
+[[obligations]]
+id = "M-JD-A11-03"
+obligation_id = "O-JD-A11-REAL-DATA-IP"
+haip_action_id = "HAIP-A11"
+obligation_ja = "実企業データ・個人データの取得根拠、品質、秘密保持及び知的財産権の取扱いを確認する。"
+obligation_en = "Establish lawful collection, quality, confidentiality, and intellectual-property handling for real company and personal data."
+applicability = "IN_SCOPE_TECHNICAL"
+assessment = "NOT_COVERED"
+minimum_evidence_strength = 0
+evidence_ids = []
+supporting_evidence_ids = ["E-JD-README"]
+gaps = ["No real-data rights clearance, personal-data assessment, anonymity/secret-preservation proof, or operational data-handling evidence is supplied."]
+rationale_ja = "合成データ、固定の開示項目及び著作権表示は、実データの適法性や秘密保持の十分性を証明しない。"
+rationale_en = "Synthetic data, fixed disclosure fields, and copyright notices do not establish lawful or sufficient protection of real data."
+
+[reporting]
+bridge_id = "joint-delivery-participation-reporting-v2-bridge.v1"
+snapshot_date = "2026-11-08"
+official_source_id = "SRC-OECD-HAIP-V2"
+purpose_ja = "本Profileの証拠をReporting Framework v2.0の7セクションへ限定的に接続する利用ガイド。"
+purpose_en = "Bounded evidence-use guidance connecting this profile to the seven Reporting Framework v2.0 sections."
+not_a_submission_tool_ja = "質問票の複製、完成報告書、提出手続、参加資格判定、承認又は認証ではありません。"
+not_a_submission_tool_en = "Not a questionnaire replica, completed report, submission workflow, eligibility decision, approval, or certification."
+
+[[reporting.scope_checks]]
+id = "SCOPE-AI-SYSTEM"
+question_ja = "対象となる実際のAI・物流システムと報告組織の役割は何か。"
+question_en = "What actual AI/logistics system and reporting-organisation role are in scope?"
+rule_ja = "主対象は固定合成条件の参加・引渡し検証モデルであり、採算は別判定です。公開API実験は補助資料として扱い、各API出力の個別形式保証へ読み替えません。本Profileから報告対象又は参加資格を自動判定しません。"
+rule_en = "The principal subject is the fixed synthetic participation/handoff model, with economics evaluated separately. The published API experiment is supporting context, not an individual formal guarantee of API outputs. This profile does not automatically determine reporting scope or eligibility."
+
+[[reporting.sections]]
+section_id = "RF2-S1"
+section_number = 1
+title_ja = "リスクの特定及び評価"
+title_en = "Risk identification and evaluation"
+bridge_status = "TECHNICAL_EVIDENCE_INPUT"
+haip_action_ids = ["HAIP-A1", "HAIP-A11"]
+supported_obligation_ids = [
+  "O-JD-A1-PARTICIPATION",
+  "O-JD-A1-HANDOFF",
+  "O-JD-A1-ECONOMIC-SEPARATION",
+  "O-JD-A1-MODEL",
+  "O-JD-A1-AI-EXPERIMENT",
+  "O-JD-A11-DATA-QUALITY",
+]
+known_gap_obligation_ids = ["O-JD-A1-SYSTEM-RISK", "O-JD-A11-REAL-DATA-IP"]
+evidence_ids = [
+  "E-JD-CORE",
+  "E-JD-CASES",
+  "E-JD-LEAN",
+  "E-JD-WORKFLOW",
+  "E-JD-CI",
+  "E-JD-API-ADAPTER",
+  "E-JD-API-RECORD",
+]
+profile_can_support_ja = "固定合成条件の参加・引渡し検査、採算との分離、モデル証明、具体入力の実装照合及び補助的なAI接続記録。"
+profile_can_support_en = "Fixed synthetic participation/handoff checks, separate economics, model proofs, concrete-input comparisons, and supporting AI-connection records."
+organisation_must_add_ja = "実際のAI・物流システム、利用環境・データ、運行上の影響及び評価手法を別途特定する。"
+organisation_must_add_en = "Separately identify the actual AI/logistics system, deployment context, data, operational impacts, and evaluation methods."
+illustrative_wording_ja = "共同配送の合成PoCについて採用条件・引渡し条件の検査とモデル証明を公開している。実運行全体のリスク評価は別に必要である。"
+illustrative_wording_en = "We publish adoption/handoff checks and model proofs for a synthetic joint-delivery PoC; risk evaluation across actual operations requires separate evidence."
+do_not_infer_ja = "実配送の安全性、AIの汎用信頼性、配送最適化性能、独立評価又は法令適合を推論しない。"
+do_not_infer_en = "Do not infer physical-delivery safety, general AI reliability, route-optimisation performance, independent evaluation, or legal compliance."
+
+[[reporting.sections]]
+section_id = "RF2-S2"
+section_number = 2
+title_ja = "リスク管理及び情報セキュリティ"
+title_en = "Risk management and information security"
+bridge_status = "TECHNICAL_EVIDENCE_INPUT"
+haip_action_ids = [
+  "HAIP-A1",
+  "HAIP-A2",
+  "HAIP-A5",
+  "HAIP-A6",
+  "HAIP-A11",
+]
+supported_obligation_ids = [
+  "O-JD-A1-PARTICIPATION",
+  "O-JD-A1-HANDOFF",
+  "O-JD-A2-REPLAY",
+  "O-JD-A5-APPROVAL-GATE",
+  "O-JD-A6-INPUT",
+  "O-JD-A11-DATA-QUALITY",
+  "O-JD-A11-DISCLOSURE",
+]
+known_gap_obligation_ids = [
+  "O-JD-A2-OPERATIONS",
+  "O-JD-A5-GOVERNANCE",
+  "O-JD-A6-DEPLOYED-SECURITY",
+  "O-JD-A11-REAL-DATA-IP",
+]
+evidence_ids = [
+  "E-JD-CORE",
+  "E-JD-CASES",
+  "E-JD-UI",
+  "E-JD-LEAN",
+  "E-JD-CI",
+]
+profile_can_support_ja = "共同承認、現在条件の再確認、保持状態内の再使用停止、厳格な入力検査、限定要約及び記録再計算。"
+profile_can_support_en = "Joint approval, use-time checks, retained-state duplicate-use blocking, strict input validation, limited summaries, and record recomputation."
+organisation_must_add_ja = "実際の本人認証・認可、永続状態・排他制御、情報管理、脆弱性対応及びリスク管理の実施証拠を別途示す。"
+organisation_must_add_en = "Supply separate evidence for real identity/access controls, persistent/exclusive state, information handling, vulnerability response, and operational risk management."
+illustrative_wording_ja = "本PoCの模擬許可は現計画と現在条件を再検証する。実物流での執行基盤や情報保護全体の実証とは区別する。"
+illustrative_wording_en = "PoC simulation permission rechecks the current plan and conditions; this is distinct from operational enforcement infrastructure and comprehensive information protection."
+do_not_infer_ja = "本番の防御能力、真正性、永続的な再使用防止、秘密保持又は全社リスク管理を推論しない。"
+do_not_infer_en = "Do not infer production security, authenticity, persistent replay prevention, confidentiality, or enterprise risk management."
+
+[[reporting.sections]]
+section_id = "RF2-S3"
+section_number = 3
+title_ja = "高度AIシステムに関する透明性報告"
+title_en = "Transparency reporting on advanced AI systems"
+bridge_status = "TECHNICAL_EVIDENCE_INPUT"
+haip_action_ids = ["HAIP-A3", "HAIP-A4"]
+supported_obligation_ids = ["O-JD-A3-PUBLIC", "O-JD-A4-PUBLIC-SHARING"]
+known_gap_obligation_ids = ["O-JD-A3-SYSTEM-REPORT", "O-JD-A4-INCIDENT-SHARING"]
+evidence_ids = [
+  "E-JD-README",
+  "E-JD-CASES",
+  "E-JD-LEAN",
+  "E-JD-WORKFLOW",
+  "E-JD-CI",
+]
+profile_can_support_ja = "PoCの目的・条件・操作・評価範囲・限界と、合成試験仕様・証明コード・再検証手順の公開。"
+profile_can_support_en = "Publication of PoC purpose, conditions, operation, evaluation scope/limits, synthetic test specifications, proof code, and replay procedures."
+organisation_must_add_ja = "実利用システム、報告主体の役割、能力、重要リスク及び評価結果を別途示す。"
+organisation_must_add_en = "Supply separate facts about the actual system, reporting entity role, capabilities, material risks, and evaluations."
+illustrative_wording_ja = "版固定された公開資料と対象コミットの成功CIにより、技術成果の範囲と確認手順を示している。"
+illustrative_wording_en = "Pinned public materials and a successful CI run at the same commit identify the scope and checking procedures of the technical result."
+do_not_infer_ja = "完成したOECD報告、包括的モデルカード又は独立認証とみなさない。"
+do_not_infer_en = "Do not treat this as a completed OECD report, comprehensive model card, or independent certification."
+
+[[reporting.sections]]
+section_id = "RF2-S4"
+section_number = 4
+title_ja = "組織ガバナンス、インシデント管理及び透明性"
+title_en = "Organizational governance, incident management, and transparency"
+bridge_status = "LIMITED_CONTEXT_INPUT"
+haip_action_ids = [
+  "HAIP-A2",
+  "HAIP-A4",
+  "HAIP-A5",
+  "HAIP-A11",
+]
+supported_obligation_ids = ["O-JD-A2-REPLAY", "O-JD-A4-PUBLIC-SHARING", "O-JD-A5-APPROVAL-GATE"]
+known_gap_obligation_ids = [
+  "O-JD-A2-OPERATIONS",
+  "O-JD-A4-INCIDENT-SHARING",
+  "O-JD-A5-GOVERNANCE",
+  "O-JD-A11-REAL-DATA-IP",
+]
+evidence_ids = [
+  "E-JD-README",
+  "E-JD-CORE",
+  "E-JD-CASES",
+  "E-JD-LEAN",
+  "E-JD-WORKFLOW",
+]
+profile_can_support_ja = "判断・未確認事項の記録、共同承認と役割の照合、模擬利用境界及び公開可能な評価方法の共有。"
+profile_can_support_en = "Decision/unresolved-state records, joint approval and role checks, simulation boundaries, and sharing of releasable evaluation methods."
+organisation_must_add_ja = "実際の責任分担、契約・承認、経営監督、教育、事故連絡及びデータ管理を別途説明する。"
+organisation_must_add_en = "Separately describe actual accountability, contracts/approvals, management oversight, training, incident communications, and data handling."
+illustrative_wording_ja = "合成の承認・役割と判定記録を技術上検査できる。組織統治及び実インシデント対応の実施は別の証拠で説明する。"
+illustrative_wording_en = "Synthetic approvals/roles and decision records can be technically checked; organisational governance and actual incident response require separate evidence."
+do_not_infer_ja = "法的責任の確定、組織ガバナンス又は当局報告体制の実証を推論しない。"
+do_not_infer_en = "Do not infer legal-liability allocation, demonstrated organisational governance, or regulatory reporting arrangements."
+
+[[reporting.sections]]
+section_id = "RF2-S5"
+section_number = 5
+title_ja = "コンテンツ認証及び来歴管理の仕組み"
+title_en = "Content authentication & provenance mechanisms"
+bridge_status = "NO_PROFILE_COVERAGE"
+haip_action_ids = ["HAIP-A7"]
+supported_obligation_ids = []
+known_gap_obligation_ids = ["O-JD-A7-CONTENT-AUTH"]
+evidence_ids = []
+profile_can_support_ja = "このProfileにAI生成コンテンツの認証・来歴機構の実装カバレッジはない。"
+profile_can_support_en = "This profile has no implementation coverage for AI-content authentication or provenance mechanisms."
+organisation_must_add_ja = "適用するコンテンツ認証・表示・来歴機構と、その実装・評価証拠を別途示す。"
+organisation_must_add_en = "Supply separate evidence for applicable content-authentication, labelling, and provenance mechanisms and their evaluation."
+illustrative_wording_ja = "SHA-256は記録の内容照合に用いる。発行者認証、電子署名又は認証されたAIコンテンツ来歴は主張しない。"
+illustrative_wording_en = "SHA-256 is used for record-content comparison, without claiming issuer authentication, signatures, or authenticated AI-content provenance."
+do_not_infer_ja = "ハッシュ、API応答識別子又は再計算可能性を、署名・透かし・認証された来歴と同一視しない。"
+do_not_infer_en = "Do not equate hashes, API response identifiers, or replayability with signatures, watermarks, or authenticated provenance."
+
+[[reporting.sections]]
+section_id = "RF2-S6"
+section_number = 6
+title_ja = "AI安全性の向上及び社会的リスク軽減のための研究・投資"
+title_en = "Research & investment to advance AI safety & mitigate societal risks"
+bridge_status = "LIMITED_CONTEXT_INPUT"
+haip_action_ids = ["HAIP-A8", "HAIP-A10"]
+supported_obligation_ids = ["O-JD-A8-RESEARCH", "O-JD-A10-METHOD"]
+known_gap_obligation_ids = ["O-JD-A8-INVESTMENT", "O-JD-A10-STANDARDS"]
+evidence_ids = [
+  "E-JD-README",
+  "E-JD-CORE",
+  "E-JD-UI",
+  "E-JD-LEAN",
+  "E-JD-WORKFLOW",
+]
+profile_can_support_ja = "採用条件と模擬実行の分離に関する公開参照実装、形式モデル及びPython・ブラウザの相互照合方法。"
+profile_can_support_en = "Public reference code, formal models, and Python/browser cross-checking methods for separating adoption conditions from simulated execution."
+organisation_must_add_ja = "研究優先順位、継続的な投資・人員及び標準化活動・採用実績を別途示す。"
+organisation_must_add_en = "Supply separate evidence for research priorities, sustained funding/staffing, and standards participation/adoption."
+illustrative_wording_ja = "限定条件を実行・再検証できる技術研究成果を公開している。投資額、研究成熟度又は国際標準採用を示すものではない。"
+illustrative_wording_en = "We publish technical research artifacts for bounded execution and replay, without asserting investment levels, research maturity, or international-standard adoption."
+do_not_infer_ja = "定理件数や実装照合から、継続投資、国際標準適合又は任意企業への接続性を推論しない。"
+do_not_infer_en = "Do not infer sustained investment, international-standard conformance, or universal company integration from theorem counts or implementation comparisons."
+
+[[reporting.sections]]
+section_id = "RF2-S7"
+section_number = 7
+title_ja = "人類及び世界全体の利益の推進"
+title_en = "Advancing human and global interests"
+bridge_status = "LIMITED_CONTEXT_INPUT"
+haip_action_ids = ["HAIP-A9"]
+supported_obligation_ids = ["O-JD-A9-PUBLIC-INTEREST"]
+known_gap_obligation_ids = ["O-JD-A9-IMPACT"]
+evidence_ids = ["E-JD-README", "E-JD-CASES", "E-JD-UI"]
+profile_can_support_ja = "既存荷主の条件を尊重し、追加荷主の受入れ条件と増分採算を確かめる共同配送の合成ユースケース。"
+profile_can_support_en = "A synthetic joint-delivery use case for checking new-shipper acceptance conditions and incremental economics while respecting existing shippers."
+organisation_must_add_ja = "実事業者の参加意向、同条件比較、実測利益・工数、負の影響及び関係者評価を別途示す。"
+organisation_must_add_en = "Supply separate evidence for actual participation intent, comparable evaluations, measured profits/workload, adverse impacts, and stakeholder assessment."
+illustrative_wording_ja = "共同配送への追加参加を検討する技術PoCである。実測の事業効果・社会便益はこのProfileでは計測していない。"
+illustrative_wording_en = "This technical PoC examines additional participation in joint delivery; actual business outcomes and social benefits are not measured profile results."
+do_not_infer_ja = "実導入、利益実現、投資回収、工数削減、CO2削減又は商用化の成立を推論しない。"
+do_not_infer_en = "Do not infer actual deployment, realised profits, investment recovery, workload/CO2 reductions, or commercial viability."
