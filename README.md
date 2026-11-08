@@ -16,6 +16,7 @@
 | [`civic-answer-adoption`](profiles/civic-answer-adoption/README.md) | 自治体AIの回答案を、資料・相談条件・根拠との対応に基づいて職員確認用に採用できるかを検証する。 | Published |
 | [`civic-ai-privacy`](profiles/civic-ai-privacy/README.md) | 合成データの模擬送信と出力採用について、目的・権限・送信先・累積開示などの条件を検証する。 | Published |
 | [`civic-ai-lifecycle`](profiles/civic-ai-lifecycle/README.md) | 派生情報への利用条件の承継・限定変更・継続利用と、指定した管理範囲の業務利用終了を検証する。 | Published |
+| [`joint-delivery-participation`](profiles/joint-delivery-participation/README.md) | 共同配送への追加参加条件・共同承認・引渡しを検証し、採算を別判定する。株式会社オンザリンクスとの共同PoC。 | Published |
 
 新しいマッピングは、既存Profileへ証拠を混ぜ込まず、`profiles/<slug>/`へ独立して追加します。Profile間のカバレッジは合算せず、全体のHAIP適合点・認証点も作りません。
 
@@ -63,6 +64,9 @@ profiles/
   civic-ai-lifecycle/
     README.md
     profile.toml
+  joint-delivery-participation/
+    README.md
+    profile.toml
 ```
 
 新しいProfileを1件増やすたびに増えるのは2ファイルだけです。
@@ -95,7 +99,7 @@ python validate.py --self-test
 
 ### 公開範囲と統合PoCとの区別
 
-このマッピング集は、コールドチェーン1件・自治体AI3件の独立Profileを収録します。自治体AIの統合PoCを独立Profileとして収録したものではなく、各Profileの証拠を足し合わせて統合運転の保証を主張しません。統合PoCの成果を紹介する場合は、その別リポジトリの実証範囲と、このマッピングの範囲を分けて説明します。
+このマッピング集は、コールドチェーン1件・自治体AI3件・共同配送1件の独立Profileを収録します。自治体AIの統合PoCを独立Profileとして収録したものではなく、各Profileの証拠を足し合わせて統合運転の保証を主張しません。統合PoCの成果を紹介する場合は、その別リポジトリの実証範囲と、このマッピングの範囲を分けて説明します。
 
 各Profileの`snapshot_date`と固定コミットは証拠の参照時点です。説明・配置・発行者表記の修正を、実験の再実行日や新しい保証範囲へ読み替えません。回答採用Profileの実行用識別名は実フォルダに合わせた`civic-answer-adoption`です。既存の`profile_id`と参照元PoCのリポジトリ名は変更していません。
 
